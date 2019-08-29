@@ -2,13 +2,12 @@
   "name": "cybotranik-wui",
   "version": "1.0.0",
   "description": "Website html User Interface.",
-  "main": "src/index.js",
+  "main": "src/cybotranik-wui.js",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "test": "node tests",
-    "lint": "eslint src --fix && eslint tests --fix"
+    "lint": "eslint src --fix"
   },
   "repository": {
     "type": "git",
