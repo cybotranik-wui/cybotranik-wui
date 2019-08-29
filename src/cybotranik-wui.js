@@ -102,26 +102,26 @@ CybotranikWUI.prototype.createStyle = function (selector, args) {
  */
 CybotranikWUI.prototype.documentAppendCss = function (syntax) {
 
-  var element = document.createElement("style");
-  element.setAttribute("type", "text/css");
+  var element = document.createElement('style')
+  element.setAttribute('type', 'text/css')
 
   switch (this.currentBrowser()) {
 
-    // Old Property
-    case "MSIE 5": element.styleSheet.cssText = syntax; break;
-    case "MSIE 7": element.styleSheet.cssText = syntax; break;
-    case "MSIE 8": element.styleSheet.cssText = syntax; break;
+  // Old Property
+  case 'MSIE 5': element.styleSheet.cssText = syntax; break
+  case 'MSIE 7': element.styleSheet.cssText = syntax; break
+  case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-    case "MSIE 9": element.innerText = syntax; break;
-    case "MSIE 10": element.innerText = syntax; break;
-    case "IE 11": element.innerText = syntax; break;
-    case "Chrome 76": element.innerText = syntax; break;
-    case "Edge 18": element.innerText = syntax; break;
-    case "Firefox 68": element.innerText = syntax; break;
-    default: element.innerText = syntax;
+  case 'MSIE 9': element.innerText = syntax; break
+  case 'MSIE 10': element.innerText = syntax; break
+  case 'IE 11': element.innerText = syntax; break
+  case 'Chrome 76': element.innerText = syntax; break
+  case 'Edge 18': element.innerText = syntax; break
+  case 'Firefox 68': element.innerText = syntax; break
+  default: element.innerText = syntax
   }
 
   // by default it will be at the bottom of the title.
-  document.getElementsByTagName('head')[0].appendChild(element);
-};
+  document.getElementsByTagName('head')[0].appendChild(element)
+}
