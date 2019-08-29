@@ -8,30 +8,30 @@
  * */
 class CybotranikWUI {
 
-    /**
+  /**
      * Cybotranik WUI
      *
      * Website html User Interface.
      *
      * @returns <CybotranikWUI>
      */
-    constructor() {
+  constructor() {
 
-        /**
+    /**
          * Active Package Name
          */
-        this.Name = require('../package.json').name;
+    this.Name = require('../package.json').name
 
-        /**
+    /**
          * Active Package Version
          */
-        this.Version = require('../package.json').version;
+    this.Version = require('../package.json').version
 
-        /**
+    /**
          * @returns <CybotranikWUI>
          */
-        return this
-    }
+    return this
+  }
 }
 
 module.exports = CybotranikWUI
