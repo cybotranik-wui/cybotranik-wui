@@ -31,16 +31,16 @@ CybotranikWUI.prototype.createProperty = function (property, value) {
 CybotranikWUI.prototype.createStyle = function (selector, args) {
 
   // No added blank property
-  if (args.length === 0) return "";
+  if (args.length === 0) return ''
 
-  var syntaxs = selector + '{';
+  var syntaxs = selector + '{'
 
   for (var i = 0; i < args.length; i++) {
-    var arg = args[i];
-    syntaxs += arg + ';';
+    var arg = args[i]
+    syntaxs += arg + ';'
   }
 
-  syntaxs += '}';
+  syntaxs += '}'
 
-  return syntaxs;
-};
+  return syntaxs
+}
