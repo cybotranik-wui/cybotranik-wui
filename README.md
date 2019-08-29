@@ -1,4 +1,4 @@
-# cybotranik-wui
+# Cybotranik-wui
 
 Website html User Interface.
 
@@ -36,7 +36,7 @@ Cybotranik documentation and examples are available at https://cybotranik-wui.gi
 
 # Community
 
-Discuss new features, future goals, general problems or questions about Cybotranik's development, or anything else you can think of.
+Discuss new features, future goals, general problems or questions about Cybotranik's development, or anything else you can think of. https://cybotranik-wui.slack.com/
 
 # Copyright and license
 
