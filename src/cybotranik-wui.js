@@ -140,3 +140,35 @@ CybotranikWUI.prototype.documentAppendCssArray = function (array) {
 
   this.documentAppendCss(syntaxs)
 }
+
+/**
+ * Rem value to Rem Value 
+ * If old navigator return pixel value
+ * @param {float} value Size
+ * @returns {float} Compatible Size
+ */
+CybotranikWUI.prototype.Size = function (value) {
+
+  var result = value
+  var factor = 14
+
+  switch (this.currentBrowser()) {
+  case 'MSIE 5': result = (factor * 1.05) * value + 'px'; break
+  case 'MSIE 7': result = (factor * 1.05) * value + 'px'; break
+  case 'MSIE 8': result = (factor * 1.05) * value + 'px'; break
+  case 'MSIE 9': result = (factor * 1.05) * value + 'px'; break
+
+    // rem compatible.
+  case 'MSIE 10': result = value + 'rem'; break
+  case 'MSIE 11': result = value + 'rem'; break
+  case 'Chrome 76': result = value + 'rem'; break
+
+  case 'Edge 18': result = (factor * 1.05) * value + 'px'; break
+  case 'Firefox 68': result = (factor * 1.05) * value + 'px'; break
+
+    // rem compatible default.
+  default: result = value + 'rem'
+  }
+
+  return result
+}
