@@ -7,7 +7,22 @@
     "doc": "docs"
   },
   "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
     "lint": "eslint src --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commitmsg": "commit stage",
+      "pre-push": "npm run test && npm version patch"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint",
+      "npm run test",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -29,6 +44,8 @@
   },
   "homepage": "https://github.com/cybotranik-wui/cybotranik-wui#readme",
   "devDependencies": {
-    "eslint": "^6.2.2"
+    "eslint": "^6.2.2",
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.5"
   }
 }
