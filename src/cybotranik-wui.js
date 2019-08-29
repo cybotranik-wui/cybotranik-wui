@@ -429,29 +429,24 @@ CybotranikWUI.prototype.Defaults = function () {
      * Content sectioning
      * __________________________________________________
      * */
-
-    // address
     , this.createStyle('address',
       [
 
       ]
     )
 
-    // article
     , this.createStyle('article',
       [
 
       ]
     )
 
-    // aside
     , this.createStyle('aside',
       [
 
       ]
     )
 
-    // footer
     , this.createStyle('footer',
       [
 
@@ -534,8 +529,6 @@ CybotranikWUI.prototype.Defaults = function () {
      * Text content
      * __________________________________________________
      * */
-
-
     , this.createStyle('blockquote',
       [
 
@@ -831,7 +824,6 @@ CybotranikWUI.prototype.Defaults = function () {
     * Image and multimedia
     * __________________________________________________
     * */
-
     , this.createStyle('area',
       [
 
@@ -856,7 +848,6 @@ CybotranikWUI.prototype.Defaults = function () {
       ]
     )
 
-    // video
     , this.createStyle('video',
       [
 
@@ -867,7 +858,6 @@ CybotranikWUI.prototype.Defaults = function () {
     * Embedded content
     * __________________________________________________
     * */
-
     , this.createStyle('embed',
       [
 
@@ -1069,7 +1059,6 @@ CybotranikWUI.prototype.Defaults = function () {
     * Web Components
     * __________________________________________________
     * */
-
     , this.createStyle('shadow',
       [
 
@@ -1098,3 +1087,816 @@ cybotranik.createElementArray()
  * Add Default Item Array to Current Document
  */
 cybotranik.documentAppendCssArray(cybotranik.Defaults())
+
+/**
+ * Theme Configuration
+ * @returns {Theme} Plugin css styles
+ * */
+CybotranikWUI.prototype.Theme = {
+  Color: {
+    Primary: '#00d1b2'
+    , White: '#ffffff'
+    , Black: '#0a0a0a'
+    , Light: '#f5f5f5'
+    , Dark: '#363636'
+    , Link: '#3273dc'
+    , Info: '#209cee'
+    , Success: '#23d160'
+    , Warning: '#ffdd57'
+    , Danger: '#ff3860'
+  }
+  , Font: {
+    Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
+    , Family_Print: 'SFMono- Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
+    , Size: 1
+    , Weight: 400
+  }
+  , Margin: {
+    All: 0
+    , Bottom: 0
+    , Top: 0
+    , Left: 0
+    , Right: 0
+  }
+  , Padding: {
+    All: 0
+    , Bottom: 0
+    , Top: 0
+    , Left: 0
+    , Right: 0
+  }
+  , Border: {
+    All: 0
+    , Bottom: 0
+    , Top: 0
+    , Left: 0
+    , Right: 0
+  }
+  , Line: { Height: 1.50 }
+
+}
+
+/**
+* Theme Style Syntax Array
+* @returns {array} All css styles
+* */
+CybotranikWUI.prototype.Themes = function () {
+
+  return [
+
+    this.createStyle('html',
+      [
+
+      ]
+    )
+
+    , this.createStyle('body',
+      [
+        this.createProperty('font-family', this.Theme.Font.Family)
+        , this.createProperty('font-size', this.compatibleSize(this.Theme.Font.Size))
+        , this.createProperty('font-weight', this.Theme.Font.Weight)
+        , this.createProperty('line-height', this.Theme.Line.Height)
+        , this.createProperty('background-color', this.Theme.Color.White)
+      ]
+    )
+
+    /**
+     * Content sectioning
+     */
+    , this.createStyle('address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section',
+      [
+
+      ]
+    )
+
+    /**
+     * Text content
+     */
+    , this.createStyle('blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul',
+      [
+
+      ]
+    )
+
+    /**
+     * Inline text semantics
+     */
+    , this.createStyle('a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr',
+      [
+
+      ]
+    )
+
+    /**
+     * Image and multimedia
+     */
+    , this.createStyle('area,audio,canvas,img,track,video',
+      [
+
+      ]
+    )
+
+    /**
+     * Embedded content
+     */
+    , this.createStyle('embed,iframe,noembed,object,param,picture,source',
+      [
+
+      ]
+    )
+
+    /**
+     * Demarcating edits
+     */
+    , this.createStyle('del,ins',
+      [
+
+      ]
+    )
+
+    /**
+     * Table content
+     */
+    , this.createStyle('caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr',
+      [
+
+      ]
+    )
+
+    /**
+     * Forms
+     */
+    , this.createStyle('button,datalist,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea',
+      [
+
+      ]
+    )
+
+    /**
+     * Interactive elements
+     */
+    , this.createStyle('details,dialog,summary',
+      [
+
+      ]
+    )
+
+    /**
+     * Web Components
+     */
+    , this.createStyle('shadow,template',
+      [
+
+      ]
+    )
+
+    /*
+     * Content sectioning
+     * __________________________________________________
+     * */
+    , this.createStyle('address',
+      [
+
+      ]
+    )
+
+    , this.createStyle('article',
+      [
+
+      ]
+    )
+
+    , this.createStyle('aside',
+      [
+
+      ]
+    )
+
+    , this.createStyle('footer',
+      [
+
+      ]
+    )
+
+    , this.createStyle('header',
+      [
+
+      ]
+    )
+
+    , this.createStyle('h1, h2, h3, h4, h5, h6',
+      [
+        this.createProperty('font-weight', 500)
+        , this.createProperty('line-height', this.Default.Line.Height)
+      ]
+    )
+
+    , this.createStyle('h1',
+      [
+
+      ]
+    )
+
+    , this.createStyle('h2',
+      [
+
+      ]
+    )
+
+    , this.createStyle('h3',
+      [
+
+      ]
+    )
+
+    , this.createStyle('h4',
+      [
+
+      ]
+    )
+
+    , this.createStyle('h5',
+      [
+
+      ]
+    )
+
+    , this.createStyle('h6',
+      [
+
+      ]
+    )
+
+    , this.createStyle('hgroup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('main',
+      [
+
+      ]
+    )
+
+    , this.createStyle('nav',
+      [
+
+      ]
+    )
+
+    , this.createStyle('section',
+      [
+
+      ]
+    )
+
+    /*
+     * Text content
+     * __________________________________________________
+     * */
+    , this.createStyle('blockquote',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dd',
+      [
+
+      ]
+    )
+
+    , this.createStyle('div',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dl',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dt',
+      [
+
+      ]
+    )
+
+    , this.createStyle('figcaption',
+      [
+
+      ]
+    )
+
+    , this.createStyle('figure',
+      [
+
+      ]
+    )
+
+    , this.createStyle('hr',
+      [
+
+      ]
+    )
+
+    , this.createStyle('li',
+      [
+
+      ]
+    )
+
+    , this.createStyle('[role="menuitem"]',
+      [
+        this.createProperty('cursor', 'pointer')
+        , this.createProperty('background', this.Theme.Color.Light)
+      ]
+    )
+
+    , this.createStyle('[role="menu"]',
+      [
+
+      ]
+    )
+
+    , this.createStyle('ol',
+      [
+
+      ]
+    )
+
+    , this.createStyle('p',
+      [
+
+      ]
+    )
+
+    , this.createStyle('pre',
+      [
+
+      ]
+    )
+
+    , this.createStyle('ul',
+      [
+
+      ]
+    )
+
+    /*
+    * Inline text semantics
+    * __________________________________________________
+    * */
+    , this.createStyle('a',
+      [
+        this.createProperty('color', this.Theme.Color.Link)
+      ]
+    )
+
+    , this.createStyle('abbr',
+      [
+
+      ]
+    )
+
+    , this.createStyle('b',
+      [
+
+      ]
+    )
+
+    , this.createStyle('bdi',
+      [
+
+      ]
+    )
+
+    , this.createStyle('bdo',
+      [
+
+      ]
+    )
+
+    , this.createStyle('br',
+      [
+
+      ]
+    )
+
+    , this.createStyle('cite',
+      [
+
+      ]
+    )
+
+    , this.createStyle('code',
+      [
+
+      ]
+    )
+
+    , this.createStyle('data',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dfn',
+      [
+
+      ]
+    )
+
+    , this.createStyle('em',
+      [
+
+      ]
+    )
+
+    , this.createStyle('i',
+      [
+
+      ]
+    )
+
+    , this.createStyle('kbd',
+      [
+
+      ]
+    )
+
+    , this.createStyle('mark',
+      [
+
+      ]
+    )
+
+    , this.createStyle('mark',
+      [
+
+      ]
+    )
+
+    , this.createStyle('q',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rb',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rp',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rt',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rtc',
+      [
+
+      ]
+    )
+
+    , this.createStyle('ruby',
+      [
+
+      ]
+    )
+
+    , this.createStyle('s',
+      [
+
+      ]
+    )
+
+    , this.createStyle('samp',
+      [
+
+      ]
+    )
+
+    , this.createStyle('small',
+      [
+
+      ]
+    )
+
+    , this.createStyle('span',
+      [
+
+      ]
+    )
+
+    , this.createStyle('strong',
+      [
+
+      ]
+    )
+
+    , this.createStyle('sub',
+      [
+
+      ]
+    )
+
+    , this.createStyle('sup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('time',
+      [
+
+      ]
+    )
+
+    , this.createStyle('u',
+      [
+
+      ]
+    )
+
+    , this.createStyle('var',
+      [
+
+      ]
+    )
+
+    , this.createStyle('wbr',
+      [
+
+      ]
+    )
+
+    /*
+    * Image and multimedia
+    * __________________________________________________
+    * */
+    , this.createStyle('area',
+      [
+
+      ]
+    )
+
+    , this.createStyle('audio',
+      [
+
+      ]
+    )
+
+    , this.createStyle('img',
+      [
+
+      ]
+    )
+
+    , this.createStyle('track',
+      [
+
+      ]
+    )
+
+    // video
+    , this.createStyle('video',
+      [
+
+      ]
+    )
+
+    /*
+    * Embedded content
+    * __________________________________________________
+    * */
+    , this.createStyle('embed',
+      [
+
+      ]
+    )
+
+    , this.createStyle('iframe',
+      [
+
+      ]
+    )
+
+    /*
+    * Demarcating edits
+    * __________________________________________________
+    * */
+    , this.createStyle('del',
+      [
+
+      ]
+    )
+
+    , this.createStyle('ins',
+      [
+
+      ]
+    )
+
+    /*
+    * Table content
+    * __________________________________________________
+    * */
+    , this.createStyle('caption',
+      [
+
+      ]
+    )
+
+    , this.createStyle('col',
+      [
+
+      ]
+    )
+
+    , this.createStyle('colgroup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('table',
+      [
+
+      ]
+    )
+
+    , this.createStyle('tbody',
+      [
+
+      ]
+    )
+
+    , this.createStyle('td',
+      [
+
+      ]
+    )
+
+    , this.createStyle('tfoot',
+      [
+
+      ]
+    )
+
+    , this.createStyle('th',
+      [
+
+      ]
+    )
+
+    , this.createStyle('thead',
+      [
+
+      ]
+    )
+
+    , this.createStyle('tr',
+      [
+
+      ]
+    )
+
+    /*
+    * Forms
+    * __________________________________________________
+    * */
+    , this.createStyle('button',
+      [
+
+      ]
+    )
+
+    , this.createStyle('datalist',
+      [
+
+      ]
+    )
+
+    , this.createStyle('form',
+      [
+
+      ]
+    )
+
+    , this.createStyle('input',
+      [
+
+      ]
+    )
+
+    , this.createStyle('label',
+      [
+
+      ]
+    )
+
+    , this.createStyle('legend',
+      [
+
+      ]
+    )
+
+    , this.createStyle('meter',
+      [
+
+      ]
+    )
+
+    , this.createStyle('optgroup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('option',
+      [
+
+      ]
+    )
+
+    , this.createStyle('output',
+      [
+
+      ]
+    )
+
+    , this.createStyle('progress',
+      [
+
+      ]
+    )
+
+    , this.createStyle('select',
+      [
+
+      ]
+    )
+
+    , this.createStyle('textarea',
+      [
+
+      ]
+    )
+
+    /*
+    * Interactive elements
+    * __________________________________________________
+    * */
+    , this.createStyle('details',
+      [
+        this.createProperty('cursor', 'pointer')
+
+      ]
+    )
+
+    , this.createStyle('dialog',
+      [
+
+      ]
+    )
+
+    , this.createStyle('summary',
+      [
+
+      ]
+    )
+
+    /*
+    * Web Components
+    * __________________________________________________
+    * */
+    , this.createStyle('shadow',
+      [
+
+      ]
+    )
+
+    , this.createStyle('template',
+      [
+
+      ]
+    )
+  ]
+}
+
+/**
+ * Add Themes Item Array to Current Document
+ */
+cybotranik.documentAppendCssArray(cybotranik.Themes())
