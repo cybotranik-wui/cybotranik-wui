@@ -125,3 +125,18 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
   // by default it will be at the bottom of the title.
   document.getElementsByTagName('head')[0].appendChild(element)
 }
+
+/**
+ * Inserts the current syntax array into the css document.
+ */
+CybotranikWUI.prototype.documentAppendCssArray = function (array) {
+
+  var syntaxs = ''
+
+  // syntaxs builder
+  for (var i = 0; i < array.length; i++) {
+    syntaxs += array[i]
+  }
+
+  this.documentAppendCss(syntaxs)
+}
