@@ -1,6 +1,6 @@
 {
   "name": "cybotranik-wui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Website html User Interface.",
   "main": "src/cybotranik-wui.js",
   "directories": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "lint": "eslint src --fix",
-    "build":"terser src/cybotranik-wui.js -o src/cybotranik-wui.min.js"
+    "build": "terser src/cybotranik-wui.js -o src/cybotranik-wui.min.js"
   },
   "husky": {
     "hooks": {
