@@ -93,3 +93,35 @@ CybotranikWUI.prototype.createStyle = function (selector, args) {
 
   return syntaxs
 }
+
+/**
+ * by default it will be at the bottom of the title.
+ * Append string css syntax
+ *  
+ * @param {string} syntax css syntax
+ */
+CybotranikWUI.prototype.documentAppendCss = function (syntax) {
+
+  var element = document.createElement("style");
+  element.setAttribute("type", "text/css");
+
+  switch (this.currentBrowser()) {
+
+    // Old Property
+    case "MSIE 5": element.styleSheet.cssText = syntax; break;
+    case "MSIE 7": element.styleSheet.cssText = syntax; break;
+    case "MSIE 8": element.styleSheet.cssText = syntax; break;
+
+    // New Property
+    case "MSIE 9": element.innerText = syntax; break;
+    case "MSIE 10": element.innerText = syntax; break;
+    case "IE 11": element.innerText = syntax; break;
+    case "Chrome 76": element.innerText = syntax; break;
+    case "Edge 18": element.innerText = syntax; break;
+    case "Firefox 68": element.innerText = syntax; break;
+    default: element.innerText = syntax;
+  }
+
+  // by default it will be at the bottom of the title.
+  document.getElementsByTagName('head')[0].appendChild(element);
+};
