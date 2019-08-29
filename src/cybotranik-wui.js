@@ -9,6 +9,12 @@
 function CybotranikWUI() { }
 
 /**
- * Initalize
+ * Create Property
+ * @param {string} property Element Property
+ * @param {string} value Element Value
+ * @returns {string} String Proeprty
  */
-new CybotranikWUI()
+CybotranikWUI.prototype.createProperty = function (property, value) {
+
+  return property + ' : ' + value
+}
