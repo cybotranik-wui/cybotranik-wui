@@ -147,7 +147,7 @@ CybotranikWUI.prototype.documentAppendCssArray = function (array) {
  * @param {float} value Size
  * @returns {float} Compatible Size
  */
-CybotranikWUI.prototype.Size = function (value) {
+CybotranikWUI.prototype.compatibleSize = function (value) {
 
   var result = value
   var factor = 14
