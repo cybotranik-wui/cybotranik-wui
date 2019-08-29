@@ -1,0 +1,31 @@
+{
+  "name": "cybotranik-wui",
+  "version": "1.0.0",
+  "description": "Website html User Interface.",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cybotranik-wui/cybotranik-wui.git"
+  },
+  "keywords": [
+    "cybotranik",
+    "ui",
+    "web",
+    "user",
+    "interface",
+    "html5",
+    "js"
+  ],
+  "author": "azmisahin@outlook.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cybotranik-wui/cybotranik-wui/issues"
+  },
+  "homepage": "https://github.com/cybotranik-wui/cybotranik-wui#readme"
+}
