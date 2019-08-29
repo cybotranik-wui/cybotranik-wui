@@ -16,7 +16,7 @@
     "hooks": {
       "pre-commit": "lint-staged",
       "commitmsg": "commit stage",
-      "pre-push": "npm run test && npm version patch"
+      "pre-push": "npm version patch"
     }
   },
   "lint-staged": {
