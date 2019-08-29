@@ -2,6 +2,10 @@
 
 ![Cybotranik-wui](docs/media/favicon.png)
 
+[![Build Status](https://dev.azure.com/azmisahin-github/cybotranik-wui/_apis/build/status/cybotranik-wui.cybotranik-wui?branchName=master)](https://dev.azure.com/azmisahin-github/cybotranik-wui/_build/latest?definitionId=21&branchName=master)
+
+[![NPM](https://nodei.co/npm/cybotranik-wui.png)](https://nodei.co/npm/cybotranik-wui/)
+
 # Bugs and feature requests
 
 Have a bug or a feature request? Please first read the issue guidelines and search for existing and closed issues. If your problem or idea is not addressed yet, please open a new issue.
