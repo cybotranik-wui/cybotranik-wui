@@ -209,14 +209,12 @@ CybotranikWUI.prototype.HtmlElements = ''
   // Web Components
   + ',shadow,template'
 
-  + ''.split(',')
-
 /**
  * Document Add current HTML Elements array
  */
 CybotranikWUI.prototype.createElementArray = function () {
 
-  var array = this.HtmlElements()
+  var array = this.HtmlElements.split(',')
 
   for (var index = 0; index < array.length; index++) {
     var element = array[index]
@@ -1085,3 +1083,18 @@ CybotranikWUI.prototype.Defaults = function () {
     )
   ]
 }
+
+/**
+ * Initalize Cybotranik WUI
+ */
+var cybotranik = new CybotranikWUI()
+
+/**
+ * Add HTML tag Array to Current Document
+ */
+cybotranik.createElementArray()
+
+/**
+ * Add Default Item Array to Current Document
+ */
+cybotranik.documentAppendCssArray(cybotranik.Defaults())
