@@ -107,19 +107,19 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
 
   switch (this.currentBrowser()) {
 
-    // Old Property
-    case 'MSIE 5': element.styleSheet.cssText = syntax; break
-    case 'MSIE 7': element.styleSheet.cssText = syntax; break
-    case 'MSIE 8': element.styleSheet.cssText = syntax; break
+  // Old Property
+  case 'MSIE 5': element.styleSheet.cssText = syntax; break
+  case 'MSIE 7': element.styleSheet.cssText = syntax; break
+  case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-    case 'MSIE 9': element.innerText = syntax; break
-    case 'MSIE 10': element.innerText = syntax; break
-    case 'IE 11': element.innerText = syntax; break
-    case 'Chrome 76': element.innerText = syntax; break
-    case 'Edge 18': element.innerText = syntax; break
-    case 'Firefox 68': element.innerText = syntax; break
-    default: element.innerText = syntax
+  case 'MSIE 9': element.innerText = syntax; break
+  case 'MSIE 10': element.innerText = syntax; break
+  case 'IE 11': element.innerText = syntax; break
+  case 'Chrome 76': element.innerText = syntax; break
+  case 'Edge 18': element.innerText = syntax; break
+  case 'Firefox 68': element.innerText = syntax; break
+  default: element.innerText = syntax
   }
 
   // by default it will be at the bottom of the title.
@@ -153,21 +153,21 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   var factor = 14
 
   switch (this.currentBrowser()) {
-    case 'MSIE 5': result = (factor * 1.05) * value + 'px'; break
-    case 'MSIE 7': result = (factor * 1.05) * value + 'px'; break
-    case 'MSIE 8': result = (factor * 1.05) * value + 'px'; break
-    case 'MSIE 9': result = (factor * 1.05) * value + 'px'; break
+  case 'MSIE 5': result = (factor * 1.05) * value + 'px'; break
+  case 'MSIE 7': result = (factor * 1.05) * value + 'px'; break
+  case 'MSIE 8': result = (factor * 1.05) * value + 'px'; break
+  case 'MSIE 9': result = (factor * 1.05) * value + 'px'; break
 
     // rem compatible.
-    case 'MSIE 10': result = value + 'rem'; break
-    case 'MSIE 11': result = value + 'rem'; break
-    case 'Chrome 76': result = value + 'rem'; break
+  case 'MSIE 10': result = value + 'rem'; break
+  case 'MSIE 11': result = value + 'rem'; break
+  case 'Chrome 76': result = value + 'rem'; break
 
-    case 'Edge 18': result = (factor * 1.05) * value + 'px'; break
-    case 'Firefox 68': result = (factor * 1.05) * value + 'px'; break
+  case 'Edge 18': result = (factor * 1.05) * value + 'px'; break
+  case 'Firefox 68': result = (factor * 1.05) * value + 'px'; break
 
     // rem compatible default.
-    default: result = value + 'rem'
+  default: result = value + 'rem'
   }
 
   return result
