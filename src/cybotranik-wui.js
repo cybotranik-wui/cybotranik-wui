@@ -272,3 +272,816 @@ CybotranikWUI.prototype.Default = {
   , Line: { Height: 1.5 }
 
 }
+
+/**
+ * Default Style Syntax Array
+ * @returns {array} All css styles
+ * */
+CybotranikWUI.prototype.Defaults = function () {
+
+  return [
+
+    this.createStyle('*',
+      [
+        this.createProperty('zoom', 1)
+
+      ]
+    )
+
+    , this.createStyle('*, ::after, ::before',
+      [
+        this.createProperty('box-sizing', 'border-box')
+      ]
+    )
+
+    , this.createStyle('*, ::after',
+      [
+        this.createProperty('clear', 'both')
+      ]
+    )
+
+    , this.createStyle('html',
+      [
+
+      ]
+    )
+
+    , this.createStyle('body',
+      [
+        this.createProperty('font-family', this.Default.Font.Family)
+        , this.createProperty('font-size', this.compatibleSize(this.Default.Font.Size))
+        , this.createProperty('font-weight', this.Default.Font.Weight)
+        , this.createProperty('line-height', this.Default.Line.Height)
+
+        , this.createProperty('margin', 0)
+        , this.createProperty('padding', 0)
+        , this.createProperty('text-align', 'left')
+      ]
+    )
+
+    /**
+     * Content sectioning
+     */
+    , this.createStyle('address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section',
+      [
+        this.createProperty('display', 'block')
+        , this.createProperty('margin-top', this.compatibleSize(this.Default.Margin.Top))
+        , this.createProperty('margin-bottom', this.compatibleSize(this.Default.Margin.Bottom))
+        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
+        , this.createProperty('margin-right', this.compatibleSize(this.Default.Margin.Right))
+        , this.createProperty('padding-top', this.compatibleSize(this.Default.Padding.Top))
+        , this.createProperty('padding-bottom', this.compatibleSize(this.Default.Padding.Bottom))
+        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
+        , this.createProperty('padding-right', this.compatibleSize(this.Default.Padding.Right))
+        , this.createProperty('border', 'solid ' + this.compatibleSize(this.Default.Border.All) + ' transparent')
+      ]
+    )
+
+    /**
+     * Text content
+     */
+    , this.createStyle('blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul',
+      [
+        this.createProperty('display', 'block')
+        , this.createProperty('margin-top', this.compatibleSize(this.Default.Margin.Top))
+        , this.createProperty('margin-bottom', this.compatibleSize(this.Default.Margin.Bottom))
+        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
+        , this.createProperty('margin-right', this.compatibleSize(this.Default.Margin.Right))
+        , this.createProperty('padding-top', this.compatibleSize(this.Default.Padding.Top))
+        , this.createProperty('padding-bottom', this.compatibleSize(this.Default.Padding.Bottom))
+        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
+        , this.createProperty('padding-right', this.compatibleSize(this.Default.Padding.Right))
+      ]
+    )
+
+    /**
+     * Inline text semantics
+     */
+    , this.createStyle('a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr',
+      [
+        this.createProperty('display', 'inline')
+        , this.createProperty('zoom', '1')
+      ]
+    )
+
+    /**
+     * Image and multimedia
+     */
+    , this.createStyle('area,audio,canvas,img,track,video',
+      [
+        this.createProperty('display', 'inline-block')
+      ]
+    )
+
+    /**
+     * Embedded content
+     */
+    , this.createStyle('embed,iframe,noembed,object,param,picture,source',
+      [
+
+      ]
+    )
+
+    /**
+     * Demarcating edits
+     */
+    , this.createStyle('del,ins',
+      [
+
+      ]
+    )
+
+    /**
+     * Table content
+     */
+    , this.createStyle('caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr',
+      [
+
+      ]
+    )
+
+    /**
+     * Forms
+     */
+    , this.createStyle('button,datalist,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea',
+      [
+
+      ]
+    )
+
+    /**
+     * Interactive elements
+     */
+    , this.createStyle('details,dialog,summary',
+      [
+
+      ]
+    )
+
+    /**
+     * Web Components
+     */
+    , this.createStyle('shadow,template',
+      [
+
+      ]
+    )
+
+    /*
+     * Content sectioning
+     * __________________________________________________
+     * */
+
+    // address
+    , this.createStyle('address',
+      [
+
+      ]
+    )
+
+    // article
+    , this.createStyle('article',
+      [
+
+      ]
+    )
+
+    // aside
+    , this.createStyle('aside',
+      [
+
+      ]
+    )
+
+    // footer
+    , this.createStyle('footer',
+      [
+
+      ]
+    )
+
+    , this.createStyle('header',
+      [
+
+      ]
+    )
+
+    , this.createStyle('h1, h2, h3, h4, h5, h6',
+      [
+        this.createProperty('font-weight', 500)
+      ]
+    )
+
+    , this.createStyle('h1',
+      [
+        this.createProperty('font-size', this.compatibleSize(2.5))
+      ]
+    )
+
+    , this.createStyle('h2',
+      [
+        this.createProperty('font-size', this.compatibleSize(2))
+      ]
+    )
+
+    , this.createStyle('h3',
+      [
+        this.createProperty('font-size', this.compatibleSize(1.75))
+      ]
+    )
+
+    , this.createStyle('h4',
+      [
+        this.createProperty('font-size', this.compatibleSize(1.5))
+      ]
+    )
+
+    , this.createStyle('h5',
+      [
+        this.createProperty('font-size', this.compatibleSize(1.25))
+      ]
+    )
+
+    , this.createStyle('h6',
+      [
+        this.createProperty('font-size', this.compatibleSize(1))
+      ]
+    )
+
+    , this.createStyle('hgroup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('main',
+      [
+
+      ]
+    )
+
+    , this.createStyle('nav',
+      [
+
+      ]
+    )
+
+    , this.createStyle('section',
+      [
+
+      ]
+    )
+
+    /*
+     * Text content
+     * __________________________________________________
+     * */
+
+
+    , this.createStyle('blockquote',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dd',
+      [
+
+      ]
+    )
+
+    , this.createStyle('div',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dl',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dt',
+      [
+
+      ]
+    )
+
+    , this.createStyle('figcaption',
+      [
+
+      ]
+    )
+
+    , this.createStyle('figure',
+      [
+
+      ]
+    )
+
+    , this.createStyle('hr',
+      [
+
+      ]
+    )
+
+    , this.createStyle('li',
+      [
+
+      ]
+    )
+
+    , this.createStyle('[role="menuitem"]',
+      [
+        this.createProperty('display', 'inline')
+        , this.createProperty('padding-top', this.compatibleSize(0.25))
+        , this.createProperty('padding-bottom', this.compatibleSize(0.25))
+        , this.createProperty('padding-left', this.compatibleSize(0.5))
+        , this.createProperty('padding-right', this.compatibleSize(0.5))
+      ]
+    )
+
+    , this.createStyle('[role="menu"]',
+      [
+        this.createProperty('display', 'block')
+      ]
+    )
+
+    , this.createStyle('ol',
+      [
+
+      ]
+    )
+
+    , this.createStyle('p',
+      [
+        this.createProperty('font-size', this.compatibleSize(1.25))
+        , this.createProperty('font-weight', 300)
+      ]
+    )
+
+    , this.createStyle('pre',
+      [
+        this.createProperty('white-space', 'pre-line')
+      ]
+    )
+
+    , this.createStyle('ul',
+      [
+
+      ]
+    )
+
+    /*
+    * Inline text semantics
+    * __________________________________________________
+    * */
+    , this.createStyle('a',
+      [
+        this.createProperty('text-decoration', 'none')
+      ]
+    )
+
+    , this.createStyle('abbr',
+      [
+
+      ]
+    )
+
+    , this.createStyle('b',
+      [
+
+      ]
+    )
+
+    , this.createStyle('bdi',
+      [
+
+      ]
+    )
+
+    , this.createStyle('bdo',
+      [
+
+      ]
+    )
+
+    , this.createStyle('br',
+      [
+
+      ]
+    )
+
+    , this.createStyle('cite',
+      [
+
+      ]
+    )
+
+    , this.createStyle('code',
+      [
+
+      ]
+    )
+
+    , this.createStyle('data',
+      [
+
+      ]
+    )
+
+    , this.createStyle('dfn',
+      [
+
+      ]
+    )
+
+    , this.createStyle('em',
+      [
+
+      ]
+    )
+
+    , this.createStyle('i',
+      [
+
+      ]
+    )
+
+    , this.createStyle('kbd',
+      [
+
+      ]
+    )
+
+    , this.createStyle('mark',
+      [
+
+      ]
+    )
+
+    , this.createStyle('mark',
+      [
+
+      ]
+    )
+
+    , this.createStyle('q',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rb',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rp',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rt',
+      [
+
+      ]
+    )
+
+    , this.createStyle('rtc',
+      [
+
+      ]
+    )
+
+    , this.createStyle('ruby',
+      [
+
+      ]
+    )
+
+    , this.createStyle('s',
+      [
+
+      ]
+    )
+
+    , this.createStyle('samp',
+      [
+
+      ]
+    )
+
+    , this.createStyle('small',
+      [
+
+      ]
+    )
+
+    , this.createStyle('span',
+      [
+
+      ]
+    )
+
+    , this.createStyle('strong',
+      [
+
+      ]
+    )
+
+    , this.createStyle('sub',
+      [
+
+      ]
+    )
+
+    , this.createStyle('sup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('time',
+      [
+
+      ]
+    )
+
+    , this.createStyle('u',
+      [
+
+      ]
+    )
+
+    , this.createStyle('var',
+      [
+
+      ]
+    )
+
+    , this.createStyle('wbr',
+      [
+
+      ]
+    )
+
+    /*
+    * Image and multimedia
+    * __________________________________________________
+    * */
+
+    , this.createStyle('area',
+      [
+
+      ]
+    )
+
+    , this.createStyle('audio',
+      [
+
+      ]
+    )
+
+    , this.createStyle('img',
+      [
+
+      ]
+    )
+
+    , this.createStyle('track',
+      [
+
+      ]
+    )
+
+    // video
+    , this.createStyle('video',
+      [
+
+      ]
+    )
+
+    /*
+    * Embedded content
+    * __________________________________________________
+    * */
+
+    , this.createStyle('embed',
+      [
+
+      ]
+    )
+
+    , this.createStyle('iframe',
+      [
+
+      ]
+    )
+
+    /*
+    * Demarcating edits
+    * __________________________________________________
+    * */
+    , this.createStyle('del',
+      [
+
+      ]
+    )
+
+    , this.createStyle('ins',
+      [
+
+      ]
+    )
+
+    /*
+    * Table content
+    * __________________________________________________
+    * */
+    , this.createStyle('caption',
+      [
+
+      ]
+    )
+
+    , this.createStyle('col',
+      [
+
+      ]
+    )
+
+    , this.createStyle('colgroup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('table',
+      [
+
+      ]
+    )
+
+    , this.createStyle('tbody',
+      [
+
+      ]
+    )
+
+    , this.createStyle('td',
+      [
+
+      ]
+    )
+
+    , this.createStyle('tfoot',
+      [
+
+      ]
+    )
+
+    , this.createStyle('th',
+      [
+
+      ]
+    )
+
+    , this.createStyle('thead',
+      [
+
+      ]
+    )
+
+    , this.createStyle('tr',
+      [
+
+      ]
+    )
+
+    /*
+    * Forms
+    * __________________________________________________
+    * */
+    , this.createStyle('button',
+      [
+
+      ]
+    )
+
+    , this.createStyle('datalist',
+      [
+
+      ]
+    )
+
+    , this.createStyle('form',
+      [
+
+      ]
+    )
+
+    , this.createStyle('input',
+      [
+
+      ]
+    )
+
+    , this.createStyle('label',
+      [
+
+      ]
+    )
+
+    , this.createStyle('legend',
+      [
+
+      ]
+    )
+
+    , this.createStyle('meter',
+      [
+
+      ]
+    )
+
+    , this.createStyle('optgroup',
+      [
+
+      ]
+    )
+
+    , this.createStyle('option',
+      [
+
+      ]
+    )
+
+    , this.createStyle('output',
+      [
+
+      ]
+    )
+
+    , this.createStyle('progress',
+      [
+
+      ]
+    )
+
+    , this.createStyle('select',
+      [
+
+      ]
+    )
+
+    , this.createStyle('textarea',
+      [
+
+      ]
+    )
+
+    /*
+    * Interactive elements
+    * __________________________________________________
+    * */
+    , this.createStyle('details',
+      [
+        this.createProperty('cursor', 'pointer')
+
+      ]
+    )
+
+    , this.createStyle('dialog',
+      [
+
+      ]
+    )
+
+    , this.createStyle('summary',
+      [
+
+      ]
+    )
+
+    /*
+    * Web Components
+    * __________________________________________________
+    * */
+
+    , this.createStyle('shadow',
+      [
+
+      ]
+    )
+
+    , this.createStyle('template',
+      [
+
+      ]
+    )
+  ]
+}
