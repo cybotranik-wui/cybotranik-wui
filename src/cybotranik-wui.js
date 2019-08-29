@@ -9,7 +9,7 @@
 function CybotranikWUI() { }
 
 /**
- * Current navigator device name and version
+ * Navigator Compatibility Frendly Name and Version
  * 
  * @returns {string} Navigator Name and Version
  */
