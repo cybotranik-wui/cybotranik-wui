@@ -132,10 +132,10 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
 CybotranikWUI.prototype.documentAppendCssArray = function (array) {
 
   var syntaxs = ''
-
   // syntaxs builder
   for (var i = 0; i < array.length; i++) {
-    syntaxs += array[i]
+    if(array[i] !== '')
+      syntaxs += array[i]
   }
 
   this.documentAppendCss(syntaxs)
