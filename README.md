@@ -6,10 +6,6 @@
 
 [![NPM](https://nodei.co/npm/cybotranik-wui.png)](https://nodei.co/npm/cybotranik-wui/)
 
-# Bugs and feature requests
-
-Have a bug or a feature request? Please first read the issue guidelines and search for existing and closed issues. If your problem or idea is not addressed yet, please open a new issue.
-
 # Documents.
 
 Cybotranik documentation and examples are available at https://cybotranik-wui.github.io/.
