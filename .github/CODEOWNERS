@@ -1,0 +1,11 @@
+# Code Owners
+# Each line is a file pattern followed by one or more owners.
+
+# Review when someone opens a pull request.
+*	@cybotranik-wui/review.
+
+# When someone opens a pull request that only modifies JS files.
+*.js	@cybotranik-wui/js-review
+
+#  When someone opens a pull request that only modifies /docs folder.
+/docs	@cybotranik-wui/docs-review
