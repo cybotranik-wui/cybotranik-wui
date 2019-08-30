@@ -7,28 +7,77 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Content sectioning</title>
     <link rel="icon" href="../../docs/media/favicon.ico">
-
+    <meta name="google" content="notranslate" />
     <!-- Cybotranik WUI -->
     <script src="../../src/cybotranik-wui.js"></script>
 </head>
 
-<body>
+<body is="doc-page">
     <header>
         <h1>Content sectioning</h1>
     </header>
-    <main>
-        <article>
-            <h2>address</h2>
-            <p>The HTML element indicates that the enclosed HTML provides contact information for a person or people, or
-                for an organization</p>
-            <address>
-                Visit <a href="https://cybotranik-wui.github.io"> cybotranik-wui.github.io</a><br>
-                If you see any bugs, please <a href="mailto:Jack@cybotranik-wui.github.io"> contact webmaster</a><br>
-                <a href="mailto:jack@cybotranik-wui.github.io">Jack JACKSON</a><br>
-                <a href="tel:+11234567890">(123) 456-7890</a>
-            </address>
-        </article>
-    </main>
+    <div role="main">
+        <aside is="doc-example">
+            <header>
+                <h2>address</h2>
+                <p>The HTML element indicates that the enclosed HTML provides contact information for a person or
+                    people, or
+                    for an organization</p>
+            </header>
+            <div role="main">
+                <address is="web-address">
+                    Visit <a href="https://cybotranik-wui.github.io"> cybotranik-wui.github.io</a><br>
+                    If you see any bugs, please <a href="mailto:Jack@cybotranik-wui.github.io"> contact
+                        webmaster</a><br>
+                    <a href="mailto:jack@cybotranik-wui.github.io">Jack JACKSON</a><br>
+                    <a href="tel:+11234567890">(123) 456-7890</a>
+                </address>
+            </div>
+        </aside>
+
+        <aside is="doc-example">
+            <header>
+                <h2>article</h2>
+                <p>The HTML element represents a self-contained composition in a document, page, application, or site,
+                    which is intended to be independently distributable or reusable (e.g., in syndication). Examples
+                    include: a forum post, a magazine or newspaper article, or a blog entry.</p>
+            </header>
+            <div role="main">
+                <article is="weather-forecast">
+                    <header>
+                        <h3>Antalya, Turkey Day Weather</h3>
+                    </header>
+
+                    <article is="weather-day">
+                        <h4>Sunny</h4>
+                        <time datetime="2019-08-30">Agust 30</time>
+                        <meter min="-40" max="50" low="10" high="30" optimum="20" value="32">32 degrees</meter>
+                    </article>
+                    <article is="weather-day">
+                        <h4>Sunny</h4>
+                        <time datetime="2019-08-31">Agust 31</time>
+                        <meter min="-50" max="50" low="10" high="30" optimum="20" value="30">30 degrees</meter>
+                    </article>
+                    <article is="weather-day">
+                        <h4>Sunny</h4>
+                        <time datetime="2019-09-01">Semtember 01</time>
+                        <meter min="-50" max="50" low="10" high="30" optimum="20" value="28">28 degrees</meter>
+                    </article>
+                    <article is="weather-day">
+                        <h4>Sunny</h4>
+                        <time datetime="2019-09-02">Semtember 02</time>
+                        <meter min="-50" max="50" low="10" high="30" optimum="20" value="26">26 degrees</meter>
+                    </article>
+                    <article is="weather-day">
+                        <h4>Sunny</h4>
+                        <time datetime="2019-09-03">Semtember 03</time>
+                        <meter min="-50" max="50" low="10" high="30" optimum="20" value="24">24 degrees</meter>
+                    </article>
+                </article>
+            </div>
+
+        </aside>
+    </div>
 </body>
 
 </html>

@@ -9,6 +9,56 @@
 function CybotranikWUI() { }
 
 /**
+ * Default Configuration
+ * 
+ * @returns {Theme} Plugin css styles
+ * */
+CybotranikWUI.prototype.Default = {
+  Color: {
+    Primary: '#00d1b2'
+    , White: '#ffffff'
+    , Black: '#0a0a0a'
+    , Light: '#f5f5f5'
+    , Dark: '#363636'
+    , Link: '#3273dc'
+    , Info: '#209cee'
+    , Success: '#23d160'
+    , Warning: '#ffdd57'
+    , Danger: '#ff3860'
+  }
+  , Font: {
+    Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
+    , Family_Print: 'SFMono- Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
+    , Size: 1
+    , Weight: 300
+    , Factor: 18
+  }
+  , Margin: {
+    All: 1
+    , Bottom: 1
+    , Top: 1
+    , Left: 1
+    , Right: 1
+  }
+  , Padding: {
+    All: 1
+    , Bottom: 1
+    , Top: 1
+    , Left: 1
+    , Right: 1
+  }
+  , Border: {
+    All: 0.2
+    , Bottom: 0.2
+    , Top: 0.2
+    , Left: 0.2
+    , Right: 0.2
+  }
+  , Line: { Height: 1.6 }
+
+}
+
+/**
  * Navigator Compatibility Frendly Name and Version
  * 
  * @returns {string} Navigator Name and Version
@@ -107,19 +157,19 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
 
   switch (this.currentBrowser()) {
 
-  // Old Property
-  case 'MSIE 5': element.styleSheet.cssText = syntax; break
-  case 'MSIE 7': element.styleSheet.cssText = syntax; break
-  case 'MSIE 8': element.styleSheet.cssText = syntax; break
+    // Old Property
+    case 'MSIE 5': element.styleSheet.cssText = syntax; break
+    case 'MSIE 7': element.styleSheet.cssText = syntax; break
+    case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-  case 'MSIE 9': element.innerText = syntax; break
-  case 'MSIE 10': element.innerText = syntax; break
-  case 'IE 11': element.innerText = syntax; break
-  case 'Chrome 76': element.innerText = syntax; break
-  case 'Edge 18': element.innerText = syntax; break
-  case 'Firefox 68': element.innerText = syntax; break
-  default: element.innerText = syntax
+    case 'MSIE 9': element.innerText = syntax; break
+    case 'MSIE 10': element.innerText = syntax; break
+    case 'IE 11': element.innerText = syntax; break
+    case 'Chrome 76': element.innerText = syntax; break
+    case 'Edge 18': element.innerText = syntax; break
+    case 'Firefox 68': element.innerText = syntax; break
+    default: element.innerText = syntax
   }
 
   // by default it will be at the bottom of the title.
@@ -134,7 +184,7 @@ CybotranikWUI.prototype.documentAppendCssArray = function (array) {
   var syntaxs = ''
   // syntaxs builder
   for (var i = 0; i < array.length; i++) {
-    if(array[i] !== '')
+    if (array[i] !== '')
       syntaxs += array[i]
   }
 
@@ -150,24 +200,24 @@ CybotranikWUI.prototype.documentAppendCssArray = function (array) {
 CybotranikWUI.prototype.compatibleSize = function (value) {
 
   var result = value
-  var factor = 14
+  var factor = this.Default.Font.Factor
 
   switch (this.currentBrowser()) {
-  case 'MSIE 5': result = (factor * 1.05) * value + 'px'; break
-  case 'MSIE 7': result = (factor * 1.05) * value + 'px'; break
-  case 'MSIE 8': result = (factor * 1.05) * value + 'px'; break
-  case 'MSIE 9': result = (factor * 1.05) * value + 'px'; break
-
+    case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
+    case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
+    case 'MSIE 8': result = (factor * 1) * value + 'px'; break
+    case 'MSIE 9': result = (factor * 1) * value + 'px'; break
+    case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
+    case 'Firefox 68': result = (factor * 1.15) * value + 'px'; break
     // rem compatible.
-  case 'MSIE 10': result = value + 'rem'; break
-  case 'MSIE 11': result = value + 'rem'; break
-  case 'Chrome 76': result = value + 'rem'; break
-
-  case 'Edge 18': result = (factor * 1.05) * value + 'px'; break
-  case 'Firefox 68': result = (factor * 1.05) * value + 'px'; break
+    // case 'MSIE 10': result = value + 'rem'; break
+    // case 'MSIE 11': result = value + 'rem'; break
+    // case 'Chrome 76': result = value + 'rem'; brea
 
     // rem compatible default.
-  default: result = value + 'rem'
+    // default: result = value + 'rem'
+    // px compatible default.
+    default: result = (factor * 1) * value + 'px'
   }
 
   return result
@@ -223,66 +273,44 @@ CybotranikWUI.prototype.createElementArray = function () {
 }
 
 /**
- * Default Configuration
- * 
- * @returns {Theme} Plugin css styles
- * */
-CybotranikWUI.prototype.Default = {
-  Color: {
-    Primary: 'black'
-    , White: 'white'
-    , Black: 'black'
-    , Light: 'gray'
-    , Dark: 'darkgrey'
-    , Link: 'blue'
-    , Info: 'cyan'
-    , Success: 'green'
-    , Warning: 'yellow'
-    , Danger: 'red'
-  }
-  , Font: {
-    Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
-    , Family_Print: 'SFMono- Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
-    , Size: 1
-    , Weight: 400
-  }
-  , Margin: {
-    All: 0
-    , Bottom: 0
-    , Top: 0
-    , Left: 0
-    , Right: 0
-  }
-  , Padding: {
-    All: 0
-    , Bottom: 0
-    , Top: 0
-    , Left: 0
-    , Right: 0
-  }
-  , Border: {
-    All: 0
-    , Bottom: 0
-    , Top: 0
-    , Left: 0
-    , Right: 0
-  }
-  , Line: { Height: 1.5 }
-
-}
-
-/**
  * Default Style Syntax Array
  * @returns {array} All css styles
  * */
 CybotranikWUI.prototype.Defaults = function () {
 
   return [
+    this.createStyle('is="css-shema"',
+      [
+        /* Positioning */
+        this.createProperty('Positioning', 'relative')
+        , this.createProperty('top', 0)
+        , this.createProperty('right', 0)
+        , this.createProperty('bottom', 0)
+        , this.createProperty('left', 0)
+        , this.createProperty('z-index', 1)
 
-    this.createStyle('*',
+        /* Display */
+        , this.createProperty('display', 'block')
+        , this.createProperty('float', 'left')
+        , this.createProperty('width', "auto")
+        , this.createProperty('height', "auto")
+
+        /* Typography */
+        , this.createProperty('line-height', this.Default.Line.Height)
+        , this.createProperty('color', this.Default.Color.Dark)
+        , this.createProperty('text-align', 'center')
+
+        /* Theme */
+        , this.createProperty('background-color', this.Default.Color.Light)
+        , this.createProperty('border-left-style', 'dashed')
+        , this.createProperty('border-left-width', this.compatibleSize(1))
+        , this.createProperty('border-left-color', this.Default.Color.Danger)
+      ]
+    )
+
+    , this.createStyle('*',
       [
         this.createProperty('zoom', 1)
-
       ]
     )
 
@@ -306,14 +334,22 @@ CybotranikWUI.prototype.Defaults = function () {
 
     , this.createStyle('body',
       [
-        this.createProperty('font-family', this.Default.Font.Family)
+        /* Positioning */
+        this.createProperty('margin', 0)
+        , this.createProperty('padding', 0)
+
+        /* Display */
+        , this.createProperty('text-align', 'left')
+
+        /* Typography */
+        , this.createProperty('font-family', this.Default.Font.Family)
         , this.createProperty('font-size', this.compatibleSize(this.Default.Font.Size))
         , this.createProperty('font-weight', this.Default.Font.Weight)
         , this.createProperty('line-height', this.Default.Line.Height)
 
-        , this.createProperty('margin', 0)
-        , this.createProperty('padding', 0)
-        , this.createProperty('text-align', 'left')
+        /* Theme */
+        , this.createProperty('background-color', this.Default.Color.White)
+
       ]
     )
 
@@ -322,15 +358,20 @@ CybotranikWUI.prototype.Defaults = function () {
      */
     , this.createStyle('address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section',
       [
-        this.createProperty('display', 'block')
-        , this.createProperty('margin-top', this.compatibleSize(this.Default.Margin.Top))
-        , this.createProperty('margin-bottom', this.compatibleSize(this.Default.Margin.Bottom))
-        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
-        , this.createProperty('margin-right', this.compatibleSize(this.Default.Margin.Right))
-        , this.createProperty('padding-top', this.compatibleSize(this.Default.Padding.Top))
-        , this.createProperty('padding-bottom', this.compatibleSize(this.Default.Padding.Bottom))
-        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
-        , this.createProperty('padding-right', this.compatibleSize(this.Default.Padding.Right))
+        /* Positioning */
+        this.createProperty('margin-top', this.compatibleSize(0))
+        , this.createProperty('margin-bottom', this.compatibleSize(0))
+        , this.createProperty('margin-left', this.compatibleSize(0))
+        , this.createProperty('margin-right', this.compatibleSize(0))
+        , this.createProperty('padding-top', this.compatibleSize(0))
+        , this.createProperty('padding-bottom', this.compatibleSize(0))
+        , this.createProperty('padding-left', this.compatibleSize(0))
+        , this.createProperty('padding-right', this.compatibleSize(0))
+
+        /* Display */
+        , this.createProperty('display', 'block')
+
+        /* Theme */
         , this.createProperty('border', 'solid ' + this.compatibleSize(this.Default.Border.All) + ' transparent')
       ]
     )
@@ -340,15 +381,18 @@ CybotranikWUI.prototype.Defaults = function () {
      */
     , this.createStyle('blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul',
       [
-        this.createProperty('display', 'block')
-        , this.createProperty('margin-top', this.compatibleSize(this.Default.Margin.Top))
-        , this.createProperty('margin-bottom', this.compatibleSize(this.Default.Margin.Bottom))
-        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
-        , this.createProperty('margin-right', this.compatibleSize(this.Default.Margin.Right))
-        , this.createProperty('padding-top', this.compatibleSize(this.Default.Padding.Top))
-        , this.createProperty('padding-bottom', this.compatibleSize(this.Default.Padding.Bottom))
-        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
-        , this.createProperty('padding-right', this.compatibleSize(this.Default.Padding.Right))
+        /* Positioning */
+        this.createProperty('margin-top', this.compatibleSize(0))
+        , this.createProperty('margin-bottom', this.compatibleSize(0))
+        , this.createProperty('margin-left', this.compatibleSize(0))
+        , this.createProperty('margin-right', this.compatibleSize(0))
+        , this.createProperty('padding-top', this.compatibleSize(0))
+        , this.createProperty('padding-bottom', this.compatibleSize(0))
+        , this.createProperty('padding-left', this.compatibleSize(0))
+        , this.createProperty('padding-right', this.compatibleSize(0))
+
+        /* Display */
+        , this.createProperty('display', 'block')
       ]
     )
 
@@ -357,6 +401,7 @@ CybotranikWUI.prototype.Defaults = function () {
      */
     , this.createStyle('a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr',
       [
+        /* Display */
         this.createProperty('display', 'inline')
         , this.createProperty('zoom', '1')
       ]
@@ -367,6 +412,7 @@ CybotranikWUI.prototype.Defaults = function () {
      */
     , this.createStyle('area,audio,canvas,img,track,video',
       [
+        /* Display */
         this.createProperty('display', 'inline-block')
       ]
     )
@@ -425,651 +471,90 @@ CybotranikWUI.prototype.Defaults = function () {
       ]
     )
 
-    /*
-     * Content sectioning
-     * __________________________________________________
-     * */
-    , this.createStyle('address',
-      [
-
-      ]
-    )
-
-    , this.createStyle('article',
-      [
-
-      ]
-    )
-
-    , this.createStyle('aside',
-      [
-
-      ]
-    )
-
-    , this.createStyle('footer',
-      [
-
-      ]
-    )
-
-    , this.createStyle('header',
-      [
-
-      ]
-    )
-
-    , this.createStyle('h1, h2, h3, h4, h5, h6',
-      [
-        this.createProperty('font-weight', 500)
-      ]
-    )
-
-    , this.createStyle('h1',
-      [
-        this.createProperty('font-size', this.compatibleSize(2.5))
-      ]
-    )
-
-    , this.createStyle('h2',
-      [
-        this.createProperty('font-size', this.compatibleSize(2))
-      ]
-    )
-
-    , this.createStyle('h3',
-      [
-        this.createProperty('font-size', this.compatibleSize(1.75))
-      ]
-    )
-
-    , this.createStyle('h4',
-      [
-        this.createProperty('font-size', this.compatibleSize(1.5))
-      ]
-    )
-
-    , this.createStyle('h5',
-      [
-        this.createProperty('font-size', this.compatibleSize(1.25))
-      ]
-    )
-
-    , this.createStyle('h6',
-      [
-        this.createProperty('font-size', this.compatibleSize(1))
-      ]
-    )
-
-    , this.createStyle('hgroup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('main',
-      [
-
-      ]
-    )
-
-    , this.createStyle('nav',
-      [
-
-      ]
-    )
-
-    , this.createStyle('section',
-      [
-
-      ]
-    )
-
-    /*
-     * Text content
-     * __________________________________________________
-     * */
-    , this.createStyle('blockquote',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dd',
-      [
-
-      ]
-    )
-
-    , this.createStyle('div',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dl',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dt',
-      [
-
-      ]
-    )
-
-    , this.createStyle('figcaption',
-      [
-
-      ]
-    )
-
-    , this.createStyle('figure',
-      [
-
-      ]
-    )
-
-    , this.createStyle('hr',
-      [
-
-      ]
-    )
-
-    , this.createStyle('li',
-      [
-
-      ]
-    )
-
-    , this.createStyle('[role="menuitem"]',
-      [
-        this.createProperty('display', 'inline')
-        , this.createProperty('padding-top', this.compatibleSize(0.25))
-        , this.createProperty('padding-bottom', this.compatibleSize(0.25))
-        , this.createProperty('padding-left', this.compatibleSize(0.5))
-        , this.createProperty('padding-right', this.compatibleSize(0.5))
-      ]
-    )
-
-    , this.createStyle('[role="menu"]',
-      [
-        this.createProperty('display', 'block')
-      ]
-    )
-
-    , this.createStyle('ol',
-      [
-
-      ]
-    )
-
-    , this.createStyle('p',
-      [
-        this.createProperty('font-size', this.compatibleSize(1.25))
-        , this.createProperty('font-weight', 300)
-      ]
-    )
-
-    , this.createStyle('pre',
-      [
-        this.createProperty('white-space', 'pre-line')
-      ]
-    )
-
-    , this.createStyle('ul',
-      [
-
-      ]
-    )
-
-    /*
-    * Inline text semantics
-    * __________________________________________________
-    * */
     , this.createStyle('a',
       [
+        /* Typography */
         this.createProperty('text-decoration', 'none')
+        /* Theme */
+        , this.createProperty('color', this.Default.Color.Link)
       ]
     )
 
-    , this.createStyle('abbr',
+    , this.createStyle('[is="doc-page"]',
       [
+        /* Positioning */
+        this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
+        , this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
+        /* Theme */
+        , this.createProperty('background-color', '#f9f9f9')
+        , this.createProperty('color', '#607D8B')
 
       ]
     )
 
-    , this.createStyle('b',
+    , this.createStyle('[is="doc-page"] > header',
       [
+        /* Typography */
+        this.createProperty('text-align', 'center')
 
+        /* Theme */
+        , this.createProperty('background-color', '#efefef')
+        , this.createProperty('border-bottom-style', 'solid')
+        , this.createProperty('border-bottom-width', this.compatibleSize(0.1))
+        , this.createProperty('border-bottom-color', this.Default.Color.Light)
       ]
     )
 
-    , this.createStyle('bdi',
+    , this.createStyle('[is="doc-page"] > [role="main"]',
       [
-
-      ]
-    )
-
-    , this.createStyle('bdo',
-      [
-
-      ]
-    )
-
-    , this.createStyle('br',
-      [
-
-      ]
-    )
-
-    , this.createStyle('cite',
-      [
-
-      ]
-    )
-
-    , this.createStyle('code',
-      [
-
-      ]
-    )
-
-    , this.createStyle('data',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dfn',
-      [
-
-      ]
-    )
-
-    , this.createStyle('em',
-      [
-
-      ]
-    )
-
-    , this.createStyle('i',
-      [
-
-      ]
-    )
-
-    , this.createStyle('kbd',
-      [
-
-      ]
-    )
-
-    , this.createStyle('mark',
-      [
-
-      ]
-    )
-
-    , this.createStyle('mark',
-      [
-
-      ]
-    )
-
-    , this.createStyle('q',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rb',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rp',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rt',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rtc',
-      [
-
-      ]
-    )
-
-    , this.createStyle('ruby',
-      [
-
-      ]
-    )
-
-    , this.createStyle('s',
-      [
-
-      ]
-    )
-
-    , this.createStyle('samp',
-      [
-
-      ]
-    )
-
-    , this.createStyle('small',
-      [
-
-      ]
-    )
-
-    , this.createStyle('span',
-      [
-
-      ]
-    )
-
-    , this.createStyle('strong',
-      [
-
-      ]
-    )
-
-    , this.createStyle('sub',
-      [
-
-      ]
-    )
-
-    , this.createStyle('sup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('time',
-      [
-
-      ]
-    )
-
-    , this.createStyle('u',
-      [
-
-      ]
-    )
-
-    , this.createStyle('var',
-      [
-
-      ]
-    )
-
-    , this.createStyle('wbr',
-      [
-
-      ]
-    )
-
-    /*
-    * Image and multimedia
-    * __________________________________________________
-    * */
-    , this.createStyle('area',
-      [
-
-      ]
-    )
-
-    , this.createStyle('audio',
-      [
-
+        this.createProperty('background-color', 'white')
       ]
     )
 
-    , this.createStyle('img',
+    , this.createStyle('[is="doc-example"]',
       [
+        /* Positioning */
+        this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
 
-      ]
-    )
-
-    , this.createStyle('track',
-      [
-
-      ]
-    )
-
-    , this.createStyle('video',
-      [
-
-      ]
-    )
-
-    /*
-    * Embedded content
-    * __________________________________________________
-    * */
-    , this.createStyle('embed',
-      [
-
-      ]
-    )
-
-    , this.createStyle('iframe',
-      [
-
-      ]
-    )
-
-    /*
-    * Demarcating edits
-    * __________________________________________________
-    * */
-    , this.createStyle('del',
-      [
-
-      ]
-    )
-
-    , this.createStyle('ins',
-      [
-
-      ]
-    )
-
-    /*
-    * Table content
-    * __________________________________________________
-    * */
-    , this.createStyle('caption',
-      [
-
-      ]
-    )
-
-    , this.createStyle('col',
-      [
-
-      ]
-    )
-
-    , this.createStyle('colgroup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('table',
-      [
-
-      ]
-    )
-
-    , this.createStyle('tbody',
-      [
-
-      ]
-    )
-
-    , this.createStyle('td',
-      [
-
-      ]
-    )
-
-    , this.createStyle('tfoot',
-      [
-
-      ]
-    )
-
-    , this.createStyle('th',
-      [
-
-      ]
-    )
-
-    , this.createStyle('thead',
-      [
-
-      ]
-    )
-
-    , this.createStyle('tr',
-      [
-
-      ]
-    )
-
-    /*
-    * Forms
-    * __________________________________________________
-    * */
-    , this.createStyle('button',
-      [
-
-      ]
-    )
-
-    , this.createStyle('datalist',
-      [
-
-      ]
-    )
-
-    , this.createStyle('form',
-      [
-
-      ]
-    )
-
-    , this.createStyle('input',
-      [
-
-      ]
-    )
-
-    , this.createStyle('label',
-      [
-
-      ]
-    )
-
-    , this.createStyle('legend',
-      [
-
-      ]
-    )
-
-    , this.createStyle('meter',
-      [
-
-      ]
-    )
-
-    , this.createStyle('optgroup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('option',
-      [
-
-      ]
-    )
-
-    , this.createStyle('output',
-      [
-
-      ]
-    )
+        /* Typography */
+        , this.createProperty('text-align', 'left')
 
-    , this.createStyle('progress',
-      [
-
-      ]
-    )
-
-    , this.createStyle('select',
-      [
-
-      ]
-    )
-
-    , this.createStyle('textarea',
-      [
-
       ]
     )
 
-    /*
-    * Interactive elements
-    * __________________________________________________
-    * */
-    , this.createStyle('details',
+    , this.createStyle('[is="doc-example"] > header',
       [
-        this.createProperty('cursor', 'pointer')
+        /* Theme */
+        this.createProperty('border-bottom-style', 'solid')
+        , this.createProperty('border-bottom-width', '1px')
+        , this.createProperty('border-bottom-color', '#607D8B')
 
       ]
     )
 
-    , this.createStyle('dialog',
+    , this.createStyle('[is="weather-forecast"] > header',
       [
-
+        this.createProperty('border-left-style', 'dotted')
+        , this.createProperty('border-left-width', '1px')
+        , this.createProperty('border-left-color', '#607D8B')
       ]
     )
 
-    , this.createStyle('summary',
+    , this.createStyle('[is="weather-day"]',
       [
-
+        this.createProperty('border-bottom-style', 'dotted')
+        , this.createProperty('border-bottom-width', '1px')
+        , this.createProperty('border-bottom-color', '#607D8B')
       ]
     )
 
-    /*
-    * Web Components
-    * __________________________________________________
-    * */
-    , this.createStyle('shadow',
+    , this.createStyle('[is="weather-day"] meter',
       [
-
+        /* Positioning */
+        this.createProperty('float', 'right')
       ]
     )
-
-    , this.createStyle('template',
-      [
 
-      ]
-    )
   ]
 }
 
@@ -1087,816 +572,3 @@ cybotranik.createElementArray()
  * Add Default Item Array to Current Document
  */
 cybotranik.documentAppendCssArray(cybotranik.Defaults())
-
-/**
- * Theme Configuration
- * @returns {Theme} Plugin css styles
- * */
-CybotranikWUI.prototype.Theme = {
-  Color: {
-    Primary: '#00d1b2'
-    , White: '#ffffff'
-    , Black: '#0a0a0a'
-    , Light: '#f5f5f5'
-    , Dark: '#363636'
-    , Link: '#3273dc'
-    , Info: '#209cee'
-    , Success: '#23d160'
-    , Warning: '#ffdd57'
-    , Danger: '#ff3860'
-  }
-  , Font: {
-    Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
-    , Family_Print: 'SFMono- Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace'
-    , Size: 1
-    , Weight: 400
-  }
-  , Margin: {
-    All: 0
-    , Bottom: 0
-    , Top: 0
-    , Left: 0
-    , Right: 0
-  }
-  , Padding: {
-    All: 0
-    , Bottom: 0
-    , Top: 0
-    , Left: 0
-    , Right: 0
-  }
-  , Border: {
-    All: 0
-    , Bottom: 0
-    , Top: 0
-    , Left: 0
-    , Right: 0
-  }
-  , Line: { Height: 1.50 }
-
-}
-
-/**
-* Theme Style Syntax Array
-* @returns {array} All css styles
-* */
-CybotranikWUI.prototype.Themes = function () {
-
-  return [
-
-    this.createStyle('html',
-      [
-
-      ]
-    )
-
-    , this.createStyle('body',
-      [
-        this.createProperty('font-family', this.Theme.Font.Family)
-        , this.createProperty('font-size', this.compatibleSize(this.Theme.Font.Size))
-        , this.createProperty('font-weight', this.Theme.Font.Weight)
-        , this.createProperty('line-height', this.Theme.Line.Height)
-        , this.createProperty('background-color', this.Theme.Color.White)
-      ]
-    )
-
-    /**
-     * Content sectioning
-     */
-    , this.createStyle('address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section',
-      [
-
-      ]
-    )
-
-    /**
-     * Text content
-     */
-    , this.createStyle('blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul',
-      [
-
-      ]
-    )
-
-    /**
-     * Inline text semantics
-     */
-    , this.createStyle('a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr',
-      [
-
-      ]
-    )
-
-    /**
-     * Image and multimedia
-     */
-    , this.createStyle('area,audio,canvas,img,track,video',
-      [
-
-      ]
-    )
-
-    /**
-     * Embedded content
-     */
-    , this.createStyle('embed,iframe,noembed,object,param,picture,source',
-      [
-
-      ]
-    )
-
-    /**
-     * Demarcating edits
-     */
-    , this.createStyle('del,ins',
-      [
-
-      ]
-    )
-
-    /**
-     * Table content
-     */
-    , this.createStyle('caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr',
-      [
-
-      ]
-    )
-
-    /**
-     * Forms
-     */
-    , this.createStyle('button,datalist,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea',
-      [
-
-      ]
-    )
-
-    /**
-     * Interactive elements
-     */
-    , this.createStyle('details,dialog,summary',
-      [
-
-      ]
-    )
-
-    /**
-     * Web Components
-     */
-    , this.createStyle('shadow,template',
-      [
-
-      ]
-    )
-
-    /*
-     * Content sectioning
-     * __________________________________________________
-     * */
-    , this.createStyle('address',
-      [
-
-      ]
-    )
-
-    , this.createStyle('article',
-      [
-
-      ]
-    )
-
-    , this.createStyle('aside',
-      [
-
-      ]
-    )
-
-    , this.createStyle('footer',
-      [
-
-      ]
-    )
-
-    , this.createStyle('header',
-      [
-
-      ]
-    )
-
-    , this.createStyle('h1, h2, h3, h4, h5, h6',
-      [
-        this.createProperty('font-weight', 500)
-        , this.createProperty('line-height', this.Default.Line.Height)
-      ]
-    )
-
-    , this.createStyle('h1',
-      [
-
-      ]
-    )
-
-    , this.createStyle('h2',
-      [
-
-      ]
-    )
-
-    , this.createStyle('h3',
-      [
-
-      ]
-    )
-
-    , this.createStyle('h4',
-      [
-
-      ]
-    )
-
-    , this.createStyle('h5',
-      [
-
-      ]
-    )
-
-    , this.createStyle('h6',
-      [
-
-      ]
-    )
-
-    , this.createStyle('hgroup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('main',
-      [
-
-      ]
-    )
-
-    , this.createStyle('nav',
-      [
-
-      ]
-    )
-
-    , this.createStyle('section',
-      [
-
-      ]
-    )
-
-    /*
-     * Text content
-     * __________________________________________________
-     * */
-    , this.createStyle('blockquote',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dd',
-      [
-
-      ]
-    )
-
-    , this.createStyle('div',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dl',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dt',
-      [
-
-      ]
-    )
-
-    , this.createStyle('figcaption',
-      [
-
-      ]
-    )
-
-    , this.createStyle('figure',
-      [
-
-      ]
-    )
-
-    , this.createStyle('hr',
-      [
-
-      ]
-    )
-
-    , this.createStyle('li',
-      [
-
-      ]
-    )
-
-    , this.createStyle('[role="menuitem"]',
-      [
-        this.createProperty('cursor', 'pointer')
-        , this.createProperty('background', this.Theme.Color.Light)
-      ]
-    )
-
-    , this.createStyle('[role="menu"]',
-      [
-
-      ]
-    )
-
-    , this.createStyle('ol',
-      [
-
-      ]
-    )
-
-    , this.createStyle('p',
-      [
-
-      ]
-    )
-
-    , this.createStyle('pre',
-      [
-
-      ]
-    )
-
-    , this.createStyle('ul',
-      [
-
-      ]
-    )
-
-    /*
-    * Inline text semantics
-    * __________________________________________________
-    * */
-    , this.createStyle('a',
-      [
-        this.createProperty('color', this.Theme.Color.Link)
-      ]
-    )
-
-    , this.createStyle('abbr',
-      [
-
-      ]
-    )
-
-    , this.createStyle('b',
-      [
-
-      ]
-    )
-
-    , this.createStyle('bdi',
-      [
-
-      ]
-    )
-
-    , this.createStyle('bdo',
-      [
-
-      ]
-    )
-
-    , this.createStyle('br',
-      [
-
-      ]
-    )
-
-    , this.createStyle('cite',
-      [
-
-      ]
-    )
-
-    , this.createStyle('code',
-      [
-
-      ]
-    )
-
-    , this.createStyle('data',
-      [
-
-      ]
-    )
-
-    , this.createStyle('dfn',
-      [
-
-      ]
-    )
-
-    , this.createStyle('em',
-      [
-
-      ]
-    )
-
-    , this.createStyle('i',
-      [
-
-      ]
-    )
-
-    , this.createStyle('kbd',
-      [
-
-      ]
-    )
-
-    , this.createStyle('mark',
-      [
-
-      ]
-    )
-
-    , this.createStyle('mark',
-      [
-
-      ]
-    )
-
-    , this.createStyle('q',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rb',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rp',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rt',
-      [
-
-      ]
-    )
-
-    , this.createStyle('rtc',
-      [
-
-      ]
-    )
-
-    , this.createStyle('ruby',
-      [
-
-      ]
-    )
-
-    , this.createStyle('s',
-      [
-
-      ]
-    )
-
-    , this.createStyle('samp',
-      [
-
-      ]
-    )
-
-    , this.createStyle('small',
-      [
-
-      ]
-    )
-
-    , this.createStyle('span',
-      [
-
-      ]
-    )
-
-    , this.createStyle('strong',
-      [
-
-      ]
-    )
-
-    , this.createStyle('sub',
-      [
-
-      ]
-    )
-
-    , this.createStyle('sup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('time',
-      [
-
-      ]
-    )
-
-    , this.createStyle('u',
-      [
-
-      ]
-    )
-
-    , this.createStyle('var',
-      [
-
-      ]
-    )
-
-    , this.createStyle('wbr',
-      [
-
-      ]
-    )
-
-    /*
-    * Image and multimedia
-    * __________________________________________________
-    * */
-    , this.createStyle('area',
-      [
-
-      ]
-    )
-
-    , this.createStyle('audio',
-      [
-
-      ]
-    )
-
-    , this.createStyle('img',
-      [
-
-      ]
-    )
-
-    , this.createStyle('track',
-      [
-
-      ]
-    )
-
-    // video
-    , this.createStyle('video',
-      [
-
-      ]
-    )
-
-    /*
-    * Embedded content
-    * __________________________________________________
-    * */
-    , this.createStyle('embed',
-      [
-
-      ]
-    )
-
-    , this.createStyle('iframe',
-      [
-
-      ]
-    )
-
-    /*
-    * Demarcating edits
-    * __________________________________________________
-    * */
-    , this.createStyle('del',
-      [
-
-      ]
-    )
-
-    , this.createStyle('ins',
-      [
-
-      ]
-    )
-
-    /*
-    * Table content
-    * __________________________________________________
-    * */
-    , this.createStyle('caption',
-      [
-
-      ]
-    )
-
-    , this.createStyle('col',
-      [
-
-      ]
-    )
-
-    , this.createStyle('colgroup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('table',
-      [
-
-      ]
-    )
-
-    , this.createStyle('tbody',
-      [
-
-      ]
-    )
-
-    , this.createStyle('td',
-      [
-
-      ]
-    )
-
-    , this.createStyle('tfoot',
-      [
-
-      ]
-    )
-
-    , this.createStyle('th',
-      [
-
-      ]
-    )
-
-    , this.createStyle('thead',
-      [
-
-      ]
-    )
-
-    , this.createStyle('tr',
-      [
-
-      ]
-    )
-
-    /*
-    * Forms
-    * __________________________________________________
-    * */
-    , this.createStyle('button',
-      [
-
-      ]
-    )
-
-    , this.createStyle('datalist',
-      [
-
-      ]
-    )
-
-    , this.createStyle('form',
-      [
-
-      ]
-    )
-
-    , this.createStyle('input',
-      [
-
-      ]
-    )
-
-    , this.createStyle('label',
-      [
-
-      ]
-    )
-
-    , this.createStyle('legend',
-      [
-
-      ]
-    )
-
-    , this.createStyle('meter',
-      [
-
-      ]
-    )
-
-    , this.createStyle('optgroup',
-      [
-
-      ]
-    )
-
-    , this.createStyle('option',
-      [
-
-      ]
-    )
-
-    , this.createStyle('output',
-      [
-
-      ]
-    )
-
-    , this.createStyle('progress',
-      [
-
-      ]
-    )
-
-    , this.createStyle('select',
-      [
-
-      ]
-    )
-
-    , this.createStyle('textarea',
-      [
-
-      ]
-    )
-
-    /*
-    * Interactive elements
-    * __________________________________________________
-    * */
-    , this.createStyle('details',
-      [
-        this.createProperty('cursor', 'pointer')
-
-      ]
-    )
-
-    , this.createStyle('dialog',
-      [
-
-      ]
-    )
-
-    , this.createStyle('summary',
-      [
-
-      ]
-    )
-
-    /*
-    * Web Components
-    * __________________________________________________
-    * */
-    , this.createStyle('shadow',
-      [
-
-      ]
-    )
-
-    , this.createStyle('template',
-      [
-
-      ]
-    )
-  ]
-}
-
-/**
- * Add Themes Item Array to Current Document
- */
-cybotranik.documentAppendCssArray(cybotranik.Themes())
