@@ -15,16 +15,65 @@ function CybotranikWUI() { }
  * */
 CybotranikWUI.prototype.Default = {
   Color: {
-    Primary: '#00d1b2'
-    , White: '#ffffff'
-    , Black: '#0a0a0a'
-    , Light: '#f5f5f5'
-    , Dark: '#363636'
-    , Link: '#3273dc'
-    , Info: '#209cee'
-    , Success: '#23d160'
-    , Warning: '#ffdd57'
-    , Danger: '#ff3860'
+    /**
+     * Default White ( Foreground ) Ratio 8:1
+     * https://webaim.org/resources/contrastchecker/
+     */
+    White: 'white'
+
+    /* 
+     * Lighter ( Background ) Ratio 8:1
+     * https://webaim.org/resources/contrastchecker/ 
+     * Swatch1 
+     */
+    , Lighter: '#B2E2B1'
+
+    /**
+     * Light
+     * <---
+     * Swatch2
+     */
+    , Light: '#B0E1AD'
+
+    /**
+     * Primary
+     *      -
+     * Swatch0
+     */
+    , Primary: '#8FD38B'
+
+    /**
+     * Dark
+     *            --->
+     * Swatch3
+     */
+    , Dark: '#6CBF67'
+
+    /* 
+     * Darker ( Foreground ) Ratio 8:1
+     * https://webaim.org/resources/contrastchecker/  
+     * Swatch4
+     */
+    , Darker: '#1C401C'
+
+    /**
+     * Default Black ( Background ) Ratio 8:1
+     * https://webaim.org/resources/contrastchecker/
+     */
+    , Black: '#384238'
+
+    /**
+     * Link Contrast Checker
+     * https://www.w3.org/TR/WCAG/#contrast-minimum
+     * https://webaim.org/resources/linkcontrastchecker/?fcolor=000000&bcolor=FFFFFF&lcolor=2F6F2F
+     */
+    , Link: '#2F6F2F'
+
+    /** */
+    , Info: '#000000'
+    , Success: '#000000'
+    , Warning: '#000000'
+    , Danger: '#000000'
   }
   , Font: {
     Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
@@ -34,18 +83,18 @@ CybotranikWUI.prototype.Default = {
     , Factor: 18
   }
   , Margin: {
-    All: 1
-    , Bottom: 1
-    , Top: 1
-    , Left: 1
-    , Right: 1
+    All: 0.5
+    , Bottom: 0.5
+    , Top: 0.5
+    , Left: 0.5
+    , Right: 0.5
   }
   , Padding: {
-    All: 1
-    , Bottom: 1
-    , Top: 1
-    , Left: 1
-    , Right: 1
+    All: 0.5
+    , Bottom: 0.5
+    , Top: 0.5
+    , Left: 0.5
+    , Right: 0.5
   }
   , Border: {
     All: 0.2
@@ -56,6 +105,13 @@ CybotranikWUI.prototype.Default = {
   }
   , Line: { Height: 1.6 }
 
+}
+
+/**
+ * Theme Configuration
+ */
+CybotranikWUI.prototype.setThemeDefault = function (configuration) {
+  this.Default.Color = configuration.Color
 }
 
 /**
@@ -157,19 +213,19 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
 
   switch (this.currentBrowser()) {
 
-    // Old Property
-    case 'MSIE 5': element.styleSheet.cssText = syntax; break
-    case 'MSIE 7': element.styleSheet.cssText = syntax; break
-    case 'MSIE 8': element.styleSheet.cssText = syntax; break
+  // Old Property
+  case 'MSIE 5': element.styleSheet.cssText = syntax; break
+  case 'MSIE 7': element.styleSheet.cssText = syntax; break
+  case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-    case 'MSIE 9': element.innerText = syntax; break
-    case 'MSIE 10': element.innerText = syntax; break
-    case 'IE 11': element.innerText = syntax; break
-    case 'Chrome 76': element.innerText = syntax; break
-    case 'Edge 18': element.innerText = syntax; break
-    case 'Firefox 68': element.innerText = syntax; break
-    default: element.innerText = syntax
+  case 'MSIE 9': element.innerText = syntax; break
+  case 'MSIE 10': element.innerText = syntax; break
+  case 'IE 11': element.innerText = syntax; break
+  case 'Chrome 76': element.innerText = syntax; break
+  case 'Edge 18': element.innerText = syntax; break
+  case 'Firefox 68': element.innerText = syntax; break
+  default: element.innerText = syntax
   }
 
   // by default it will be at the bottom of the title.
@@ -203,12 +259,12 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   var factor = this.Default.Font.Factor
 
   switch (this.currentBrowser()) {
-    case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
-    case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
-    case 'MSIE 8': result = (factor * 1) * value + 'px'; break
-    case 'MSIE 9': result = (factor * 1) * value + 'px'; break
-    case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
-    case 'Firefox 68': result = (factor * 1.15) * value + 'px'; break
+  case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
+  case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
+  case 'MSIE 8': result = (factor * 1) * value + 'px'; break
+  case 'MSIE 9': result = (factor * 1) * value + 'px'; break
+  case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
+  case 'Firefox 68': result = (factor * 1.15) * value + 'px'; break
     // rem compatible.
     // case 'MSIE 10': result = value + 'rem'; break
     // case 'MSIE 11': result = value + 'rem'; break
@@ -217,7 +273,7 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
     // rem compatible default.
     // default: result = value + 'rem'
     // px compatible default.
-    default: result = (factor * 1) * value + 'px'
+  default: result = (factor * 1) * value + 'px'
   }
 
   return result
@@ -279,36 +335,8 @@ CybotranikWUI.prototype.createElementArray = function () {
 CybotranikWUI.prototype.Defaults = function () {
 
   return [
-    this.createStyle('is="css-shema"',
-      [
-        /* Positioning */
-        this.createProperty('Positioning', 'relative')
-        , this.createProperty('top', 0)
-        , this.createProperty('right', 0)
-        , this.createProperty('bottom', 0)
-        , this.createProperty('left', 0)
-        , this.createProperty('z-index', 1)
 
-        /* Display */
-        , this.createProperty('display', 'block')
-        , this.createProperty('float', 'left')
-        , this.createProperty('width', "auto")
-        , this.createProperty('height', "auto")
-
-        /* Typography */
-        , this.createProperty('line-height', this.Default.Line.Height)
-        , this.createProperty('color', this.Default.Color.Dark)
-        , this.createProperty('text-align', 'center')
-
-        /* Theme */
-        , this.createProperty('background-color', this.Default.Color.Light)
-        , this.createProperty('border-left-style', 'dashed')
-        , this.createProperty('border-left-width', this.compatibleSize(1))
-        , this.createProperty('border-left-color', this.Default.Color.Danger)
-      ]
-    )
-
-    , this.createStyle('*',
+    this.createStyle('*',
       [
         this.createProperty('zoom', 1)
       ]
@@ -349,6 +377,7 @@ CybotranikWUI.prototype.Defaults = function () {
 
         /* Theme */
         , this.createProperty('background-color', this.Default.Color.White)
+        , this.createProperty('color', this.Default.Color.Black)
 
       ]
     )
@@ -482,12 +511,8 @@ CybotranikWUI.prototype.Defaults = function () {
 
     , this.createStyle('[is="doc-page"]',
       [
-        /* Positioning */
-        this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
-        , this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
         /* Theme */
-        , this.createProperty('background-color', '#f9f9f9')
-        , this.createProperty('color', '#607D8B')
+        this.createProperty('background-color', this.Default.Color.Lighter)
 
       ]
     )
@@ -496,18 +521,13 @@ CybotranikWUI.prototype.Defaults = function () {
       [
         /* Typography */
         this.createProperty('text-align', 'center')
-
-        /* Theme */
-        , this.createProperty('background-color', '#efefef')
-        , this.createProperty('border-bottom-style', 'solid')
-        , this.createProperty('border-bottom-width', this.compatibleSize(0.1))
-        , this.createProperty('border-bottom-color', this.Default.Color.Light)
       ]
     )
 
-    , this.createStyle('[is="doc-page"] > [role="main"]',
+    , this.createStyle('[is="doc-page"] > section',
       [
-        this.createProperty('background-color', 'white')
+        /* Theme */
+        this.createProperty('background-color', this.Default.Color.White)
       ]
     )
 
@@ -515,10 +535,9 @@ CybotranikWUI.prototype.Defaults = function () {
       [
         /* Positioning */
         this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
-
+        , this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
         /* Typography */
         , this.createProperty('text-align', 'left')
-
       ]
     )
 
@@ -527,16 +546,23 @@ CybotranikWUI.prototype.Defaults = function () {
         /* Theme */
         this.createProperty('border-bottom-style', 'solid')
         , this.createProperty('border-bottom-width', '1px')
-        , this.createProperty('border-bottom-color', '#607D8B')
-
+        , this.createProperty('border-bottom-color', this.Default.Color.Primary)
       ]
     )
+
+    , this.createStyle('[is="doc-example"] > article',
+      [
+        /* Theme */
+        this.createProperty('border-color', this.Default.Color.Primary)
+        , this.createProperty('border-style', 'dotted')
+        , this.createProperty('border-width', '1px')
+      ])
 
     , this.createStyle('[is="weather-forecast"] > header',
       [
         this.createProperty('border-left-style', 'dotted')
         , this.createProperty('border-left-width', '1px')
-        , this.createProperty('border-left-color', '#607D8B')
+        , this.createProperty('border-left-color', this.Default.Color.Darker)
       ]
     )
 
@@ -544,7 +570,7 @@ CybotranikWUI.prototype.Defaults = function () {
       [
         this.createProperty('border-bottom-style', 'dotted')
         , this.createProperty('border-bottom-width', '1px')
-        , this.createProperty('border-bottom-color', '#607D8B')
+        , this.createProperty('border-bottom-color', this.Default.Color.Darker)
       ]
     )
 
@@ -567,6 +593,31 @@ var cybotranik = new CybotranikWUI()
  * Add HTML tag Array to Current Document
  */
 cybotranik.createElementArray()
+
+/**
+ * Color Swatch
+ * 
+ * https://www.w3.org/TR/WCAG/#contrast-minimum
+ * https://webaim.org/resources/contrastchecker/
+ */
+var Swatch = {
+  Color: {
+    White: 'white'
+    , Lighter: '#A8E27B'
+    , Light: '#7DBF49'
+    , Primary: '#60A828'
+    , Dark: '#458812'
+    , Darker: '#2B6300'
+    , Black: '#384238'
+    , Link: '#E57D9B'
+  }
+}
+
+/**
+ * Purple Theme Configuration
+ */
+cybotranik.setThemeDefault(Swatch)
+
 
 /**
  * Add Default Item Array to Current Document
