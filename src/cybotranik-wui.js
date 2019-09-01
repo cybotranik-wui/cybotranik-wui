@@ -350,7 +350,7 @@ CybotranikWUI.prototype.Defaults = function () {
 
     , this.createStyle('*, ::after',
       [
-        this.createProperty('clear', 'both')
+        // this.createProperty('clear', 'both')
       ]
     )
 
@@ -559,6 +559,33 @@ CybotranikWUI.prototype.Defaults = function () {
       [
         /* Positioning */
         this.createProperty('float', 'right')
+      ]
+    )
+
+    , this.createStyle('[is="aside-box"]',
+      [
+        /* Positioning */
+        this.createProperty('width', '40%')
+        , this.createProperty('padding-left', '.5rem')
+        , this.createProperty('margin-left', '.5rem')
+        , this.createProperty('float', 'right')
+      ]
+    )
+    , this.createStyle('aside',
+      [
+        this.createProperty('box-shadow', 'inset 10px 0 5px -5px' + this.Default.Color.Lighter)
+        , this.createProperty('border-left-style', 'inset')
+        , this.createProperty('border-left-width', '1px')
+        , this.createProperty('border-left-color', this.Default.Color.Lighter)
+        , this.createProperty('font-style', 'italic')
+        , this.createProperty('color', this.Default.Color.Darker)
+      ]
+    )
+
+    , this.createStyle('aside > p',
+      [
+        /* Positioning */
+        this.createProperty('margin', '.5rem')
       ]
     )
   ]
