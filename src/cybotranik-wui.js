@@ -581,13 +581,45 @@ CybotranikWUI.prototype.Defaults = function () {
         , this.createProperty('color', this.Default.Color.Darker)
       ]
     )
-
     , this.createStyle('aside > p',
       [
         /* Positioning */
         this.createProperty('margin', '.5rem')
       ]
     )
+
+    , this.createStyle('.container', [
+      this.createProperty('width', '100%')
+      , this.createProperty('margin-right', 'auto')
+      , this.createProperty('margin-left', 'auto')
+    ])
+    , this.createStyle('.row', [this.createProperty('width', '100%')])
+    , this.createStyle('.col-2', [this.createProperty('width', '20%')])
+    , this.createStyle('.col-8', [this.createProperty('width', '80%')])
+    , this.createStyle('.col-2,.col-8', [this.createProperty('float', 'left')])
+
+    , this.createStyle('body', [
+      this.createProperty('background-color', this.Default.Color.Light)
+    ])
+
+    , this.createStyle('[is="aside-nav"]', [
+      this.createProperty('color', this.Default.Color.Dark)
+    ])
+    , this.createStyle('[is="aside-nav"] nav', [
+      this.createProperty('position', 'fixed')
+    ])
+    , this.createStyle('[is="aside-nav"] a', [
+      this.createProperty('color', this.Default.Color.White)
+    ])
+
+    , this.createStyle('[is="aside-nav"] ul', [
+      this.createProperty('list-style-type', 'disc')
+    ])
+
+    , this.createStyle('[is="aside-nav"] li', [
+      this.createProperty('margin-left', '15px')
+      
+    ])
   ]
 }
 
