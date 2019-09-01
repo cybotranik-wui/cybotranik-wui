@@ -264,7 +264,7 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   case 'MSIE 8': result = (factor * 1) * value + 'px'; break
   case 'MSIE 9': result = (factor * 1) * value + 'px'; break
   case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
-  case 'Firefox 68': result = (factor * 1.15) * value + 'px'; break
+  case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
     // rem compatible.
     // case 'MSIE 10': result = value + 'rem'; break
     // case 'MSIE 11': result = value + 'rem'; break
@@ -508,65 +508,46 @@ CybotranikWUI.prototype.Defaults = function () {
         , this.createProperty('color', this.Default.Color.Link)
       ]
     )
-
-    , this.createStyle('[is="doc-page"]',
+    , this.createStyle('[is="article-page"]',
       [
         /* Theme */
         this.createProperty('background-color', this.Default.Color.Lighter)
-
       ]
     )
-
-    , this.createStyle('[is="doc-page"] > header',
+    , this.createStyle('[is="article-page"] > [is="article-header"]',
       [
-        /* Typography */
+        /*  */
         this.createProperty('text-align', 'center')
+
+      ]
+    )
+    , this.createStyle('[is="article-page"] > [is="article-section"]',
+      [
+        /* Positioning */
+        this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
+        , this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
+        /* Theme */
+        , this.createProperty('background-color', this.Default.Color.White)
       ]
     )
 
-    , this.createStyle('[is="doc-page"] > section',
+    , this.createStyle('[is="article-section"]',
       [
         /* Theme */
         this.createProperty('background-color', this.Default.Color.White)
       ]
     )
 
-    , this.createStyle('[is="doc-example"]',
-      [
-        /* Positioning */
-        this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
-        , this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
-        /* Typography */
-        , this.createProperty('text-align', 'left')
-      ]
-    )
-
-    , this.createStyle('[is="doc-example"] > header',
+    , this.createStyle('[is="article-app"]',
       [
         /* Theme */
-        this.createProperty('border-bottom-style', 'solid')
-        , this.createProperty('border-bottom-width', '1px')
-        , this.createProperty('border-bottom-color', this.Default.Color.Primary)
+        this.createProperty('border-style', 'dotted')
+        , this.createProperty('border-width', '2px')
+        , this.createProperty('border-color', this.Default.Color.Lighter)
       ]
     )
 
-    , this.createStyle('[is="doc-example"] > article',
-      [
-        /* Theme */
-        this.createProperty('border-color', this.Default.Color.Primary)
-        , this.createProperty('border-style', 'dotted')
-        , this.createProperty('border-width', '1px')
-      ])
-
-    , this.createStyle('[is="weather-forecast"] > header',
-      [
-        this.createProperty('border-left-style', 'dotted')
-        , this.createProperty('border-left-width', '1px')
-        , this.createProperty('border-left-color', this.Default.Color.Darker)
-      ]
-    )
-
-    , this.createStyle('[is="weather-day"]',
+    , this.createStyle('[is="weather-forecast"] [is="article-section"]',
       [
         this.createProperty('border-bottom-style', 'dotted')
         , this.createProperty('border-bottom-width', '1px')
@@ -574,13 +555,12 @@ CybotranikWUI.prototype.Defaults = function () {
       ]
     )
 
-    , this.createStyle('[is="weather-day"] meter',
+    , this.createStyle('[is="weather-forecast"] [is="article-section"] meter',
       [
         /* Positioning */
         this.createProperty('float', 'right')
       ]
     )
-
   ]
 }
 
