@@ -67,7 +67,8 @@ CybotranikWUI.prototype.Default = {
      * https://www.w3.org/TR/WCAG/#contrast-minimum
      * https://webaim.org/resources/linkcontrastchecker/?fcolor=000000&bcolor=FFFFFF&lcolor=2F6F2F
      */
-    , Link: '#2F6F2F'
+    , Link: '#991E41'
+    , LinkO: '#002900'
 
     /** */
     , Info: '#000000'
@@ -609,7 +610,7 @@ CybotranikWUI.prototype.Defaults = function () {
       this.createProperty('position', 'fixed')
     ])
     , this.createStyle('[is="aside-nav"] a', [
-      this.createProperty('color', this.Default.Color.White)
+      this.createProperty('color', this.Default.Color.LinkO)
     ])
 
     , this.createStyle('[is="aside-nav"] ul', [
@@ -648,7 +649,8 @@ var Swatch = {
     , Dark: '#458812'
     , Darker: '#2B6300'
     , Black: '#384238'
-    , Link: '#E57D9B'
+    , Link: '#991E41'
+    , LinkO: '#002900'
   }
 }
 
