@@ -16,22 +16,26 @@
     <div class="container">
         <div class="row">
             <div class="col-2">
-                <aside is="aside-nav">
-                    <nav>
+                <article is="article-page">
+                    <header is="article-header">
+                        <h1>Cybotranik</h1>
+                    </header>
+                    <section is="article-section" id="content-sectioning">
                         <figure>
                             <img src="../../docs/media/favicon.png" alt="Cybotranik WUI">
                         </figure>
-                        <ul>
-                            <li><a href="#">Content sectioning</a>
-                                <ul>
-                                    <li><a href="#address">address</a></li>
-                                    <li><a href="#article">article</a></li>
-                                    <li><a href="#aside">aside</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </nav>
-                </aside>
+                        <header is="section-header">
+                            <h2>Content sectioning</h4>
+                        </header>
+                        <nav is="aside-nav">
+                            <ul>
+                                <li><a href="#address">address</a></li>
+                                <li><a href="#article">article</a></li>
+                                <li><a href="#aside">aside</a></li>
+                            </ul>
+                        </nav>
+                    </section>
+                </article>
             </div>
             <div class="col-8">
                 <article is="article-page">

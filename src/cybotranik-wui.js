@@ -595,10 +595,18 @@ CybotranikWUI.prototype.Defaults = function () {
       , this.createProperty('margin-left', 'auto')
     ])
     , this.createStyle('.row', [this.createProperty('width', '100%')])
+    , this.createStyle('.col-1', [this.createProperty('width', '10%')])
     , this.createStyle('.col-2', [this.createProperty('width', '20%')])
+    , this.createStyle('.col-3', [this.createProperty('width', '30%')])
+    , this.createStyle('.col-4', [this.createProperty('width', '40%')])
+    , this.createStyle('.col-5', [this.createProperty('width', '50%')])
+    , this.createStyle('.col-6', [this.createProperty('width', '60%')])
+    , this.createStyle('.col-7', [this.createProperty('width', '70%')])
     , this.createStyle('.col-8', [this.createProperty('width', '80%')])
-    , this.createStyle('.col-2,.col-8', [this.createProperty('float', 'left')])
-
+    , this.createStyle('.col-9', [this.createProperty('width', '90%')])
+    , this.createStyle('.col-10', [this.createProperty('width', '100%')])
+    , this.createStyle('.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10', [this.createProperty('float', 'left')])
+    , this.createStyle('img', [this.createProperty('width', '100%')])
     , this.createStyle('body', [
       this.createProperty('background-color', this.Default.Color.Light)
     ])
@@ -606,9 +614,7 @@ CybotranikWUI.prototype.Defaults = function () {
     , this.createStyle('[is="aside-nav"]', [
       this.createProperty('color', this.Default.Color.Dark)
     ])
-    , this.createStyle('[is="aside-nav"] nav', [
-      this.createProperty('position', 'fixed')
-    ])
+
     , this.createStyle('[is="aside-nav"] a', [
       this.createProperty('color', this.Default.Color.LinkO)
     ])
