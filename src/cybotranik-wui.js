@@ -567,14 +567,14 @@ CybotranikWUI.prototype.Defaults = function () {
       [
         /* Positioning */
         this.createProperty('width', '40%')
-        , this.createProperty('padding-left', '.5rem')
-        , this.createProperty('margin-left', '.5rem')
         , this.createProperty('float', 'right')
       ]
     )
     , this.createStyle('aside',
       [
         this.createProperty('box-shadow', 'inset 10px 0 5px -5px' + this.Default.Color.Lighter)
+        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
+        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
         , this.createProperty('border-left-style', 'inset')
         , this.createProperty('border-left-width', '1px')
         , this.createProperty('border-left-color', this.Default.Color.Lighter)
@@ -585,7 +585,7 @@ CybotranikWUI.prototype.Defaults = function () {
     , this.createStyle('aside > p',
       [
         /* Positioning */
-        this.createProperty('margin', '.5rem')
+        this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
       ]
     )
 
@@ -618,8 +618,8 @@ CybotranikWUI.prototype.Defaults = function () {
     ])
 
     , this.createStyle('[is="aside-nav"] li', [
-      this.createProperty('margin-left', '15px')
-      
+      this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
+
     ])
   ]
 }
