@@ -650,6 +650,13 @@ CybotranikWUI.prototype.Defaults = function () {
     , this.createStyle('[is="horizontal-menu"] > li > a', [
       this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
     ])
+
+    , this.createStyle('nav > ul > li > a:hover', [
+      this.createProperty('border-bottom-color', this.Default.Color.Link)
+      , this.createProperty('border-bottom-style', 'solid')
+      , this.createProperty('border-bottom-width', '1px')
+      , this.createProperty('color', this.Default.Color.Darker)
+    ])
   ]
 }
 
