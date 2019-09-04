@@ -180,3 +180,23 @@ The HTML `<main>` element represents the dominant content of the `<body>` of a d
         serving as its first President from 1923 until his death in 1938.</p>
 </div>
 ```
+
+## `<nav>`
+
+The HTML `<nav>` element represents a section of a page whose purpose is to provide navigation links, either within the current document or to other documents. Common examples of navigation sections are menus, tables of contents, and indexes.
+
+```HTML
+<nav is="header-nav">
+    <ul is="horizontal-menu">
+        <li><a href="#address">address</a></li>
+        <li><a href="#article">article</a></li>
+        <li><a href="#aside">aside</a></li>
+        <li><a href="#footer">footer</a></li>
+        <li><a href="#header">header</a></li>
+        <li><a href="#hgroup">hgroup</a></li>
+        <li><a href="#main">main</a></li>
+        <li><a href="#nav">nav</a></li>
+        <li><a href="#section">section</a></li>
+    </ul>
+</nav>
+```

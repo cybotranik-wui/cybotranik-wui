@@ -632,6 +632,24 @@ CybotranikWUI.prototype.Defaults = function () {
       this.createProperty('text-align', 'right')
 
     ])
+
+    , this.createStyle('[is="header-nav"]', [
+
+    ])
+
+    , this.createStyle('[is="horizontal-menu"]', [
+      this.createProperty('list-style', 'none')
+      , this.createProperty('display', 'inline-block')
+      , this.createProperty('position', 'relative')
+    ])
+
+    , this.createStyle('[is="horizontal-menu"] > li', [
+      this.createProperty('float', 'left')
+    ])
+
+    , this.createStyle('[is="horizontal-menu"] > li > a', [
+      this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
+    ])
   ]
 }
 
