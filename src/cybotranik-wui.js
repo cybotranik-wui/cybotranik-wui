@@ -627,6 +627,11 @@ CybotranikWUI.prototype.Defaults = function () {
       this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
 
     ])
+
+    , this.createStyle('[is="header-group"]', [
+      this.createProperty('text-align', 'right')
+
+    ])
   ]
 }
 

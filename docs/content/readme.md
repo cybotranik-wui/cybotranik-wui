@@ -108,3 +108,18 @@ The HTML `<header>` element represents introductory content, typically a group o
     </header>
 </div>
 ```
+## `<hgroup>`
+
+The HTML `<hgroup>` element represents a multi-level heading for a section of a document. It groups a set of h1 – h6 elements.
+
+```HTML
+<div is="article-app">
+    <hgroup is="header-group">
+        <h3>Mathematics</h1>
+            <h5>Arf invariant</h2>
+    </hgroup>
+    <p>In mathematics, the Arf invariant of a nonsingular quadratic form over a field of
+        characteristic 2 was defined by Turkish mathematician Cahit Arf when he started the
+        systematic study of quadratic forms over arbitrary fields of characteristic 2.</p>
+</div>
+```
