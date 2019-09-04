@@ -91,3 +91,20 @@ The HTML `<footer>` element represents a footer for its nearest sectioning conte
     </footer>
 </div>
 ```
+
+## `<header>`
+
+The HTML `<header>` element represents introductory content, typically a group of introductory or navigational aids. It may contain some heading elements but also a logo, a search form, an author name, and other elements.
+
+```HTML
+<div is="article-app">
+    <header is="section-header">
+        <h6>Content sectioning Header Example</h6>
+        <h5>Content sectioning Header Example</h5>
+        <h4>Content sectioning Header Example</h4>
+        <h3>Content sectioning Header Example</h3>
+        <h2>Content sectioning Header Example</h2>
+        <h1>Content sectioning Header Example</h1>
+    </header>
+</div>
+```
