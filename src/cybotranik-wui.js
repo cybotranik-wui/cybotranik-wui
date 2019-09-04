@@ -163,6 +163,17 @@ CybotranikWUI.prototype.currentBrowser = function () {
   return userAgentMatch.join(' ')
 
 }
+/**
+ * Document Information
+ */
+CybotranikWUI.prototype.currentDocument = function () {
+
+  var result = {
+    Width: document.body.clientWidth
+  }
+
+  return result
+}
 
 /**
  * CSS Property string generate syntax
@@ -329,6 +340,25 @@ CybotranikWUI.prototype.createElementArray = function () {
   }
 }
 
+/**
+ * Onload Event and Start
+ */
+CybotranikWUI.prototype.start = function () {
+  var self = this
+  window.onload = function () {
+    /**
+     * Add Default Item Array to Current Document
+     */
+    self.documentAppendCssArray(cybotranik.Defaults())
+  }
+
+  window.onresize = function () {
+    /**
+     * Add Default Item Array to Current Document
+     */
+    self.documentAppendCssArray(cybotranik.Defaults())
+  }
+}
 /**
  * Default Style Syntax Array
  * @returns {array} All css styles
@@ -657,6 +687,16 @@ CybotranikWUI.prototype.Defaults = function () {
       , this.createProperty('border-bottom-width', '1px')
       , this.createProperty('color', this.Default.Color.Darker)
     ])
+    , this.createStyle('.aside-toogle', [
+
+      this.currentDocument().Width < 1000 ? this.createProperty('display', 'none') : this.createProperty('display', 'block')
+
+    ])
+    , this.createStyle('.col-8', [
+
+      this.currentDocument().Width < 1000 ? this.createProperty('width', '100%') : this.createProperty('display', 'block')
+
+    ])
   ]
 }
 
@@ -695,8 +735,7 @@ var Swatch = {
  */
 cybotranik.setThemeDefault(Swatch)
 
-
 /**
- * Add Default Item Array to Current Document
+ * Cybotranik Loading
  */
-cybotranik.documentAppendCssArray(cybotranik.Defaults())
+cybotranik.start()
