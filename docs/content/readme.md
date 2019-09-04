@@ -200,3 +200,39 @@ The HTML `<nav>` element represents a section of a page whose purpose is to prov
     </ul>
 </nav>
 ```
+
+## `<section>`
+
+The HTML `<section>` element represents a standalone section — which doesn't have a more specific semantic element to represent it — contained within an HTML document. Typically, but not always, sections have a heading.
+
+```HTML
+<div is="article-app">
+    <section is="article-section">
+        <header is="section-header">
+            <h5>Exchange</h5>
+        </header>
+        <p is="section-description">If you were to buy a shoe, you would have to give a sack
+            of apples to the person who made the shoes.</p>
+    </section>
+    <section is="article-section">
+        <header is="section-header">
+            <h5>Problem</h5>
+        </header>
+        <p is="section-description">The shoemaker couldn't buy sacks of apples for every
+            shoe he made.</p>
+    </section>
+    <section is="article-section">
+        <header is="section-header">
+            <h5>Swap</h5>
+        </header>
+        <p is="section-description">Instead we needed to use another vehicle to swap.</p>
+    </section>
+    <section is="article-section">
+        <header is="section-header">
+            <h5>Money</h5>
+        </header>
+        <p is="section-description">Nowadays, we have electronic currencies that guarantee
+            the power of exchange.</p>
+    </section>
+</div>
+```
