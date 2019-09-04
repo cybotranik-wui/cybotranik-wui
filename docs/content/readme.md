@@ -79,3 +79,15 @@ The HTML `<aside>` element represents a portion of a document whose content is o
         shape after pressing with the finger, and feel soft and slippery in the mouth.</p>
 </div>
 ```
+
+## `<footer>`
+
+The HTML `<footer>` element represents a footer for its nearest sectioning content or sectioning root element. A footer typically contains information about the author of the section, copyright data or links to related documents.
+
+```HTML
+<div is="article-app">
+    <footer>
+        <p>copyright @ 2019 | Cybotranik WUI</p>
+    </footer>
+</div>
+```
