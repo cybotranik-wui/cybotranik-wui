@@ -28,6 +28,19 @@ The HTML `<address>` element indicates that the enclosed HTML provides contact i
 The HTML `<article>` element represents a self-contained composition in a document, page, application, or site, which is intended to be independently distributable or reusable (e.g., in syndication). Examples include: a forum post, a magazine or newspaper article, or a blog entry.
 
 ```HTML
+<article is="article-page">
+    <header is="article-header">
+        <h1>Cybotranik</h1>
+    </header>
+    <section is="article-section" id="content-sectioning">
+        <figure>
+            <img src="../../docs/media/favicon.png" alt="Cybotranik WUI">
+        </figure>
+    </section>
+</article>
+```
+
+```HTML
 <article is="weather-forecast">
     <header is="article-header">
         <h3>Antalya, Turkey Day Weather</h3>
@@ -61,6 +74,38 @@ The HTML `<article>` element represents a self-contained composition in a docume
         <meter min="-50" max="50" low="10" high="30" optimum="20" value="24">24
             degrees</meter>
         <h4>Sunny</h4>
+    </section>
+</article>
+```
+
+```HTML
+<article is="article-page">
+    <header is="article-header">
+        <h1>Content sectioning</h1>
+    </header>
+    <section is="article-section">
+        <header is="section-header">
+            <h2>address</h2>
+        </header>
+        <p is="section-description">The HTML element indicates that the enclosed HTML provides contact
+            information
+            for a person or
+            people, or
+            for an organization</p>
+        <article is="section-content">
+            <header is="article-header">
+                <h3>Example</h3>
+            </header>
+            <div is="article-app">
+                <address is="web-address">
+                    Visit <a href="https://cybotranik-wui.github.io"> cybotranik-wui.github.io</a><br>
+                    If you see any bugs, please <a href="mailto:Jack@cybotranik-wui.github.io"> contact
+                        webmaster</a>.<br>
+                    Contact: <a href="mailto:jack@cybotranik-wui.github.io">Jack JACKSON</a>.<br>
+                    Phone: <a href="tel:+11234567890">(123) 456-7890</a>
+                </address>
+            </div>
+        </article>
     </section>
 </article>
 ```
