@@ -33,3 +33,7 @@ It takes advantage of the additional features of the new generation of browsers,
 ## Mobile
 
 It provides good looks on mobile devices and provides performance with a single file library.
+
+### USAGE
+
+* [Usage](usage.md)
