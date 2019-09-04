@@ -168,3 +168,15 @@ The HTML `<hgroup>` element represents a multi-level heading for a section of a 
         systematic study of quadratic forms over arbitrary fields of characteristic 2.</p>
 </div>
 ```
+
+## `<main>`
+
+The HTML `<main>` element represents the dominant content of the `<body>` of a document. The main content area consists of content that is directly related to or expands upon the central topic of a document, or the central functionality of an application.
+
+```HTML
+<div role="main">
+    <p>Kemal Atatürk, commonly referred to as Mustafa Kemal Atatürk, was a Turkish field
+        marshal, revolutionary statesman, author, and founder of the Republic of Turkey,
+        serving as its first President from 1923 until his death in 1938.</p>
+</div>
+```
