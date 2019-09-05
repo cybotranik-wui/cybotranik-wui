@@ -10,6 +10,8 @@
 
 Cybotranik documentation and examples are available at https://cybotranik-wui.github.io/.
 
+See how it works for a [quick start](how-do-i-start.md).
+
 # Community
 
 Discuss new features, future goals, general problems or questions about Cybotranik's development, or anything else you can think of. https://cybotranik-wui.slack.com/

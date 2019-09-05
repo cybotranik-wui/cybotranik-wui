@@ -6,9 +6,7 @@ Web User Interface
 
 The all-in-one, user interface kit.
 
-This interface comes with ready-to-use examples in many programming languages.
-
-HTML, ASP, ASP-NET, PHP, JAVA, NODEJS, PYTHON
+This interface is suitable for use in many programming languages.
 
 ## Fast web templates.
 
@@ -33,7 +31,3 @@ It takes advantage of the additional features of the new generation of browsers,
 ## Mobile
 
 It provides good looks on mobile devices and provides performance with a single file library.
-
-### USAGE
-
-* [Usage](usage.md)
