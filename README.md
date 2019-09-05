@@ -10,7 +10,7 @@
 
 Cybotranik documentation and examples are available at https://cybotranik-wui.github.io/.
 
-See how it works for a [quick start](how-do-i-start.md).
+See how it works for a [quick start](docs/how-do-i-start.md).
 
 # Community
 
