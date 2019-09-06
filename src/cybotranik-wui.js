@@ -222,9 +222,9 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
 
   var element = document.createElement('style')
   element.setAttribute('type', 'text/css')
+  element.id = 'cybotranik-wui'
 
   switch (this.currentBrowser()) {
-
   // Old Property
   case 'MSIE 5': element.styleSheet.cssText = syntax; break
   case 'MSIE 7': element.styleSheet.cssText = syntax; break
@@ -239,6 +239,9 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
   case 'Firefox 68': element.innerText = syntax; break
   default: element.innerText = syntax
   }
+
+  // removing previous element. Performance problem.
+  document.getElementById(element.id) === null ? 'First loading' : document.getElementById(element.id).remove()
 
   // by default it will be at the bottom of the title.
   document.getElementsByTagName('head')[0].appendChild(element)
@@ -277,14 +280,14 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   case 'MSIE 9': result = (factor * 1) * value + 'px'; break
   case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
   case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
-    // rem compatible.
-    // case 'MSIE 10': result = value + 'rem'; break
-    // case 'MSIE 11': result = value + 'rem'; break
-    // case 'Chrome 76': result = value + 'rem'; brea
+  // rem compatible.
+  // case 'MSIE 10': result = value + 'rem'; break
+  // case 'MSIE 11': result = value + 'rem'; break
+  // case 'Chrome 76': result = value + 'rem'; brea
 
-    // rem compatible default.
-    // default: result = value + 'rem'
-    // px compatible default.
+  // rem compatible default.
+  // default: result = value + 'rem'
+  // px compatible default.
   default: result = (factor * 1) * value + 'px'
   }
 
