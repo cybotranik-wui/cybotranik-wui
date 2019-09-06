@@ -1,6 +1,6 @@
 {
   "name": "cybotranik-wui",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "Website html User Interface.",
   "main": "src/cybotranik-wui.js",
   "unpkg": "dist/cybotranik-wui.min.js",
