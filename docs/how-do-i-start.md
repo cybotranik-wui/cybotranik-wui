@@ -21,13 +21,13 @@ Download this project and use one of the distribution files.
 
 See examples grouped by functions.
 
-* [Content sectioning](content-sectioning.md)
-* [Text content](text-content.md)
-* [Inline text semantics](inline-text-semantics.md)
-* [Image and multimedia](image-and-multimedia.md)
+* [Sections](sections.md)
+* [Grouping Content](grouping-content.md)
+* [Text Level Semantics](text-level-semantics.md)
+* [Edits](edits.md)
 * [Embedded content](embedded-content.md)
-* [Demarcating edits](demarcating-edits.md)
-* [Table content](table-content.md)
+* [Media Elements](media-elements.md)
+* [Tabular Data](tabular-data.md)
 * [Forms](forms.md)
 * [Interactive elements](interactive-elements.md)
 * [Web Components](web-components.md)

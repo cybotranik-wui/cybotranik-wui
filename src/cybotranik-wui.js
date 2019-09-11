@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /**
  * Cybotranik WUI
  *
@@ -69,6 +70,7 @@ CybotranikWUI.prototype.Default = {
      */
     , Link: '#991E41'
     , LinkO: '#002900'
+    , Code : 'purple'
 
     /** */
     , Info: '#000000'
@@ -225,19 +227,19 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
   element.id = 'cybotranik-wui'
 
   switch (this.currentBrowser()) {
-  // Old Property
-  case 'MSIE 5': element.styleSheet.cssText = syntax; break
-  case 'MSIE 7': element.styleSheet.cssText = syntax; break
-  case 'MSIE 8': element.styleSheet.cssText = syntax; break
+    // Old Property
+    case 'MSIE 5': element.styleSheet.cssText = syntax; break
+    case 'MSIE 7': element.styleSheet.cssText = syntax; break
+    case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-  case 'MSIE 9': element.innerText = syntax; break
-  case 'MSIE 10': element.innerText = syntax; break
-  case 'IE 11': element.innerText = syntax; break
-  case 'Chrome 76': element.innerText = syntax; break
-  case 'Edge 18': element.innerText = syntax; break
-  case 'Firefox 68': element.innerText = syntax; break
-  default: element.innerText = syntax
+    case 'MSIE 9': element.innerText = syntax; break
+    case 'MSIE 10': element.innerText = syntax; break
+    case 'IE 11': element.innerText = syntax; break
+    case 'Chrome 76': element.innerText = syntax; break
+    case 'Edge 18': element.innerText = syntax; break
+    case 'Firefox 68': element.innerText = syntax; break
+    default: element.innerText = syntax
   }
 
   // removing previous element. Performance problem.
@@ -274,21 +276,21 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   var factor = this.Default.Font.Factor
 
   switch (this.currentBrowser()) {
-  case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
-  case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
-  case 'MSIE 8': result = (factor * 1) * value + 'px'; break
-  case 'MSIE 9': result = (factor * 1) * value + 'px'; break
-  case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
-  case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
-  // rem compatible.
-  // case 'MSIE 10': result = value + 'rem'; break
-  // case 'MSIE 11': result = value + 'rem'; break
-  // case 'Chrome 76': result = value + 'rem'; brea
+    case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
+    case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
+    case 'MSIE 8': result = (factor * 1) * value + 'px'; break
+    case 'MSIE 9': result = (factor * 1) * value + 'px'; break
+    case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
+    case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
+    // rem compatible.
+    // case 'MSIE 10': result = value + 'rem'; break
+    // case 'MSIE 11': result = value + 'rem'; break
+    // case 'Chrome 76': result = value + 'rem'; brea
 
-  // rem compatible default.
-  // default: result = value + 'rem'
-  // px compatible default.
-  default: result = (factor * 1) * value + 'px'
+    // rem compatible default.
+    // default: result = value + 'rem'
+    // px compatible default.
+    default: result = (factor * 1) * value + 'px'
   }
 
   return result
@@ -298,44 +300,61 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
  * HTML 5 element, html element and custom element tags
  * 
  */
-CybotranikWUI.prototype.HtmlElements = ''
+CybotranikWUI.prototype.HtmlElements = {
 
-  // Content sectioning
-  + 'address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section'
 
-  // Text content
-  + ',blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul'
+  // Sections
+  sections: 'body,article,section,nav,aside,hgroup,h1,h2,h3,h4,h5,h6,header,footer'
 
-  // Inline text semantics
-  + ',a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr'
+  // Grouping Content
+  , groupingContent: 'p,address,hr,pre,blockquote,ol,ul,li,dl,dt,dd,figure,figcaption,main,div'
 
-  // Image and multimedia
-  + ',area,audio,img,track,video'
+  // Text Level Semantics
+  , textLevelSemantics: 'a,em,strong,small,s,cite,q,dfn,abbr,ruby,rb,rt,rtc,rp,data,time,code,var,samp,kbd,sub,sup,i,b,u,mark,bdi,bdo,span,br,wbr'
+
+  // Edits
+  , edits: 'ins,del'
 
   // Embedded content
-  + ',embed,iframe,noembed,object,param,picture,source'
+  , embeddedContent: 'picture,source,img,iframe,embed,object,param,video,audio,track'
 
-  // Demarcating edits
-  + ',del,ins'
+  // Media Elements
+  , mediaElements: 'map,area'
 
-  // Table content
-  + ',caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr'
+  // Tabular Data
+  , tabularData: 'table,caption,colgroup,col,tbody,thead,tfoot,tr,td,th'
 
   // Forms
-  + ',button,datalist,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea'
+  , forms: 'form,label,input,button,select,datalist,optgroup,option,textarea,output,progress,meter,fieldset,legend'
 
   // Interactive elements
-  + ',details,dialog,summary'
+  , interactiveElements: 'details,summary,dialog'
 
   // Web Components
-  + ',shadow,template'
+  , webComponents: 'accordion,alert,animation,background,badge,breadcrumb,card,comment,counter,cover,collapse,dropdown,feed,list,lightbox,marker,modal,navbar,notification,page,pop,segment,slider,slideshow,spinner,tab'
+}
 
 /**
  * Document Add current HTML Elements array
  */
 CybotranikWUI.prototype.createElementArray = function () {
 
-  var array = this.HtmlElements.split(',')
+  var dictionary = ''
+  var el = Object.keys(this.HtmlElements)
+
+  for (var i = 0; i < el.length; i++) {
+
+    var key = el[i]
+    var val = this.HtmlElements[key]
+
+    if (i === 0) {
+      dictionary += val
+    } else {
+      dictionary += ',' + val
+    }
+  }
+
+  var array = dictionary.split(',')
 
   for (var index = 0; index < array.length; index++) {
     var element = array[index]
@@ -372,13 +391,118 @@ CybotranikWUI.prototype.Defaults = function () {
 
     this.createStyle('*',
       [
-        this.createProperty('zoom', 1)
+        /* Positioning */
+        this.createProperty('margin-top', this.compatibleSize(0))
+        , this.createProperty('margin-bottom', this.compatibleSize(0))
+        // , this.createProperty('margin-left', this.compatibleSize(0))
+        // , this.createProperty('margin-right', this.compatibleSize(0))
+        , this.createProperty('padding-top', this.compatibleSize(0))
+        , this.createProperty('padding-bottom', this.compatibleSize(0))
+        // , this.createProperty('padding-left', this.compatibleSize(0))
+        // , this.createProperty('padding-right', this.compatibleSize(0))
+
+        // this.createProperty('zoom', 1)
+        /* Theme */
+        , this.createProperty('border', 'solid ' + this.compatibleSize(0.001) + ' transparent')
+
+      ]
+    )
+
+    /**
+     * Section
+     */
+    , this.createStyle(this.HtmlElements.sections,
+      [
+      ]
+    )
+
+    /**
+     * Grouping Content
+     */
+    , this.createStyle(this.HtmlElements.groupingContent,
+      [
+      ]
+    )
+
+    /**
+     * Text Level Semantics
+     */
+    , this.createStyle(this.HtmlElements.textLevelSemantics,
+      [
+        /* Display */
+        this.createProperty('display', 'inline')
+        , this.createProperty('zoom', '1')
+      ]
+    )
+
+    /**
+     * Edits
+     */
+    , this.createStyle(this.HtmlElements.edits,
+      [
+        /* Display */
+        this.createProperty('display', 'inline-block')
+      ]
+    )
+
+    /**
+     * Embedded content
+     */
+    , this.createStyle(this.HtmlElements.embeddedContent,
+      [
+
+      ]
+    )
+
+    /**
+     * Media Elements
+     */
+    , this.createStyle(this.HtmlElements.mediaElements,
+      [
+        /* Display */
+        this.createProperty('display', 'inline-block')
+      ]
+    )
+
+    /**
+     * Tabular Data
+     */
+    , this.createStyle(this.HtmlElements.tabularData,
+      [
+
+      ]
+    )
+
+    /**
+     * Forms
+     */
+    , this.createStyle(this.HtmlElements.forms,
+      [
+
+      ]
+    )
+
+    /**
+     * Interactive Elements
+     */
+    , this.createStyle(this.HtmlElements.interactiveElements,
+      [
+
+      ]
+    )
+
+    /**
+     * Web Components
+     */
+    , this.createStyle(this.HtmlElements.webComponents,
+      [
+
       ]
     )
 
     , this.createStyle('*, ::after, ::before',
       [
-        this.createProperty('box-sizing', 'border-box')
+        // this.createProperty('box-sizing', 'border-box')
       ]
     )
 
@@ -393,6 +517,71 @@ CybotranikWUI.prototype.Defaults = function () {
 
       ]
     )
+
+    // container, row, width, height, margin, padding, align
+    , this.createStyle('.container', [
+      this.createProperty('width', '100%')
+      , this.createProperty('margin-right', 'auto')
+      , this.createProperty('margin-left', 'auto')
+    ])
+
+    , this.createStyle('.row', [this.createProperty('width', '100%')])
+
+    , this.createStyle('.width-10', [this.createProperty('width', '10%')])
+    , this.createStyle('.width-20', [this.createProperty('width', '20%')])
+    , this.createStyle('.width-30', [this.createProperty('width', '30%')])
+    , this.createStyle('.width-40', [this.createProperty('width', '40%')])
+    , this.createStyle('.width-50', [this.createProperty('width', '50%')])
+    , this.createStyle('.width-60', [this.createProperty('width', '60%')])
+    , this.createStyle('.width-70', [this.createProperty('width', '70%')])
+    , this.createStyle('.width-80', [this.createProperty('width', '80%')])
+    , this.createStyle('.width-90', [this.createProperty('width', '90%')])
+    , this.createStyle('.width-100', [this.createProperty('width', '100%')])
+    , this.createStyle('.width-10, .width-20, .width-30, .width-40, .width-50, .width-60, .width-70, .width-80, .width-90, .width-100', [this.createProperty('float', 'left')])
+
+    , this.createStyle('.width-80', [
+      this.currentDocument().Width < 1000 ? this.createProperty('width', '100%') : this.createProperty('display', 'block')
+    ])
+
+    , this.createStyle('.height-50', [this.createProperty('max-height', '50px')])
+    , this.createStyle('.height-100', [this.createProperty('max-height', '100px')])
+    , this.createStyle('.height-150', [this.createProperty('max-height', '150px')])
+    , this.createStyle('.height-200', [this.createProperty('max-height', '200px')])
+    , this.createStyle('.height-250', [this.createProperty('max-height', '250px')])
+    , this.createStyle('.height-300', [this.createProperty('max-height', '300px')])
+    , this.createStyle('.height-350', [this.createProperty('max-height', '350px')])
+    , this.createStyle('.height-400', [this.createProperty('max-height', '400px')])
+    , this.createStyle('.height-450', [this.createProperty('max-height', '450px')])
+    , this.createStyle('.height-500', [this.createProperty('max-height', '500px')])
+
+    , this.createStyle('.margin-1', [this.createProperty('margin', '1%')])
+    , this.createStyle('.margin-2', [this.createProperty('margin', '2%')])
+    , this.createStyle('.margin-3', [this.createProperty('margin', '3%')])
+    , this.createStyle('.margin-4', [this.createProperty('margin', '4%')])
+    , this.createStyle('.margin-5', [this.createProperty('margin', '5%')])
+    , this.createStyle('.margin-6', [this.createProperty('margin', '6%')])
+    , this.createStyle('.margin-7', [this.createProperty('margin', '7%')])
+    , this.createStyle('.margin-8', [this.createProperty('margin', '8%')])
+    , this.createStyle('.margin-9', [this.createProperty('margin', '9%')])
+    , this.createStyle('.margin-10', [this.createProperty('margin', '10%')])
+
+    , this.createStyle('.padding-1', [this.createProperty('padding', '1%')])
+    , this.createStyle('.padding-2', [this.createProperty('padding', '2%')])
+    , this.createStyle('.padding-3', [this.createProperty('padding', '3%')])
+    , this.createStyle('.padding-4', [this.createProperty('padding', '4%')])
+    , this.createStyle('.padding-5', [this.createProperty('padding', '5%')])
+    , this.createStyle('.padding-6', [this.createProperty('padding', '6%')])
+    , this.createStyle('.padding-7', [this.createProperty('padding', '7%')])
+    , this.createStyle('.padding-8', [this.createProperty('padding', '8%')])
+    , this.createStyle('.padding-9', [this.createProperty('padding', '9%')])
+    , this.createStyle('.padding-10', [this.createProperty('padding', '10%')])
+
+    , this.createStyle('.align-center', [this.createProperty('text-align', 'center')])
+    , this.createStyle('.align-left', [this.createProperty('text-align', 'left')])
+    , this.createStyle('.align-right', [this.createProperty('text-align', 'right')])
+    , this.createStyle('.align-justify', [this.createProperty('text-align', 'justify')])
+
+    // Sections 'body,article,section,nav,aside,hgroup,h1,h2,h3,h4,h5,h6,header,footer'
 
     , this.createStyle('body',
       [
@@ -416,124 +605,28 @@ CybotranikWUI.prototype.Defaults = function () {
       ]
     )
 
-    /**
-     * Content sectioning
-     */
-    , this.createStyle('address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section',
+    , this.createStyle('aside',
+      [
+        this.createProperty('box-shadow', 'inset 10px 0 5px -5px' + this.Default.Color.Lighter)
+        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
+        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
+        , this.createProperty('border-left-style', 'inset')
+        , this.createProperty('border-left-width', '1px')
+        , this.createProperty('border-left-color', this.Default.Color.Lighter)
+        , this.createProperty('font-style', 'italic')
+        , this.createProperty('color', this.Default.Color.Darker)
+      ]
+    )
+
+    // Grouping Content 'p,address,hr,pre,blockquote,ol,ul,li,dl,dt,dd,figure,figcaption,main,div'
+    , this.createStyle('p',
       [
         /* Positioning */
-        this.createProperty('margin-top', this.compatibleSize(0))
-        , this.createProperty('margin-bottom', this.compatibleSize(0))
-        , this.createProperty('margin-left', this.compatibleSize(0))
-        , this.createProperty('margin-right', this.compatibleSize(0))
-        , this.createProperty('padding-top', this.compatibleSize(0))
-        , this.createProperty('padding-bottom', this.compatibleSize(0))
-        , this.createProperty('padding-left', this.compatibleSize(0))
-        , this.createProperty('padding-right', this.compatibleSize(0))
-
-        /* Display */
-        , this.createProperty('display', 'block')
-
-        /* Theme */
-        , this.createProperty('border', 'solid ' + this.compatibleSize(this.Default.Border.All) + ' transparent')
+        this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
       ]
     )
 
-    /**
-     * Text content
-     */
-    , this.createStyle('blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul',
-      [
-        /* Positioning */
-        this.createProperty('margin-top', this.compatibleSize(0))
-        , this.createProperty('margin-bottom', this.compatibleSize(0))
-        , this.createProperty('margin-left', this.compatibleSize(0))
-        , this.createProperty('margin-right', this.compatibleSize(0))
-        , this.createProperty('padding-top', this.compatibleSize(0))
-        , this.createProperty('padding-bottom', this.compatibleSize(0))
-        , this.createProperty('padding-left', this.compatibleSize(0))
-        , this.createProperty('padding-right', this.compatibleSize(0))
-
-        /* Display */
-        , this.createProperty('display', 'block')
-      ]
-    )
-
-    /**
-     * Inline text semantics
-     */
-    , this.createStyle('a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr',
-      [
-        /* Display */
-        this.createProperty('display', 'inline')
-        , this.createProperty('zoom', '1')
-      ]
-    )
-
-    /**
-     * Image and multimedia
-     */
-    , this.createStyle('area,audio,canvas,img,track,video',
-      [
-        /* Display */
-        this.createProperty('display', 'inline-block')
-      ]
-    )
-
-    /**
-     * Embedded content
-     */
-    , this.createStyle('embed,iframe,noembed,object,param,picture,source',
-      [
-
-      ]
-    )
-
-    /**
-     * Demarcating edits
-     */
-    , this.createStyle('del,ins',
-      [
-
-      ]
-    )
-
-    /**
-     * Table content
-     */
-    , this.createStyle('caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr',
-      [
-
-      ]
-    )
-
-    /**
-     * Forms
-     */
-    , this.createStyle('button,datalist,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea',
-      [
-
-      ]
-    )
-
-    /**
-     * Interactive elements
-     */
-    , this.createStyle('details,dialog,summary',
-      [
-
-      ]
-    )
-
-    /**
-     * Web Components
-     */
-    , this.createStyle('shadow,template',
-      [
-
-      ]
-    )
-
+    // Text Level Semantics 'a,em,strong,small,s,cite,q,dfn,abbr,ruby,rb,rt,rtc,rp,data,time,code,var,samp,kbd,sub,sup,i,b,u,mark,bdi,bdo,span,br,wbr'
     , this.createStyle('a',
       [
         /* Typography */
@@ -542,39 +635,68 @@ CybotranikWUI.prototype.Defaults = function () {
         , this.createProperty('color', this.Default.Color.Link)
       ]
     )
+
+    , this.createStyle('code',
+      [
+        this.createProperty('color', this.Default.Color.Code)
+      ]
+    )
+
+    , this.createStyle('[is="html-tag"]:before',
+      [
+        this.createProperty('content', '"<"')
+      ]
+    )
+
+    , this.createStyle('[is="html-tag"]:after',
+      [
+        this.createProperty('content', '">"')
+      ]
+    )
+
+    // Edits 'ins,del'
+
+    // Embedded content 'picture,source,img,iframe,embed,object,param,video,audio,track'
+    , this.createStyle('img', [this.createProperty('width', '100%')])
+
+    // Media Elements 'map,area'
+
+    // Tabular Data 'table,caption,colgroup,col,tbody,thead,tfoot,tr,td,th'
+
+    // Forms 'form,label,input,button,select,datalist,optgroup,option,textarea,output,progress,meter,fieldset,legend'
+
+    // Interactive elements  'details,summary,dialog'
+
+    // Web Components 'accordion,alert,animation,background,badge,breadcrumb,card,comment,counter,cover,collapse,dropdown,feed,list,lightbox,marker,modal,navbar,notification,page,pop,segment,slider,slideshow,spinner,tab'
+
     , this.createStyle('[is="article-page"]',
       [
-        /* Theme */
         this.createProperty('background-color', this.Default.Color.Lighter)
       ]
     )
+
     , this.createStyle('[is="article-page"] > [is="article-header"]',
       [
-        /*  */
         this.createProperty('text-align', 'center')
-
       ]
     )
+
     , this.createStyle('[is="article-page"] > [is="article-section"]',
       [
-        /* Positioning */
         this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
         , this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
-        /* Theme */
         , this.createProperty('background-color', this.Default.Color.White)
       ]
     )
 
     , this.createStyle('[is="article-section"]',
       [
-        /* Theme */
         this.createProperty('background-color', this.Default.Color.White)
       ]
     )
 
     , this.createStyle('[is="article-app"]',
       [
-        /* Theme */
         this.createProperty('border-style', 'dotted')
         , this.createProperty('border-width', '2px')
         , this.createProperty('border-color', this.Default.Color.Lighter)
@@ -591,58 +713,16 @@ CybotranikWUI.prototype.Defaults = function () {
 
     , this.createStyle('[is="weather-forecast"] [is="article-section"] meter',
       [
-        /* Positioning */
         this.createProperty('float', 'right')
       ]
     )
 
     , this.createStyle('[is="aside-box"]',
       [
-        /* Positioning */
         this.createProperty('width', '40%')
         , this.createProperty('float', 'right')
       ]
     )
-    , this.createStyle('aside',
-      [
-        this.createProperty('box-shadow', 'inset 10px 0 5px -5px' + this.Default.Color.Lighter)
-        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
-        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
-        , this.createProperty('border-left-style', 'inset')
-        , this.createProperty('border-left-width', '1px')
-        , this.createProperty('border-left-color', this.Default.Color.Lighter)
-        , this.createProperty('font-style', 'italic')
-        , this.createProperty('color', this.Default.Color.Darker)
-      ]
-    )
-    , this.createStyle('aside > p',
-      [
-        /* Positioning */
-        this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
-      ]
-    )
-
-    , this.createStyle('.container', [
-      this.createProperty('width', '100%')
-      , this.createProperty('margin-right', 'auto')
-      , this.createProperty('margin-left', 'auto')
-    ])
-    , this.createStyle('.row', [this.createProperty('width', '100%')])
-    , this.createStyle('.col-1', [this.createProperty('width', '10%')])
-    , this.createStyle('.col-2', [this.createProperty('width', '20%')])
-    , this.createStyle('.col-3', [this.createProperty('width', '30%')])
-    , this.createStyle('.col-4', [this.createProperty('width', '40%')])
-    , this.createStyle('.col-5', [this.createProperty('width', '50%')])
-    , this.createStyle('.col-6', [this.createProperty('width', '60%')])
-    , this.createStyle('.col-7', [this.createProperty('width', '70%')])
-    , this.createStyle('.col-8', [this.createProperty('width', '80%')])
-    , this.createStyle('.col-9', [this.createProperty('width', '90%')])
-    , this.createStyle('.col-10', [this.createProperty('width', '100%')])
-    , this.createStyle('.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10', [this.createProperty('float', 'left')])
-    , this.createStyle('img', [this.createProperty('width', '100%')])
-    , this.createStyle('body', [
-      this.createProperty('background-color', this.Default.Color.Light)
-    ])
 
     , this.createStyle('[is="aside-nav"]', [
       this.createProperty('color', this.Default.Color.Dark)
@@ -674,6 +754,7 @@ CybotranikWUI.prototype.Defaults = function () {
       this.createProperty('list-style', 'none')
       , this.createProperty('display', 'inline-block')
       , this.createProperty('position', 'relative')
+      , this.createProperty('padding-left', 0)
     ])
 
     , this.createStyle('[is="horizontal-menu"] > li', [
@@ -690,15 +771,9 @@ CybotranikWUI.prototype.Defaults = function () {
       , this.createProperty('border-bottom-width', '1px')
       , this.createProperty('color', this.Default.Color.Darker)
     ])
+
     , this.createStyle('.aside-toogle', [
-
       this.currentDocument().Width < 1000 ? this.createProperty('display', 'none') : this.createProperty('display', 'block')
-
-    ])
-    , this.createStyle('.col-8', [
-
-      this.currentDocument().Width < 1000 ? this.createProperty('width', '100%') : this.createProperty('display', 'block')
-
     ])
   ]
 }
@@ -730,6 +805,7 @@ var Swatch = {
     , Black: '#384238'
     , Link: '#991E41'
     , LinkO: '#002900'
+    , Code: 'purple'
   }
 }
 
