@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /**
  * Cybotranik WUI
  *
@@ -14,6 +15,7 @@ function CybotranikWUI() { }
  * @returns {Theme} Plugin css styles
  * */
 CybotranikWUI.prototype.Default = {
+
   Color: {
     /**
      * Default White ( Foreground ) Ratio 8:1
@@ -26,35 +28,35 @@ CybotranikWUI.prototype.Default = {
      * https://webaim.org/resources/contrastchecker/ 
      * Swatch1 
      */
-    , Lighter: '#B2E2B1'
+    , Lighter: '#A8E27B'
 
     /**
      * Light
      * <---
      * Swatch2
      */
-    , Light: '#B0E1AD'
+    , Light: '#7DBF49'
 
     /**
      * Primary
      *      -
      * Swatch0
      */
-    , Primary: '#8FD38B'
+    , Primary: '#60A828'
 
     /**
      * Dark
      *            --->
      * Swatch3
      */
-    , Dark: '#6CBF67'
+    , Dark: '#458812'
 
     /* 
      * Darker ( Foreground ) Ratio 8:1
      * https://webaim.org/resources/contrastchecker/  
      * Swatch4
      */
-    , Darker: '#1C401C'
+    , Darker: '#2B6300'
 
     /**
      * Default Black ( Background ) Ratio 8:1
@@ -69,6 +71,7 @@ CybotranikWUI.prototype.Default = {
      */
     , Link: '#991E41'
     , LinkO: '#002900'
+    , Code: 'purple'
 
     /** */
     , Info: '#000000'
@@ -105,14 +108,88 @@ CybotranikWUI.prototype.Default = {
     , Right: 0.2
   }
   , Line: { Height: 1.6 }
+}
 
+// From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+if (!Object.keys) {
+  Object.keys = (function () {
+
+    var hasOwnProperty = Object.prototype.hasOwnProperty,
+      hasDontEnumBug = !({ toString: null }).propertyIsEnumerable.call('toString'),
+      dontEnums = [
+        'toString',
+        'toLocaleString',
+        'valueOf',
+        'hasOwnProperty',
+        'isPrototypeOf',
+        'propertyIsEnumerable',
+        'constructor'
+      ],
+      dontEnumsLength = dontEnums.length
+
+    return function (obj) {
+      if (typeof obj !== 'function' && (typeof obj !== 'object' || obj === null)) {
+        throw new TypeError('Object.keys called on non-object')
+      }
+
+      var result = [], prop, i
+
+      for (prop in obj) {
+        if (hasOwnProperty.call(obj, prop)) {
+          result.push(prop)
+        }
+      }
+
+      if (hasDontEnumBug) {
+        for (i = 0; i < dontEnumsLength; i++) {
+          if (hasOwnProperty.call(obj, dontEnums[i])) {
+            result.push(dontEnums[i])
+          }
+        }
+      }
+      return result
+    }
+  }())
+}
+
+// https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
+if (typeof Object.assign != 'function') {
+  /*eslint no-unused-vars: ["error", { "args": "none" }]*/
+  Object.assign = function (target, varArgs) { // .length of function is 2
+    'use strict'
+    if (target == null) { // TypeError if undefined or null
+      throw new TypeError('Cannot convert undefined or null to object')
+    }
+
+    var to = Object(target)
+
+    for (var index = 1; index < arguments.length; index++) {
+      var nextSource = arguments[index]
+
+      if (nextSource != null) { // Skip over if undefined or null
+        for (var nextKey in nextSource) {
+          // Avoid bugs when hasOwnProperty is shadowed
+          if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+            to[nextKey] = nextSource[nextKey]
+          }
+        }
+      }
+    }
+    return to
+  }
 }
 
 /**
  * Theme Configuration
+ * @param {string} configuration Theme Configuration
  */
-CybotranikWUI.prototype.setThemeDefault = function (configuration) {
-  this.Default.Color = configuration.Color
+CybotranikWUI.prototype.Theme = function (configuration) {
+
+  var userConfiguration = Object.assign({}, this.Default, configuration)
+
+  this.Default = userConfiguration
+
+  this.documentAppendCssArray('theme', wui.DefaultTheme())
 }
 
 /**
@@ -176,72 +253,41 @@ CybotranikWUI.prototype.currentDocument = function () {
 }
 
 /**
- * CSS Property string generate syntax
- * 
- * @param {string} property Element Property
- * @param {string} value Element Value
- * @returns {string} String Proeprty
- */
-CybotranikWUI.prototype.createProperty = function (property, value) {
-
-  return property + ' : ' + value
-}
-
-/**
- * CSS style block generate syntax
- * 
- * @param {string} selector Selector name
- * @param {array} args Element Array
- * @param {float} value Element value
- * @returns {string} Style Syntax
- */
-CybotranikWUI.prototype.createStyle = function (selector, args) {
-
-  // No added blank property
-  if (args.length === 0) return ''
-
-  var syntaxs = selector + '{'
-
-  for (var i = 0; i < args.length; i++) {
-    var arg = args[i]
-    syntaxs += arg + ';'
-  }
-
-  syntaxs += '}'
-
-  return syntaxs
-}
-
-/**
  * by default it will be at the bottom of the title.
  * Append string css syntax
- *  
+ *
+ * @param {string} syntax type style name
  * @param {string} syntax css syntax
  */
-CybotranikWUI.prototype.documentAppendCss = function (syntax) {
+CybotranikWUI.prototype.documentAppendCss = function (type, syntax) {
 
   var element = document.createElement('style')
   element.setAttribute('type', 'text/css')
-  element.id = 'cybotranik-wui'
+  element.id = 'cybotranik-wui-' + type
 
   switch (this.currentBrowser()) {
-  // Old Property
-  case 'MSIE 5': element.styleSheet.cssText = syntax; break
-  case 'MSIE 7': element.styleSheet.cssText = syntax; break
-  case 'MSIE 8': element.styleSheet.cssText = syntax; break
+    // Old Property
+    case 'MSIE 5': element.styleSheet.cssText = syntax; break
+    case 'MSIE 7': element.styleSheet.cssText = syntax; break
+    case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-  case 'MSIE 9': element.innerText = syntax; break
-  case 'MSIE 10': element.innerText = syntax; break
-  case 'IE 11': element.innerText = syntax; break
-  case 'Chrome 76': element.innerText = syntax; break
-  case 'Edge 18': element.innerText = syntax; break
-  case 'Firefox 68': element.innerText = syntax; break
-  default: element.innerText = syntax
+    case 'MSIE 9': element.innerText = syntax; break
+    case 'MSIE 10': element.innerText = syntax; break
+    case 'IE 11': element.innerText = syntax; break
+    case 'Chrome 76': element.innerText = syntax; break
+    case 'Edge 18': element.innerText = syntax; break
+    case 'Firefox 68': element.innerText = syntax; break
+    default: element.innerText = syntax
   }
 
   // removing previous element. Performance problem.
-  document.getElementById(element.id) === null ? 'First loading' : document.getElementById(element.id).remove()
+  if (document.getElementById(element.id) === null) {
+    'First loading'
+  } else {
+    var e = document.getElementById(element.id)
+    e.parentNode.removeChild(e)
+  }
 
   // by default it will be at the bottom of the title.
   document.getElementsByTagName('head')[0].appendChild(element)
@@ -250,16 +296,35 @@ CybotranikWUI.prototype.documentAppendCss = function (syntax) {
 /**
  * Inserts the current syntax array into the css document.
  */
-CybotranikWUI.prototype.documentAppendCssArray = function (array) {
+CybotranikWUI.prototype.documentAppendCssArray = function (type, array) {
 
   var syntaxs = ''
-  // syntaxs builder
-  for (var i = 0; i < array.length; i++) {
-    if (array[i] !== '')
-      syntaxs += array[i]
+
+  for (var x = 0; x < array.length; x++) {
+    var item = array[x]
+    var selectors = Object.keys(item)
+    var css = ''
+    for (var s = 0; s < selectors.length; s++) {
+      var key = selectors[s]
+      var property = item[key]
+
+      css += key + '{'
+      var properties = Object.keys(property)
+      for (var p = 0; p < properties.length; p++) {
+
+        var pKey = properties[p]
+        var pVal = property[pKey]
+        css += pKey + ':' + pVal + ';'
+      }
+      css += '}'
+      // Only found in the property area.
+      if (properties.length != 0) {
+        syntaxs += css
+      }
+    }
   }
 
-  this.documentAppendCss(syntaxs)
+  this.documentAppendCss(type, syntaxs)
 }
 
 /**
@@ -274,21 +339,21 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   var factor = this.Default.Font.Factor
 
   switch (this.currentBrowser()) {
-  case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
-  case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
-  case 'MSIE 8': result = (factor * 1) * value + 'px'; break
-  case 'MSIE 9': result = (factor * 1) * value + 'px'; break
-  case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
-  case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
-  // rem compatible.
-  // case 'MSIE 10': result = value + 'rem'; break
-  // case 'MSIE 11': result = value + 'rem'; break
-  // case 'Chrome 76': result = value + 'rem'; brea
+    case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
+    case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
+    case 'MSIE 8': result = (factor * 1) * value + 'px'; break
+    case 'MSIE 9': result = (factor * 1) * value + 'px'; break
+    case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
+    case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
+    // rem compatible.
+    // case 'MSIE 10': result = value + 'rem'; break
+    // case 'MSIE 11': result = value + 'rem'; break
+    // case 'Chrome 76': result = value + 'rem'; brea
 
-  // rem compatible default.
-  // default: result = value + 'rem'
-  // px compatible default.
-  default: result = (factor * 1) * value + 'px'
+    // rem compatible default.
+    // default: result = value + 'rem'
+    // px compatible default.
+    default: result = (factor * 1) * value + 'px'
   }
 
   return result
@@ -298,44 +363,60 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
  * HTML 5 element, html element and custom element tags
  * 
  */
-CybotranikWUI.prototype.HtmlElements = ''
+CybotranikWUI.prototype.HtmlElements = {
 
-  // Content sectioning
-  + 'address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section'
+  // Sections
+  sections: 'body,article,section,nav,aside,hgroup,h1,h2,h3,h4,h5,h6,header,footer'
 
-  // Text content
-  + ',blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul'
+  // Grouping Content
+  , groupingContent: 'p,address,hr,pre,blockquote,ol,ul,li,dl,dt,dd,figure,figcaption,main,div'
 
-  // Inline text semantics
-  + ',a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr'
+  // Text Level Semantics
+  , textLevelSemantics: 'a,em,strong,small,s,cite,q,dfn,abbr,ruby,rb,rt,rtc,rp,data,time,code,var,samp,kbd,sub,sup,i,b,u,mark,bdi,bdo,span,br,wbr'
 
-  // Image and multimedia
-  + ',area,audio,img,track,video'
+  // Edits
+  , edits: 'ins,del'
 
   // Embedded content
-  + ',embed,iframe,noembed,object,param,picture,source'
+  , embeddedContent: 'picture,source,img,iframe,embed,object,param,video,audio,track'
 
-  // Demarcating edits
-  + ',del,ins'
+  // Media Elements
+  , mediaElements: 'map,area'
 
-  // Table content
-  + ',caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr'
+  // Tabular Data
+  , tabularData: 'table,caption,colgroup,col,tbody,thead,tfoot,tr,td,th'
 
   // Forms
-  + ',button,datalist,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea'
+  , forms: 'form,label,input,button,select,datalist,optgroup,option,textarea,output,progress,meter,fieldset,legend'
 
   // Interactive elements
-  + ',details,dialog,summary'
+  , interactiveElements: 'details,summary,dialog'
 
   // Web Components
-  + ',shadow,template'
+  , webComponents: 'accordion,alert,animation,background,badge,breadcrumb,card,comment,counter,cover,collapse,dropdown,feed,list,lightbox,marker,modal,navbar,notification,page,pop,segment,slider,slideshow,spinner,tab'
+}
 
 /**
  * Document Add current HTML Elements array
  */
 CybotranikWUI.prototype.createElementArray = function () {
 
-  var array = this.HtmlElements.split(',')
+  var dictionary = ''
+  var el = Object.keys(this.HtmlElements)
+
+  for (var i = 0; i < el.length; i++) {
+
+    var key = el[i]
+    var val = this.HtmlElements[key]
+
+    if (i === 0) {
+      dictionary += val
+    } else {
+      dictionary += ',' + val
+    }
+  }
+
+  var array = dictionary.split(',')
 
   for (var index = 0; index < array.length; index++) {
     var element = array[index]
@@ -347,398 +428,517 @@ CybotranikWUI.prototype.createElementArray = function () {
  * Onload Event and Start
  */
 CybotranikWUI.prototype.start = function () {
+
   var self = this
   window.onload = function () {
     /**
      * Add Default Item Array to Current Document
      */
-    self.documentAppendCssArray(cybotranik.Defaults())
+    self.documentAppendCssArray('base', wui.Base())
   }
 
   window.onresize = function () {
     /**
      * Add Default Item Array to Current Document
      */
-    self.documentAppendCssArray(cybotranik.Defaults())
+    self.documentAppendCssArray('base', wui.Base())
   }
 }
+
 /**
- * Default Style Syntax Array
+ * Base Style Syntax Array
  * @returns {array} All css styles
  * */
-CybotranikWUI.prototype.Defaults = function () {
+CybotranikWUI.prototype.Base = function () {
 
-  return [
+  var result = []
 
-    this.createStyle('*',
-      [
-        this.createProperty('zoom', 1)
-      ]
-    )
+  /**
+   * Global
+   */
+  result.push({
+    '*': {
+      'box-sizing': 'border-box'
+      , 'margin-top': this.compatibleSize(0)
+      , 'margin-bottom': this.compatibleSize(0)
+      , 'padding-top': this.compatibleSize(0)
+      , 'padding-bottom': this.compatibleSize(0)
+    }
+  })
 
-    , this.createStyle('*, ::after, ::before',
-      [
-        this.createProperty('box-sizing', 'border-box')
-      ]
-    )
+  /**
+   * Section
+   */
+  result.push({
+    'body,article,section,nav,aside,hgroup,h1,h2,h3,h4,h5,h6,header,footer': {
+      'display': 'block'
+    }
+  })
 
-    , this.createStyle('*, ::after',
-      [
-        // this.createProperty('clear', 'both')
-      ]
-    )
 
-    , this.createStyle('html',
-      [
+  result.push({
+    'body': {
+      'margin': 0
+      , 'padding': 0
+      , 'text-align': 'left'
+      , 'font-family': this.Default.Font.Family
+      , 'font-size': this.compatibleSize(this.Default.Font.Size)
+      , 'font-weight': this.Default.Font.Weight
+      , 'line-height': this.Default.Line.Height
+    }
+  })
 
-      ]
-    )
+  result.push({
+    'aside': {
+      'margin-left': this.compatibleSize(this.Default.Margin.Left)
+      , 'padding-left': this.compatibleSize(this.Default.Padding.Left)
+    }
+  })
 
-    , this.createStyle('body',
-      [
-        /* Positioning */
-        this.createProperty('margin', 0)
-        , this.createProperty('padding', 0)
+  /**
+   * Grouping Content
+   */
+  // result.push({
+  //   [this.HtmlElements.groupingContent]: {
 
-        /* Display */
-        , this.createProperty('text-align', 'left')
+  //   }
+  // })
 
-        /* Typography */
-        , this.createProperty('font-family', this.Default.Font.Family)
-        , this.createProperty('font-size', this.compatibleSize(this.Default.Font.Size))
-        , this.createProperty('font-weight', this.Default.Font.Weight)
-        , this.createProperty('line-height', this.Default.Line.Height)
+  result.push({
+    'p': {
+      // 'margin': this.compatibleSize(this.Default.Margin.All)
+    }
+  })
 
-        /* Theme */
-        , this.createProperty('background-color', this.Default.Color.White)
-        , this.createProperty('color', this.Default.Color.Black)
+  /**
+  * Text Level Semantics
+  */
+  // result.push({
+  //   [this.HtmlElements.textLevelSemantics]: {
+  //     'display': 'inline'
+  //     , 'zoom': 1
+  //   }
+  // })
 
-      ]
-    )
+  result.push({
+    'a': {
+      'text-decoration': 'none'
+      , 'zoom': 1
+    }
+  })
 
-    /**
-     * Content sectioning
-     */
-    , this.createStyle('address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,main,nav,section',
-      [
-        /* Positioning */
-        this.createProperty('margin-top', this.compatibleSize(0))
-        , this.createProperty('margin-bottom', this.compatibleSize(0))
-        , this.createProperty('margin-left', this.compatibleSize(0))
-        , this.createProperty('margin-right', this.compatibleSize(0))
-        , this.createProperty('padding-top', this.compatibleSize(0))
-        , this.createProperty('padding-bottom', this.compatibleSize(0))
-        , this.createProperty('padding-left', this.compatibleSize(0))
-        , this.createProperty('padding-right', this.compatibleSize(0))
+  /**
+   * Edits
+   */
+  // result.push({
+  //   [this.HtmlElements.edits]: {
+  //     'display': 'inline-block'
+  //   }
+  // })
 
-        /* Display */
-        , this.createProperty('display', 'block')
+  /**
+   * Embedded content
+   */
+  // result.push({
+  //   [this.HtmlElements.embeddedContent]: {
+  //   }
+  // })
 
-        /* Theme */
-        , this.createProperty('border', 'solid ' + this.compatibleSize(this.Default.Border.All) + ' transparent')
-      ]
-    )
+  result.push({
+    'img': {
+      'width': '100%'
+    }
+  })
 
-    /**
-     * Text content
-     */
-    , this.createStyle('blockquote,dd,div,dl,dt,figcaption,figure,hr,li,ol,p,pre,ul',
-      [
-        /* Positioning */
-        this.createProperty('margin-top', this.compatibleSize(0))
-        , this.createProperty('margin-bottom', this.compatibleSize(0))
-        , this.createProperty('margin-left', this.compatibleSize(0))
-        , this.createProperty('margin-right', this.compatibleSize(0))
-        , this.createProperty('padding-top', this.compatibleSize(0))
-        , this.createProperty('padding-bottom', this.compatibleSize(0))
-        , this.createProperty('padding-left', this.compatibleSize(0))
-        , this.createProperty('padding-right', this.compatibleSize(0))
+  result.push({
+    'img-avatar': {
+      'width': '48px'
+      , 'border-radius': '50px'
+      , 'float': 'right'
+    }
+  })
 
-        /* Display */
-        , this.createProperty('display', 'block')
-      ]
-    )
+  /**
+   * Media Elements
+   */
+  // result.push({
+  //   [this.HtmlElements.mediaElements]: {
+  //     'display': 'inline-block'
+  //   }
+  // })
 
-    /**
-     * Inline text semantics
-     */
-    , this.createStyle('a,abbr,b,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rb,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr',
-      [
-        /* Display */
-        this.createProperty('display', 'inline')
-        , this.createProperty('zoom', '1')
-      ]
-    )
+  /**
+   * Tabular Data
+   */
+  // result.push({
+  //   [this.HtmlElements.mediaElements]: {
+  //   }
+  // })
 
-    /**
-     * Image and multimedia
-     */
-    , this.createStyle('area,audio,canvas,img,track,video',
-      [
-        /* Display */
-        this.createProperty('display', 'inline-block')
-      ]
-    )
+  /**
+   * Forms
+   */
+  // result.push({
+  //   [this.HtmlElements.forms]: {
+  //   }
+  // })
 
-    /**
-     * Embedded content
-     */
-    , this.createStyle('embed,iframe,noembed,object,param,picture,source',
-      [
+  /**
+   * Interactive Elements
+   */
+  // result.push({
+  //   [this.HtmlElements.interactiveElements]: {
+  //   }
+  // })
 
-      ]
-    )
+  /**
+   * Web Components
+   */
+  // result.push({
+  //   [this.HtmlElements.webComponents]: {
+  //   }
+  // })
 
-    /**
-     * Demarcating edits
-     */
-    , this.createStyle('del,ins',
-      [
+  result.push({
+    '[is="html-tag"]:before': {
+      'content': '"<"'
+    }
+  })
 
-      ]
-    )
+  result.push({
+    '[is="html-tag"]:after': {
+      'content': '">"'
+    }
+  })
 
-    /**
-     * Table content
-     */
-    , this.createStyle('caption,col,colgroup,table,tbody,td,tfoot,th,thead,tr',
-      [
+  result.push({
+    '[is="article-page"] > [is="article-header"]': {
+      'text-align': 'center'
+    }
+  })
 
-      ]
-    )
+  result.push({
+    '[is="article-page"] > [is="article-section"]': {
+      'margin': this.compatibleSize(this.Default.Margin.All)
+      , 'padding': this.compatibleSize(this.Default.Padding.All)
+    }
+  })
 
-    /**
-     * Forms
-     */
-    , this.createStyle('button,datalist,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea',
-      [
+  result.push({
+    '[is="weather-forecast"] [is="article-section"] meter': {
+      'float': 'right'
+    }
+  })
 
-      ]
-    )
+  result.push({
+    '[is="aside-box"]': {
+      'width': '40%'
+      , 'float': 'right%'
+    }
+  })
 
-    /**
-     * Interactive elements
-     */
-    , this.createStyle('details,dialog,summary',
-      [
+  result.push({
+    '[is="aside-nav"] ul': {
+      'list-style-type': 'disc'
+    }
+  })
 
-      ]
-    )
+  result.push({
+    '[is="aside-nav"] li': {
+      'margin-left': this.compatibleSize(this.Default.Margin.Left)
+    }
+  })
 
-    /**
-     * Web Components
-     */
-    , this.createStyle('shadow,template',
-      [
+  result.push({
+    '[is="header-group"]': {
+      'text-align': 'right'
+    }
+  })
 
-      ]
-    )
+  result.push({
+    '[is="horizontal-menu"]': {
+      'list-style': 'none'
+      , 'display': 'inline-block'
+      , 'position': 'relative'
+      , 'padding-left': 0
+    }
+  })
 
-    , this.createStyle('a',
-      [
-        /* Typography */
-        this.createProperty('text-decoration', 'none')
-        /* Theme */
-        , this.createProperty('color', this.Default.Color.Link)
-      ]
-    )
-    , this.createStyle('[is="article-page"]',
-      [
-        /* Theme */
-        this.createProperty('background-color', this.Default.Color.Lighter)
-      ]
-    )
-    , this.createStyle('[is="article-page"] > [is="article-header"]',
-      [
-        /*  */
-        this.createProperty('text-align', 'center')
+  result.push({
+    '[is="horizontal-menu"] > li': {
+      'float': 'left'
+    }
+  })
 
-      ]
-    )
-    , this.createStyle('[is="article-page"] > [is="article-section"]',
-      [
-        /* Positioning */
-        this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
-        , this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
-        /* Theme */
-        , this.createProperty('background-color', this.Default.Color.White)
-      ]
-    )
+  result.push({
+    '[is="horizontal-menu"] > li > a': {
+      'padding': this.compatibleSize(this.Default.Padding.All)
+    }
+  })
 
-    , this.createStyle('[is="article-section"]',
-      [
-        /* Theme */
-        this.createProperty('background-color', this.Default.Color.White)
-      ]
-    )
+  result.push({
+    '.aside-toogle': {
+      'display': 'block'
+    }
+  })
 
-    , this.createStyle('[is="article-app"]',
-      [
-        /* Theme */
-        this.createProperty('border-style', 'dotted')
-        , this.createProperty('border-width', '2px')
-        , this.createProperty('border-color', this.Default.Color.Lighter)
-      ]
-    )
+  /**
+   * Grid
+   */
+  result.push({
+    '.block, .bar, .box': {
+      'margin': '0 auto'
+      , 'position': 'reletive'
+      , 'width': '100%'
+      , 'max-width': '100%'
+      , 'float': 'left'
+    }
+  })
 
-    , this.createStyle('[is="weather-forecast"] [is="article-section"]',
-      [
-        this.createProperty('border-bottom-style', 'dotted')
-        , this.createProperty('border-bottom-width', '1px')
-        , this.createProperty('border-bottom-color', this.Default.Color.Darker)
-      ]
-    )
+  result.push({
+    '.container': {
+      'margin': '0 auto'
+      , 'position': 'reletive'
+      , 'width': '100%'
+    }
+  })
 
-    , this.createStyle('[is="weather-forecast"] [is="article-section"] meter',
-      [
-        /* Positioning */
-        this.createProperty('float', 'right')
-      ]
-    )
+  result.push({
+    '.row': {
+      'width': '100%'
+    }
+  })
 
-    , this.createStyle('[is="aside-box"]',
-      [
-        /* Positioning */
-        this.createProperty('width', '40%')
-        , this.createProperty('float', 'right')
-      ]
-    )
-    , this.createStyle('aside',
-      [
-        this.createProperty('box-shadow', 'inset 10px 0 5px -5px' + this.Default.Color.Lighter)
-        , this.createProperty('padding-left', this.compatibleSize(this.Default.Padding.Left))
-        , this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
-        , this.createProperty('border-left-style', 'inset')
-        , this.createProperty('border-left-width', '1px')
-        , this.createProperty('border-left-color', this.Default.Color.Lighter)
-        , this.createProperty('font-style', 'italic')
-        , this.createProperty('color', this.Default.Color.Darker)
-      ]
-    )
-    , this.createStyle('aside > p',
-      [
-        /* Positioning */
-        this.createProperty('margin', this.compatibleSize(this.Default.Margin.All))
-      ]
-    )
+  result.push({
+    '.width-5,.width-10,.width-11,.width-12,.width-14,.width-15,.width-16,.width-20,.width-25,.width-30,.width-33,.width-35,.width-40,.width-45,.width-50,.width-55,.width-60,.width-65,.width-70,.width-75,.width-80,.width-85,.width-90,.width-95,.width-100': {
+      'width': '99.18%'
+      , 'margin': '0.41%'
+      , 'float': 'left'
+    }
+  })
 
-    , this.createStyle('.container', [
-      this.createProperty('width', '100%')
-      , this.createProperty('margin-right', 'auto')
-      , this.createProperty('margin-left', 'auto')
-    ])
-    , this.createStyle('.row', [this.createProperty('width', '100%')])
-    , this.createStyle('.col-1', [this.createProperty('width', '10%')])
-    , this.createStyle('.col-2', [this.createProperty('width', '20%')])
-    , this.createStyle('.col-3', [this.createProperty('width', '30%')])
-    , this.createStyle('.col-4', [this.createProperty('width', '40%')])
-    , this.createStyle('.col-5', [this.createProperty('width', '50%')])
-    , this.createStyle('.col-6', [this.createProperty('width', '60%')])
-    , this.createStyle('.col-7', [this.createProperty('width', '70%')])
-    , this.createStyle('.col-8', [this.createProperty('width', '80%')])
-    , this.createStyle('.col-9', [this.createProperty('width', '90%')])
-    , this.createStyle('.col-10', [this.createProperty('width', '100%')])
-    , this.createStyle('.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10', [this.createProperty('float', 'left')])
-    , this.createStyle('img', [this.createProperty('width', '100%')])
-    , this.createStyle('body', [
-      this.createProperty('background-color', this.Default.Color.Light)
-    ])
+  result.push({
+    '.clear-marjin .width-5, .clear-marjin .width-10, .clear-marjin .width-11, .clear-marjin .width-12, .clear-marjin .width-14, .clear-marjin .width-15, .clear-marjin .width-16, .clear-marjin .width-20, .clear-marjin .width-25,.clear-marjin .width-30, .clear-marjin .width-33, .clear-marjin .width-35, .clear-marjin .width-40, .clear-marjin .width-45, .clear-marjin .width-50,.clear-marjin .width-55, .clear-marjin .width-60, .clear-marjin .width-65, .clear-marjin .width-70, .clear-marjin .width-75, .clear-marjin .width-80, .clear-marjin .width-85, .clear-marjin .width-90, .clear-marjin .width-95, .clear-marjin .width-100': {
+      'width': '100%'
+      , 'margin': 0
+      , 'float': 'left'
+    }
+  })
 
-    , this.createStyle('[is="aside-nav"]', [
-      this.createProperty('color', this.Default.Color.Dark)
-    ])
+  if (this.currentDocument().Width > 768) {
 
-    , this.createStyle('[is="aside-nav"] a', [
-      this.createProperty('color', this.Default.Color.LinkO)
-    ])
+    // Maximum 20 part 
+    result.push({ '.width-5': { 'width': '4.18%' } })
+    result.push({ '.clear-marjin .width-5': { 'width': '5%' } })
+    // Maximum 10 part 
+    result.push({ '.width-10': { 'width': '9.18%' } })
+    result.push({ '.clear-marjin .width-10': { 'width': '10%' } })
+    // Maximum 9 part 
+    result.push({ '.width-11': { 'width': '10.29%' } })
+    result.push({ '.clear-marjin .width-11': { 'width': '11%' } })
+    // Maximum 8 part 
+    result.push({ '.width-12': { 'width': '11.68%' } })
+    result.push({ '.clear-marjin .width-12': { 'width': '12%' } })
+    // Maximum 6 part 
+    result.push({ '.width-16': { 'width': '15.84%' } })
+    result.push({ '.clear-marjin .width-16': { 'width': '16%' } })
+    // Maximum 6 part 
+    result.push({ '.width-15': { 'width': '14.18%' } })
+    result.push({ '.clear-marjin .width-15': { 'width': '15%' } })
+    // Maximum 7 part 
+    result.push({ '.width-14': { 'width': '13.68%' } })
+    result.push({ '.clear-marjin .width-14': { 'width': '14%' } })
+    // Maximum 5 part 
+    result.push({ '.width-20': { 'width': '19.18%' } })
+    result.push({ '.clear-marjin .width-20': { 'width': '20%' } })
+    // Maximum 4 part 
+    result.push({ '.width-25': { 'width': '24.18%' } })
+    result.push({ '.clear-marjin .width-25': { 'width': '25%' } })
+    // Maximum 3 part 
+    result.push({ '.width-30': { 'width': '32.51%' } })
+    result.push({ '.clear-marjin .width-30': { 'width': '30%' } })
+    // Maximum 3 part 
+    result.push({ '.width-35': { 'width': '34.18%' } })
+    result.push({ '.clear-marjin .width-35': { 'width': '35%' } })
+    // Maximum 2 part 
+    result.push({ '.width-40': { 'width': '39.18%' } })
+    result.push({ '.clear-marjin .width-40': { 'width': '40%' } })
+    // Maximum 2 part 
+    result.push({ '.width-45': { 'width': '44.18%' } })
+    result.push({ '.clear-marjin .width-45': { 'width': '45%' } })
+    // Maximum 2 part 
+    result.push({ '.width-50': { 'width': '49.18%' } })
+    result.push({ '.clear-marjin .width-50': { 'width': '50%' } })
+    // Maximum 1 part 
+    result.push({ '.width-55': { 'width': '54.18%' } })
+    result.push({ '.clear-marjin .width-55': { 'width': '55%' } })
+    // Maximum 1 part 
+    result.push({ '.width-60': { 'width': '59.18%' } })
+    result.push({ '.clear-marjin .width-60': { 'width': '60%' } })
+    // Maximum 1 part 
+    result.push({ '.width-65': { 'width': '64.18%' } })
+    result.push({ '.clear-marjin .width-65': { 'width': '65%' } })
+    // Maximum 1 part 
+    result.push({ '.width-70': { 'width': '69.18%' } })
+    result.push({ '.clear-marjin .width-70': { 'width': '70%' } })
+    // Maximum 1 part 
+    result.push({ '.width-75': { 'width': '74.18%' } })
+    result.push({ '.clear-marjin .width-75': { 'width': '75%' } })
+    // Maximum 1 part 
+    result.push({ '.width-80': { 'width': '79.18%' } })
+    result.push({ '.clear-marjin .width-80': { 'width': '80%' } })
+    // Maximum 1 part 
+    result.push({ '.width-85': { 'width': '84.18%' } })
+    result.push({ '.clear-marjin .width-85': { 'width': '85%' } })
+    // Maximum 1 part 
+    result.push({ '.width-90': { 'width': '89.18%' } })
+    result.push({ '.clear-marjin .width-90': { 'width': '90%' } })
+    // Maximum 1 part 
+    result.push({ '.width-95': { 'width': '94.18%' } })
+    result.push({ '.clear-marjin .width-95': { 'width': '95%' } })
+    // Maximum 1 part 
+    result.push({ '.width-100': { 'width': '99.18%' } })
+    result.push({ '.clear-marjin .width-100': { 'width': '100%' } })
 
-    , this.createStyle('[is="aside-nav"] ul', [
-      this.createProperty('list-style-type', 'disc')
-    ])
+    /** Web Component */
+    result.push({
+      '.aside-toogle': {
+        'display': 'none'
+      }
+    })
+  }
 
-    , this.createStyle('[is="aside-nav"] li', [
-      this.createProperty('margin-left', this.compatibleSize(this.Default.Margin.Left))
+  result.push({ '.align-center': { 'text-align': 'center' } })
+  result.push({ '.align-left': { 'text-align': 'left' } })
+  result.push({ '.align-right': { 'text-align': 'right' } })
+  result.push({ '.align-justify': { 'text-align': 'justify' } })
 
-    ])
+  // Return Array List
+  return result
+}
 
-    , this.createStyle('[is="header-group"]', [
-      this.createProperty('text-align', 'right')
+/**
+ * Default Theme Style Syntax Array
+ * @returns {array} All css styles
+ * */
+CybotranikWUI.prototype.DefaultTheme = function () {
 
-    ])
+  var result = []
 
-    , this.createStyle('[is="header-nav"]', [
+  /* Theme */
+  result.push({
+    'body': {
+      'background-color': this.Default.Color.Light
+      , 'color': this.Default.Color.Black
+    }
+  })
 
-    ])
+  result.push({
+    'aside': {
+      'border-left-style': 'inset'
+      , 'border-left-width': '1px'
+      , 'font-style': 'italic'
+      , 'border-left-color': 'this.Default.Color.Lighter'
+      , 'color': this.Default.Color.Darker
+      , 'box-shadow': 'inset 10px 0 5px -5px' + this.Default.Color.Lighter
+    }
+  })
 
-    , this.createStyle('[is="horizontal-menu"]', [
-      this.createProperty('list-style', 'none')
-      , this.createProperty('display', 'inline-block')
-      , this.createProperty('position', 'relative')
-    ])
+  result.push({
+    'a': {
+      'color': this.Default.Color.Link
+    }
+  })
 
-    , this.createStyle('[is="horizontal-menu"] > li', [
-      this.createProperty('float', 'left')
-    ])
+  result.push({
+    'code': {
+      'color': this.Default.Color.Code
+    }
+  })
 
-    , this.createStyle('[is="horizontal-menu"] > li > a', [
-      this.createProperty('padding', this.compatibleSize(this.Default.Padding.All))
-    ])
+  result.push({
+    'dfn': {
+      'margin-left': '1%'
+      , 'margin-right': '1%'
+      , 'padding-left': '1%'
+      , 'padding-right': '1%'
+      , 'background-color': this.Default.Color.Lighter
+    }
+  })
 
-    , this.createStyle('nav > ul > li > a:hover', [
-      this.createProperty('border-bottom-color', this.Default.Color.Link)
-      , this.createProperty('border-bottom-style', 'solid')
-      , this.createProperty('border-bottom-width', '1px')
-      , this.createProperty('color', this.Default.Color.Darker)
-    ])
-    , this.createStyle('.aside-toogle', [
+  /**
+   * Web Components
+   */
+  result.push({
+    '[is="article-page"]': {
+      'background-color': this.Default.Color.Lighter
+    }
+  })
 
-      this.currentDocument().Width < 1000 ? this.createProperty('display', 'none') : this.createProperty('display', 'block')
+  result.push({
+    '[is="article-page"] > [is="article-section"]': {
+      'background-color': this.Default.Color.White
+    }
+  })
 
-    ])
-    , this.createStyle('.col-8', [
+  result.push({
+    '[is="article-section"]': {
+      'background-color': this.Default.Color.White
+    }
+  })
 
-      this.currentDocument().Width < 1000 ? this.createProperty('width', '100%') : this.createProperty('display', 'block')
+  result.push({
+    '[is="article-app"]': {
+      'border-style': 'dotted'
+      , 'border-width': '2px'
+      , 'border-color': this.Default.Color.Lighter
+    }
+  })
 
-    ])
-  ]
+  result.push({
+    '[is="weather-forecast"] [is="article-section"]': {
+      'border-bottom-style': 'dotted'
+      , 'border-bottom-width': '1px'
+      , 'border-bottom-color': this.Default.Color.Darker
+    }
+  })
+
+  result.push({
+    '[is="aside-nav"]': {
+      'color': this.Default.Color.Dark
+    }
+  })
+
+  result.push({
+    '[is="aside-nav"] a': {
+      'color': this.Default.Color.LinkO
+    }
+  })
+
+  result.push({
+    'nav > ul > li > a:hover': {
+      'border-bottom-color': this.Default.Color.Link
+      , 'border-bottom-style': 'solid'
+      , 'border-bottom-width': '1px'
+      , 'color': this.Default.Color.Darker
+    }
+  })
+
+  // Return Array List
+  return result
 }
 
 /**
  * Initalize Cybotranik WUI
  */
-var cybotranik = new CybotranikWUI()
+var wui = new CybotranikWUI()
 
 /**
  * Add HTML tag Array to Current Document
  */
-cybotranik.createElementArray()
+wui.createElementArray()
 
 /**
- * Color Swatch
- * 
- * https://www.w3.org/TR/WCAG/#contrast-minimum
- * https://webaim.org/resources/contrastchecker/
+ * Web User Interface starting
  */
-var Swatch = {
-  Color: {
-    White: 'white'
-    , Lighter: '#A8E27B'
-    , Light: '#7DBF49'
-    , Primary: '#60A828'
-    , Dark: '#458812'
-    , Darker: '#2B6300'
-    , Black: '#384238'
-    , Link: '#991E41'
-    , LinkO: '#002900'
-  }
-}
-
-/**
- * Purple Theme Configuration
- */
-cybotranik.setThemeDefault(Swatch)
-
-/**
- * Cybotranik Loading
- */
-cybotranik.start()
+wui.start()
