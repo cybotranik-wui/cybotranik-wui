@@ -113,9 +113,9 @@ CybotranikWUI.prototype.Default = {
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
 if (!Object.keys) {
   Object.keys = (function () {
-    'use strict';
+
     var hasOwnProperty = Object.prototype.hasOwnProperty,
-      hasDontEnumBug = !({ toString: null }).propertyIsEnumerable('toString'),
+      hasDontEnumBug = !({ toString: null }).propertyIsEnumerable.call('toString'),
       dontEnums = [
         'toString',
         'toLocaleString',
@@ -125,57 +125,58 @@ if (!Object.keys) {
         'propertyIsEnumerable',
         'constructor'
       ],
-      dontEnumsLength = dontEnums.length;
+      dontEnumsLength = dontEnums.length
 
     return function (obj) {
       if (typeof obj !== 'function' && (typeof obj !== 'object' || obj === null)) {
-        throw new TypeError('Object.keys called on non-object');
+        throw new TypeError('Object.keys called on non-object')
       }
 
-      var result = [], prop, i;
+      var result = [], prop, i
 
       for (prop in obj) {
         if (hasOwnProperty.call(obj, prop)) {
-          result.push(prop);
+          result.push(prop)
         }
       }
 
       if (hasDontEnumBug) {
         for (i = 0; i < dontEnumsLength; i++) {
           if (hasOwnProperty.call(obj, dontEnums[i])) {
-            result.push(dontEnums[i]);
+            result.push(dontEnums[i])
           }
         }
       }
-      return result;
-    };
-  }());
+      return result
+    }
+  }())
 }
 
 // https://developer.mozilla.org/tr/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Polyfill
 if (typeof Object.assign != 'function') {
+  /*eslint no-unused-vars: ["error", { "args": "none" }]*/
   Object.assign = function (target, varArgs) { // .length of function is 2
-    'use strict';
+    'use strict'
     if (target == null) { // TypeError if undefined or null
-      throw new TypeError('Cannot convert undefined or null to object');
+      throw new TypeError('Cannot convert undefined or null to object')
     }
 
-    var to = Object(target);
+    var to = Object(target)
 
     for (var index = 1; index < arguments.length; index++) {
-      var nextSource = arguments[index];
+      var nextSource = arguments[index]
 
       if (nextSource != null) { // Skip over if undefined or null
         for (var nextKey in nextSource) {
           // Avoid bugs when hasOwnProperty is shadowed
           if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-            to[nextKey] = nextSource[nextKey];
+            to[nextKey] = nextSource[nextKey]
           }
         }
       }
     }
-    return to;
-  };
+    return to
+  }
 }
 
 /**
@@ -300,22 +301,22 @@ CybotranikWUI.prototype.documentAppendCssArray = function (type, array) {
   var syntaxs = ''
 
   for (var x = 0; x < array.length; x++) {
-    var item = array[x];
+    var item = array[x]
     var selectors = Object.keys(item)
-    var css = '';
+    var css = ''
     for (var s = 0; s < selectors.length; s++) {
       var key = selectors[s]
       var property = item[key]
 
-      css += key + "{"
+      css += key + '{'
       var properties = Object.keys(property)
       for (var p = 0; p < properties.length; p++) {
 
         var pKey = properties[p]
         var pVal = property[pKey]
-        css += pKey + ":" + pVal + ";"
+        css += pKey + ':' + pVal + ';'
       }
-      css += "}"
+      css += '}'
       // Only found in the property area.
       if (properties.length != 0) {
         syntaxs += css
@@ -813,7 +814,7 @@ CybotranikWUI.prototype.Base = function () {
   result.push({ '.align-justify': { 'text-align': 'justify' } })
 
   // Return Array List
-  return result;
+  return result
 }
 
 /**
@@ -924,7 +925,7 @@ CybotranikWUI.prototype.DefaultTheme = function () {
   })
 
   // Return Array List
-  return result;
+  return result
 }
 
 /**
