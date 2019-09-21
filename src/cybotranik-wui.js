@@ -1,11 +1,10 @@
-/* eslint-disable indent */
 /**
- * Cybotranik WUI
- *
- * Website html User Interface.
- *
- * @author Azmi SAHIN
+ * @package CybotranikWUI
+ * @abstract Website html User Interface.
  * @since 2019
+ * @author Azmi SAHIN
+ * @copyright azmisahin.com
+ * @license https://github.com/cybotranik-wui/cybotranik-wui/blob/master/LICENSE
  * */
 function CybotranikWUI() { }
 
@@ -266,19 +265,19 @@ CybotranikWUI.prototype.documentAppendCss = function (type, syntax) {
   element.id = 'cybotranik-wui-' + type
 
   switch (this.currentBrowser()) {
-    // Old Property
-    case 'MSIE 5': element.styleSheet.cssText = syntax; break
-    case 'MSIE 7': element.styleSheet.cssText = syntax; break
-    case 'MSIE 8': element.styleSheet.cssText = syntax; break
+  // Old Property
+  case 'MSIE 5': element.styleSheet.cssText = syntax; break
+  case 'MSIE 7': element.styleSheet.cssText = syntax; break
+  case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-    case 'MSIE 9': element.innerText = syntax; break
-    case 'MSIE 10': element.innerText = syntax; break
-    case 'IE 11': element.innerText = syntax; break
-    case 'Chrome 76': element.innerText = syntax; break
-    case 'Edge 18': element.innerText = syntax; break
-    case 'Firefox 68': element.innerText = syntax; break
-    default: element.innerText = syntax
+  case 'MSIE 9': element.innerText = syntax; break
+  case 'MSIE 10': element.innerText = syntax; break
+  case 'IE 11': element.innerText = syntax; break
+  case 'Chrome 76': element.innerText = syntax; break
+  case 'Edge 18': element.innerText = syntax; break
+  case 'Firefox 68': element.innerText = syntax; break
+  default: element.innerText = syntax
   }
 
   // removing previous element. Performance problem.
@@ -339,12 +338,12 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   var factor = this.Default.Font.Factor
 
   switch (this.currentBrowser()) {
-    case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
-    case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
-    case 'MSIE 8': result = (factor * 1) * value + 'px'; break
-    case 'MSIE 9': result = (factor * 1) * value + 'px'; break
-    case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
-    case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
+  case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
+  case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
+  case 'MSIE 8': result = (factor * 1) * value + 'px'; break
+  case 'MSIE 9': result = (factor * 1) * value + 'px'; break
+  case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
+  case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
     // rem compatible.
     // case 'MSIE 10': result = value + 'rem'; break
     // case 'MSIE 11': result = value + 'rem'; break
@@ -353,7 +352,7 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
     // rem compatible default.
     // default: result = value + 'rem'
     // px compatible default.
-    default: result = (factor * 1) * value + 'px'
+  default: result = (factor * 1) * value + 'px'
   }
 
   return result
