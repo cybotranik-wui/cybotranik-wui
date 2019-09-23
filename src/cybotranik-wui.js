@@ -22,7 +22,7 @@ CybotranikWUI.prototype.Default = {
    */
   Color: {
     Background: '#f1f1f1'
-    , Foregound: '#3a3838'
+    , Foreground: '#3a3838'
     , Link: '#03a9f4'
     , Border: '#03a9f4'
     , Shadow: '#03a9f4'
@@ -31,6 +31,7 @@ CybotranikWUI.prototype.Default = {
     , Page: '#ffffff'
     , Menu: '#02567E'
     , Document: '#f7f3f3'
+    , Main: '#ffffff'
   }
   , Font: {
     Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
@@ -40,18 +41,18 @@ CybotranikWUI.prototype.Default = {
     , Factor: 18
   }
   , Margin: {
-    All: 0.5
-    , Bottom: 0.5
-    , Top: 0.5
-    , Left: 0.5
-    , Right: 0.5
+    All: 0.2
+    , Bottom: 0.2
+    , Top: 0.2
+    , Left: 0.2
+    , Right: 0.2
   }
   , Padding: {
-    All: 0.5
-    , Bottom: 0.5
-    , Top: 0.5
-    , Left: 0.5
-    , Right: 0.5
+    All: 0.2
+    , Bottom: 0.2
+    , Top: 0.2
+    , Left: 0.2
+    , Right: 0.2
   }
   , Border: {
     All: 0.2
@@ -142,6 +143,8 @@ CybotranikWUI.prototype.Theme = function (configuration) {
 
   this.Default = userConfiguration
 
+  console.log(userConfiguration)
+
   this.documentAppendCssArray('theme', wui.DefaultTheme())
 }
 
@@ -219,19 +222,19 @@ CybotranikWUI.prototype.documentAppendCss = function (type, syntax) {
   element.id = 'cybotranik-wui-' + type
 
   switch (this.currentBrowser()) {
-  // Old Property
-  case 'MSIE 5': element.styleSheet.cssText = syntax; break
-  case 'MSIE 7': element.styleSheet.cssText = syntax; break
-  case 'MSIE 8': element.styleSheet.cssText = syntax; break
+    // Old Property
+    case 'MSIE 5': element.styleSheet.cssText = syntax; break
+    case 'MSIE 7': element.styleSheet.cssText = syntax; break
+    case 'MSIE 8': element.styleSheet.cssText = syntax; break
 
     // New Property
-  case 'MSIE 9': element.innerText = syntax; break
-  case 'MSIE 10': element.innerText = syntax; break
-  case 'IE 11': element.innerText = syntax; break
-  case 'Chrome 76': element.innerText = syntax; break
-  case 'Edge 18': element.innerText = syntax; break
-  case 'Firefox 68': element.innerText = syntax; break
-  default: element.innerText = syntax
+    case 'MSIE 9': element.innerText = syntax; break
+    case 'MSIE 10': element.innerText = syntax; break
+    case 'IE 11': element.innerText = syntax; break
+    case 'Chrome 76': element.innerText = syntax; break
+    case 'Edge 18': element.innerText = syntax; break
+    case 'Firefox 68': element.innerText = syntax; break
+    default: element.innerText = syntax
   }
 
   // removing previous element. Performance problem.
@@ -292,12 +295,12 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
   var factor = this.Default.Font.Factor
 
   switch (this.currentBrowser()) {
-  case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
-  case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
-  case 'MSIE 8': result = (factor * 1) * value + 'px'; break
-  case 'MSIE 9': result = (factor * 1) * value + 'px'; break
-  case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
-  case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
+    case 'MSIE 5': result = (factor * 1.15) * value + 'px'; break
+    case 'MSIE 7': result = (factor * 1.110) * value + 'px'; break
+    case 'MSIE 8': result = (factor * 1) * value + 'px'; break
+    case 'MSIE 9': result = (factor * 1) * value + 'px'; break
+    case 'Edge 18': result = (factor * 1.10) * value + 'px'; break
+    case 'Firefox 68': result = (factor * 1.03) * value + 'px'; break
     // rem compatible.
     // case 'MSIE 10': result = value + 'rem'; break
     // case 'MSIE 11': result = value + 'rem'; break
@@ -306,7 +309,7 @@ CybotranikWUI.prototype.compatibleSize = function (value) {
     // rem compatible default.
     // default: result = value + 'rem'
     // px compatible default.
-  default: result = (factor * 1) * value + 'px'
+    default: result = (factor * 1) * value + 'px'
   }
 
   return result
@@ -383,6 +386,9 @@ CybotranikWUI.prototype.createElementArray = function () {
 CybotranikWUI.prototype.start = function () {
 
   var self = this
+
+  self.documentAppendCssArray("boot", [{ body: { opacity: 0 } }])
+
   window.onload = function () {
     /**
      * Add Default Item Array to Current Document
@@ -428,16 +434,22 @@ CybotranikWUI.prototype.Base = function () {
     }
   })
 
-
   result.push({
     'body': {
-      'margin': 0
+      'opacity': 1
+      , 'margin': 0
       , 'padding': 0
       , 'text-align': 'left'
       , 'font-family': this.Default.Font.Family
       , 'font-size': this.compatibleSize(this.Default.Font.Size)
       , 'font-weight': this.Default.Font.Weight
       , 'line-height': this.Default.Line.Height
+    }
+  })
+
+  result.push({
+    'header': {
+      // 'padding': '1%'
     }
   })
 
@@ -451,34 +463,48 @@ CybotranikWUI.prototype.Base = function () {
   /**
    * Grouping Content
    */
+  result.push({
+    'main': {
+      'padding': this.compatibleSize(this.Default.Padding.All)
+    }
+  })
+
+  result.push({
+    'article': {
+      'margin': this.compatibleSize(this.Default.Margin.All)
+    }
+  })
+
+  result.push({
+    'article p': {
+      'text-align': 'justify'
+      , 'text-indent': this.compatibleSize(this.Default.Margin.Left * 4)
+    }
+  })
+
   // result.push({
   //   [this.HtmlElements.groupingContent]: {
 
   //   }
   // })
 
-  result.push({
-    'p': {
-      // 'margin': this.compatibleSize(this.Default.Margin.All)
-    }
-  })
 
   /**
   * Text Level Semantics
   */
-  // result.push({
-  //   [this.HtmlElements.textLevelSemantics]: {
-  //     'display': 'inline'
-  //     , 'zoom': 1
-  //   }
-  // })
-
   result.push({
     'a': {
       'text-decoration': 'none'
       , 'zoom': 1
     }
   })
+
+  // result.push({
+  //   [this.HtmlElements.textLevelSemantics]: {
+  //     'display': 'inline'
+  //     , 'zoom': 1
+  //   }
+  // })
 
   /**
    * Edits
@@ -778,11 +804,13 @@ CybotranikWUI.prototype.DefaultTheme = function () {
 
   var result = []
 
-  /* Theme */
+  /**
+   * Section
+   */
   result.push({
     'body': {
       'background-color': this.Default.Color.Background
-      , 'color': this.Default.Color.Foregound
+      , 'color': this.Default.Color.Foreground
     }
   })
 
@@ -796,6 +824,9 @@ CybotranikWUI.prototype.DefaultTheme = function () {
     }
   })
 
+  /**
+  * Text Level Semantics
+  */
   result.push({
     'a': {
       'color': this.Default.Color.Link
@@ -807,7 +838,6 @@ CybotranikWUI.prototype.DefaultTheme = function () {
       'color': this.Default.Color.Code
     }
   })
-
   result.push({
     'dfn': {
       'margin-left': '1%'
@@ -815,6 +845,15 @@ CybotranikWUI.prototype.DefaultTheme = function () {
       , 'padding-left': '1%'
       , 'padding-right': '1%'
       , 'background-color': this.Default.Color.Mark
+    }
+  })
+
+  /**
+   * Grouping Content
+   */
+  result.push({
+    'main': {
+      'background-color': this.Default.Color.Main
     }
   })
 
