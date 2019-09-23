@@ -14,69 +14,23 @@ function CybotranikWUI() { }
  * @returns {Theme} Plugin css styles
  * */
 CybotranikWUI.prototype.Default = {
-
+  /**
+   * It should comply with accessibility standards when determining color.
+   * https://www.w3.org/TR/WCAG/#contrast-minimum
+   * https://webaim.org/resources/linkcontrastchecker
+   * https://webaim.org/resources/contrastchecker/
+   */
   Color: {
-    /**
-     * Default White ( Foreground ) Ratio 8:1
-     * https://webaim.org/resources/contrastchecker/
-     */
-    White: 'white'
-
-    /* 
-     * Lighter ( Background ) Ratio 8:1
-     * https://webaim.org/resources/contrastchecker/ 
-     * Swatch1 
-     */
-    , Lighter: '#A8E27B'
-
-    /**
-     * Light
-     * <---
-     * Swatch2
-     */
-    , Light: '#7DBF49'
-
-    /**
-     * Primary
-     *      -
-     * Swatch0
-     */
-    , Primary: '#60A828'
-
-    /**
-     * Dark
-     *            --->
-     * Swatch3
-     */
-    , Dark: '#458812'
-
-    /* 
-     * Darker ( Foreground ) Ratio 8:1
-     * https://webaim.org/resources/contrastchecker/  
-     * Swatch4
-     */
-    , Darker: '#2B6300'
-
-    /**
-     * Default Black ( Background ) Ratio 8:1
-     * https://webaim.org/resources/contrastchecker/
-     */
-    , Black: '#384238'
-
-    /**
-     * Link Contrast Checker
-     * https://www.w3.org/TR/WCAG/#contrast-minimum
-     * https://webaim.org/resources/linkcontrastchecker/?fcolor=000000&bcolor=FFFFFF&lcolor=2F6F2F
-     */
-    , Link: '#991E41'
-    , LinkO: '#002900'
-    , Code: 'purple'
-
-    /** */
-    , Info: '#000000'
-    , Success: '#000000'
-    , Warning: '#000000'
-    , Danger: '#000000'
+    Background: '#f1f1f1'
+    , Foregound: '#3a3838'
+    , Link: '#03a9f4'
+    , Border: '#03a9f4'
+    , Shadow: '#03a9f4'
+    , Mark: '#ffeb3b'
+    , Code: '#ff5722'
+    , Page: '#ffffff'
+    , Menu: '#02567E'
+    , Document: '#f7f3f3'
   }
   , Font: {
     Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
@@ -827,8 +781,8 @@ CybotranikWUI.prototype.DefaultTheme = function () {
   /* Theme */
   result.push({
     'body': {
-      'background-color': this.Default.Color.Light
-      , 'color': this.Default.Color.Black
+      'background-color': this.Default.Color.Background
+      , 'color': this.Default.Color.Foregound
     }
   })
 
@@ -837,9 +791,8 @@ CybotranikWUI.prototype.DefaultTheme = function () {
       'border-left-style': 'inset'
       , 'border-left-width': '1px'
       , 'font-style': 'italic'
-      , 'border-left-color': 'this.Default.Color.Lighter'
-      , 'color': this.Default.Color.Darker
-      , 'box-shadow': 'inset 10px 0 5px -5px' + this.Default.Color.Lighter
+      , 'border-left-color': this.Default.Color.Border
+      , 'box-shadow': 'inset 0px 0 0px  ' + this.Default.Color.Shadow
     }
   })
 
@@ -861,7 +814,7 @@ CybotranikWUI.prototype.DefaultTheme = function () {
       , 'margin-right': '1%'
       , 'padding-left': '1%'
       , 'padding-right': '1%'
-      , 'background-color': this.Default.Color.Lighter
+      , 'background-color': this.Default.Color.Mark
     }
   })
 
@@ -870,27 +823,15 @@ CybotranikWUI.prototype.DefaultTheme = function () {
    */
   result.push({
     '[is="article-page"]': {
-      'background-color': this.Default.Color.Lighter
-    }
-  })
-
-  result.push({
-    '[is="article-page"] > [is="article-section"]': {
-      'background-color': this.Default.Color.White
-    }
-  })
-
-  result.push({
-    '[is="article-section"]': {
-      'background-color': this.Default.Color.White
+      'background-color': this.Default.Color.Page
     }
   })
 
   result.push({
     '[is="article-app"]': {
-      'border-style': 'dotted'
-      , 'border-width': '2px'
-      , 'border-color': this.Default.Color.Lighter
+      'background-color': this.Default.Color.Document
+      , 'padding': '1%;'
+      , 'border': 'dotted 1px ' + this.Default.Color.Border
     }
   })
 
@@ -898,28 +839,33 @@ CybotranikWUI.prototype.DefaultTheme = function () {
     '[is="weather-forecast"] [is="article-section"]': {
       'border-bottom-style': 'dotted'
       , 'border-bottom-width': '1px'
-      , 'border-bottom-color': this.Default.Color.Darker
-    }
-  })
-
-  result.push({
-    '[is="aside-nav"]': {
-      'color': this.Default.Color.Dark
+      , 'border-bottom-color': this.Default.Color.Border
     }
   })
 
   result.push({
     '[is="aside-nav"] a': {
-      'color': this.Default.Color.LinkO
+      'color': this.Default.Color.Link
     }
   })
 
   result.push({
-    'nav > ul > li > a:hover': {
-      'border-bottom-color': this.Default.Color.Link
-      , 'border-bottom-style': 'solid'
-      , 'border-bottom-width': '1px'
-      , 'color': this.Default.Color.Darker
+    '[is="horizontal-menu"] > li > a': {
+      'color': this.Default.Color.Menu
+    }
+  })
+  result.push({
+    '[is="horizontal-menu"]  > li > a:hover': {
+      'border-bottom-color': this.Default.Color.Border
+    }
+  })
+
+  /**Test */
+  result.push({
+    '[is="article-page"] > [is="article-header"]': {
+      'padding': '5%'
+      , 'background': '#575757'
+      , 'color': '#FFFFFF'
     }
   })
 
