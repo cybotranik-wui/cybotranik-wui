@@ -22,15 +22,14 @@ CybotranikWUI.prototype.Default = {
    */
   Color: {
     Background: '#f1f1f1'
-    , Foregound: '#3a3838'
+    , Foreground: '#3a3838'
     , Link: '#03a9f4'
+    , Main: '#ffffff'
+    , Menu: '#02567E'
+    , Article: '#f7f3f3'
     , Border: '#03a9f4'
     , Shadow: '#03a9f4'
     , Mark: '#ffeb3b'
-    , Code: '#ff5722'
-    , Page: '#ffffff'
-    , Menu: '#02567E'
-    , Document: '#f7f3f3'
   }
   , Font: {
     Family: 'BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif'
@@ -40,18 +39,18 @@ CybotranikWUI.prototype.Default = {
     , Factor: 18
   }
   , Margin: {
-    All: 0.5
-    , Bottom: 0.5
-    , Top: 0.5
-    , Left: 0.5
-    , Right: 0.5
+    All: 0.2
+    , Bottom: 0.2
+    , Top: 0.2
+    , Left: 0.2
+    , Right: 0.2
   }
   , Padding: {
-    All: 0.5
-    , Bottom: 0.5
-    , Top: 0.5
-    , Left: 0.5
-    , Right: 0.5
+    All: 0.2
+    , Bottom: 0.2
+    , Top: 0.2
+    , Left: 0.2
+    , Right: 0.2
   }
   , Border: {
     All: 0.2
@@ -69,7 +68,8 @@ CybotranikWUI.prototype.Default = {
  */
 CybotranikWUI.prototype.Theme = function (configuration) {
 
-  this.Default = Object.merge(this.Default, configuration)
+  if (configuration)
+    this.Default = Object.merge(this.Default, configuration)
 
   this.documentAppendCssArray('theme', wui.DefaultTheme())
 }
@@ -312,6 +312,9 @@ CybotranikWUI.prototype.createElementArray = function () {
 CybotranikWUI.prototype.start = function () {
 
   var self = this
+
+  self.documentAppendCssArray('boot', [{ body: { opacity: 0 } }])
+
   window.onload = function () {
     /**
      * Add Default Item Array to Current Document
@@ -357,10 +360,10 @@ CybotranikWUI.prototype.Base = function () {
     }
   })
 
-
   result.push({
     'body': {
-      'margin': 0
+      'opacity': 1
+      , 'margin': 0
       , 'padding': 0
       , 'text-align': 'left'
       , 'font-family': this.Default.Font.Family
@@ -380,28 +383,27 @@ CybotranikWUI.prototype.Base = function () {
   /**
    * Grouping Content
    */
-  // result.push({
-  //   [this.HtmlElements.groupingContent]: {
-
-  //   }
-  // })
+  result.push({
+    'main': {
+      'padding': this.compatibleSize(this.Default.Padding.All)
+    }
+  })
 
   result.push({
-    'p': {
-      // 'margin': this.compatibleSize(this.Default.Margin.All)
+    'article': {
+      'margin': this.compatibleSize(this.Default.Margin.All)
+    }
+  })
+
+  result.push({
+    'article p': {
+      'text-align': 'justify'
     }
   })
 
   /**
   * Text Level Semantics
   */
-  // result.push({
-  //   [this.HtmlElements.textLevelSemantics]: {
-  //     'display': 'inline'
-  //     , 'zoom': 1
-  //   }
-  // })
-
   result.push({
     'a': {
       'text-decoration': 'none'
@@ -412,75 +414,39 @@ CybotranikWUI.prototype.Base = function () {
   /**
    * Edits
    */
-  // result.push({
-  //   [this.HtmlElements.edits]: {
-  //     'display': 'inline-block'
-  //   }
-  // })
 
   /**
    * Embedded content
    */
-  // result.push({
-  //   [this.HtmlElements.embeddedContent]: {
-  //   }
-  // })
-
   result.push({
     'img': {
       'width': '100%'
     }
   })
 
-  result.push({
-    'img-avatar': {
-      'width': '48px'
-      , 'border-radius': '50px'
-      , 'float': 'right'
-    }
-  })
-
   /**
    * Media Elements
    */
-  // result.push({
-  //   [this.HtmlElements.mediaElements]: {
-  //     'display': 'inline-block'
-  //   }
-  // })
+
 
   /**
    * Tabular Data
    */
-  // result.push({
-  //   [this.HtmlElements.mediaElements]: {
-  //   }
-  // })
+
 
   /**
    * Forms
    */
-  // result.push({
-  //   [this.HtmlElements.forms]: {
-  //   }
-  // })
+
 
   /**
    * Interactive Elements
    */
-  // result.push({
-  //   [this.HtmlElements.interactiveElements]: {
-  //   }
-  // })
+
 
   /**
    * Web Components
    */
-  // result.push({
-  //   [this.HtmlElements.webComponents]: {
-  //   }
-  // })
-
   result.push({
     '[is="html-tag"]:before': {
       'content': '"<"'
@@ -707,11 +673,13 @@ CybotranikWUI.prototype.DefaultTheme = function () {
 
   var result = []
 
-  /* Theme */
+  /**
+   * Section
+   */
   result.push({
     'body': {
       'background-color': this.Default.Color.Background
-      , 'color': this.Default.Color.Foregound
+      , 'color': this.Default.Color.Foreground
     }
   })
 
@@ -725,6 +693,9 @@ CybotranikWUI.prototype.DefaultTheme = function () {
     }
   })
 
+  /**
+  * Text Level Semantics
+  */
   result.push({
     'a': {
       'color': this.Default.Color.Link
@@ -739,11 +710,18 @@ CybotranikWUI.prototype.DefaultTheme = function () {
 
   result.push({
     'dfn': {
-      'margin-left': '1%'
-      , 'margin-right': '1%'
-      , 'padding-left': '1%'
-      , 'padding-right': '1%'
+      'margin': this.compatibleSize(this.Default.Margin.All)
+      , 'padding': this.compatibleSize(this.Default.Padding.All)
       , 'background-color': this.Default.Color.Mark
+    }
+  })
+
+  /**
+   * Grouping Content
+   */
+  result.push({
+    'main': {
+      'background-color': this.Default.Color.Main
     }
   })
 
@@ -751,23 +729,19 @@ CybotranikWUI.prototype.DefaultTheme = function () {
    * Web Components
    */
   result.push({
-    '[is="article-page"]': {
-      'background-color': this.Default.Color.Page
-    }
-  })
-
-  result.push({
     '[is="article-app"]': {
-      'background-color': this.Default.Color.Document
-      , 'padding': '1%;'
-      , 'border': 'dotted 1px ' + this.Default.Color.Border
+      'background-color': this.Default.Color.Article
+      , 'padding': this.compatibleSize(this.Default.Margin.All)
+      , 'border-style': 'dotted'
+      , 'border-width': this.compatibleSize(this.Default.Border.All)
+      , 'border-color': this.Default.Color.Border
     }
   })
 
   result.push({
     '[is="weather-forecast"] [is="article-section"]': {
       'border-bottom-style': 'dotted'
-      , 'border-bottom-width': '1px'
+      , 'border-bottom-width': this.compatibleSize(this.Default.Border.Bottom)
       , 'border-bottom-color': this.Default.Color.Border
     }
   })

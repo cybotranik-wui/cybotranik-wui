@@ -8,13 +8,13 @@
 
 # Documents.
 
-Cybotranik documentation and examples are available at https://cybotranik-wui.github.io/.
+Cybotranik [documentation](https://cybotranik-wui.github.io/) and examples are available at. 
 
 See how it works for a [quick start](docs/how-do-i-start.md).
 
 # Community
 
-Discuss new features, future goals, general problems or questions about Cybotranik's development, or anything else you can think of. https://cybotranik-wui.slack.com/
+[Discuss](https://cybotranik-wui.slack.com/) new features, future goals, general problems or questions about Cybotranik's development, or anything else you can think of.
 
 # Contribute
 
@@ -22,7 +22,7 @@ Please read these guidelines before contributing to Cybotranik:
 
 - Before you begin, [Contribute](CONTRIBUTING.md)
 - Before you begin, [Code of Conduct](CODE_OF_CONDUCT.md)
-- Before you begin, [Review](https://github.com/cybotranik-wui/cybotranik-wui/pulls)
+- Before you begin, [See the pull requests.](../../pulls)
 
 # Bugs and feature requests
 
