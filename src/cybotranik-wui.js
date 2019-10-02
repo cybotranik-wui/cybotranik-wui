@@ -320,6 +320,10 @@ CybotranikWUI.prototype.start = function () {
      * Add Default Item Array to Current Document
      */
     self.documentAppendCssArray('base', wui.Base())
+
+    // meter polyfill
+    // eslint-disable-next-line no-undef
+    meter()
   }
 
   window.onresize = function () {
@@ -327,6 +331,10 @@ CybotranikWUI.prototype.start = function () {
      * Add Default Item Array to Current Document
      */
     self.documentAppendCssArray('base', wui.Base())
+
+    // meter polyfill
+    // eslint-disable-next-line no-undef
+    meter()
   }
 }
 
@@ -437,7 +445,24 @@ CybotranikWUI.prototype.Base = function () {
   /**
    * Forms
    */
+  result.push({
+    'meter': {
+      'width': '100%'
+      , 'background': '#ececec'
+      , 'line-height': 1
+      , 'display': 'inline-block'
+      , 'height': '18px'
+      , 'border': 'solid 1px gray'
+    }
+  })
 
+  result.push({
+    '.meter': {
+      'background': '#00cc6a'
+      , 'color': 'transparent'
+      , 'height': '100%'
+    }
+  })
 
   /**
    * Interactive Elements
@@ -566,7 +591,7 @@ CybotranikWUI.prototype.Base = function () {
   })
 
   result.push({
-    '.clear-marjin .width-5, .clear-marjin .width-10, .clear-marjin .width-11, .clear-marjin .width-12, .clear-marjin .width-14, .clear-marjin .width-15, .clear-marjin .width-16, .clear-marjin .width-20, .clear-marjin .width-25,.clear-marjin .width-30, .clear-marjin .width-33, .clear-marjin .width-35, .clear-marjin .width-40, .clear-marjin .width-45, .clear-marjin .width-50,.clear-marjin .width-55, .clear-marjin .width-60, .clear-marjin .width-65, .clear-marjin .width-70, .clear-marjin .width-75, .clear-marjin .width-80, .clear-marjin .width-85, .clear-marjin .width-90, .clear-marjin .width-95, .clear-marjin .width-100': {
+    '.clear-margin .width-5, .clear-margin .width-10, .clear-margin .width-11, .clear-margin .width-12, .clear-margin .width-14, .clear-margin .width-15, .clear-margin .width-16, .clear-margin .width-20, .clear-margin .width-25,.clear-margin .width-30, .clear-margin .width-33, .clear-margin .width-35, .clear-margin .width-40, .clear-margin .width-45, .clear-margin .width-50,.clear-margin .width-55, .clear-margin .width-60, .clear-margin .width-65, .clear-margin .width-70, .clear-margin .width-75, .clear-margin .width-80, .clear-margin .width-85, .clear-margin .width-90, .clear-margin .width-95, .clear-margin .width-100': {
       'width': '100%'
       , 'margin': 0
       , 'float': 'left'
@@ -575,78 +600,81 @@ CybotranikWUI.prototype.Base = function () {
 
   if (this.currentDocument().Width > 768) {
 
-    // Maximum 20 part 
+    // 2 equal boxes of at least 1024 pixels wide. 
     result.push({ '.width-5': { 'width': '4.18%' } })
-    result.push({ '.clear-marjin .width-5': { 'width': '5%' } })
-    // Maximum 10 part 
+    result.push({ '.clear-margin .width-5': { 'width': '5%' } })
+    // 10 equal boxes of at least 1024 pixels wide. 
     result.push({ '.width-10': { 'width': '9.18%' } })
-    result.push({ '.clear-marjin .width-10': { 'width': '10%' } })
-    // Maximum 9 part 
+    result.push({ '.clear-margin .width-10': { 'width': '10%' } })
+    // 9 equal boxes of at least 1024 pixels wide. 
     result.push({ '.width-11': { 'width': '10.29%' } })
-    result.push({ '.clear-marjin .width-11': { 'width': '11%' } })
-    // Maximum 8 part 
+    result.push({ '.clear-margin .width-11': { 'width': '11.11%' } })
+    // 8 equal boxes of at least 1024 pixels wide.
     result.push({ '.width-12': { 'width': '11.68%' } })
-    result.push({ '.clear-marjin .width-12': { 'width': '12%' } })
-    // Maximum 6 part 
+    result.push({ '.clear-margin .width-12': { 'width': '12.5%' } })
+    // 6 equal boxes of at least 1024 pixels wide. 
     result.push({ '.width-16': { 'width': '15.84%' } })
-    result.push({ '.clear-marjin .width-16': { 'width': '16%' } })
-    // Maximum 6 part 
+    result.push({ '.clear-margin .width-16': { 'width': '16.66%' } })
+    // 
     result.push({ '.width-15': { 'width': '14.18%' } })
-    result.push({ '.clear-marjin .width-15': { 'width': '15%' } })
-    // Maximum 7 part 
-    result.push({ '.width-14': { 'width': '13.68%' } })
-    result.push({ '.clear-marjin .width-14': { 'width': '14%' } })
-    // Maximum 5 part 
+    result.push({ '.clear-margin .width-15': { 'width': '15%' } })
+    // 7 equal boxes of at least 1024 pixels wide. 
+    result.push({ '.width-14': { 'width': '13.46571428%' } })
+    result.push({ '.clear-margin .width-14': { 'width': '14.285714%' } })
+    // 5 equal boxes of at least 1024 pixels wide. 
     result.push({ '.width-20': { 'width': '19.18%' } })
-    result.push({ '.clear-marjin .width-20': { 'width': '20%' } })
-    // Maximum 4 part 
+    result.push({ '.clear-margin .width-20': { 'width': '20%' } })
+    // 4 equal boxes of at least 1024 pixels wide. 
     result.push({ '.width-25': { 'width': '24.18%' } })
-    result.push({ '.clear-marjin .width-25': { 'width': '25%' } })
-    // Maximum 3 part 
+    result.push({ '.clear-margin .width-25': { 'width': '25%' } })
+    //  
     result.push({ '.width-30': { 'width': '32.51%' } })
-    result.push({ '.clear-marjin .width-30': { 'width': '30%' } })
-    // Maximum 3 part 
+    result.push({ '.clear-margin .width-30': { 'width': '30%' } })
+    // 3 equal boxes of at least 1024 pixels wide.
+    result.push({ '.width-33': { 'width': '32.51%' } })
+    result.push({ '.clear-margin .width-33': { 'width': '33.33%' } })
+    //  
     result.push({ '.width-35': { 'width': '34.18%' } })
-    result.push({ '.clear-marjin .width-35': { 'width': '35%' } })
-    // Maximum 2 part 
+    result.push({ '.clear-margin .width-35': { 'width': '35%' } })
+    //  
     result.push({ '.width-40': { 'width': '39.18%' } })
-    result.push({ '.clear-marjin .width-40': { 'width': '40%' } })
-    // Maximum 2 part 
+    result.push({ '.clear-margin .width-40': { 'width': '40%' } })
+    // 
     result.push({ '.width-45': { 'width': '44.18%' } })
-    result.push({ '.clear-marjin .width-45': { 'width': '45%' } })
-    // Maximum 2 part 
+    result.push({ '.clear-margin .width-45': { 'width': '45%' } })
+    // 2 equal boxes of at least 1024 pixels wide. 
     result.push({ '.width-50': { 'width': '49.18%' } })
-    result.push({ '.clear-marjin .width-50': { 'width': '50%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-50': { 'width': '50%' } })
+    // 
     result.push({ '.width-55': { 'width': '54.18%' } })
-    result.push({ '.clear-marjin .width-55': { 'width': '55%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-55': { 'width': '55%' } })
+    // 
     result.push({ '.width-60': { 'width': '59.18%' } })
-    result.push({ '.clear-marjin .width-60': { 'width': '60%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-60': { 'width': '60%' } })
+    // 
     result.push({ '.width-65': { 'width': '64.18%' } })
-    result.push({ '.clear-marjin .width-65': { 'width': '65%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-65': { 'width': '65%' } })
+    // 
     result.push({ '.width-70': { 'width': '69.18%' } })
-    result.push({ '.clear-marjin .width-70': { 'width': '70%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-70': { 'width': '70%' } })
+    //
     result.push({ '.width-75': { 'width': '74.18%' } })
-    result.push({ '.clear-marjin .width-75': { 'width': '75%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-75': { 'width': '75%' } })
+    // 
     result.push({ '.width-80': { 'width': '79.18%' } })
-    result.push({ '.clear-marjin .width-80': { 'width': '80%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-80': { 'width': '80%' } })
+    // 
     result.push({ '.width-85': { 'width': '84.18%' } })
-    result.push({ '.clear-marjin .width-85': { 'width': '85%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-85': { 'width': '85%' } })
+    //
     result.push({ '.width-90': { 'width': '89.18%' } })
-    result.push({ '.clear-marjin .width-90': { 'width': '90%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-90': { 'width': '90%' } })
+    // 
     result.push({ '.width-95': { 'width': '94.18%' } })
-    result.push({ '.clear-marjin .width-95': { 'width': '95%' } })
-    // Maximum 1 part 
+    result.push({ '.clear-margin .width-95': { 'width': '95%' } })
+    // 1 box of at least 1024 pixels wide. 
     result.push({ '.width-100': { 'width': '99.18%' } })
-    result.push({ '.clear-marjin .width-100': { 'width': '100%' } })
+    result.push({ '.clear-margin .width-100': { 'width': '100%' } })
 
     /** Web Component */
     result.push({

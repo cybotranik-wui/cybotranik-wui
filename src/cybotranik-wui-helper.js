@@ -130,3 +130,23 @@ Object.merge = function (target, source, optionsArgument) {
     return mergeObject(target, source, optionsArgument)
   }
 }
+
+/**
+ * meter element correction for old browsers.
+ */
+
+// eslint-disable-next-line no-unused-vars
+function meter() {
+  var tag = 'meter'
+  var symbol = 'value'
+  var elements = document.getElementsByTagName(tag)
+  for (var index = 0; index < elements.length; index++) {
+    var element = elements[index]
+    var value, inner
+    value = element.attributes.getNamedItem(symbol) === null ? value : element.attributes.getNamedItem(symbol).value
+    inner = element.innerHTML
+    var percent = value * 100
+    var bar = '<div class="meter" value="' + value + '" style=" width: ' + percent + '%;">' + inner + '</div>'
+    elements[index].innerHTML = bar
+  }
+}
