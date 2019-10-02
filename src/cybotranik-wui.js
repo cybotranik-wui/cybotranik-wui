@@ -599,7 +599,7 @@ CybotranikWUI.prototype.Base = function () {
   })
   
   if (this.currentDocument().Width < 768) {
-    result.push({ '.responsive': { 'width': 'auto !important' } })
+    result.push({ '.responsive': { 'width': '100% !important' } })
   }
   
   // 2 equal boxes of at least 1024 pixels wide. 
