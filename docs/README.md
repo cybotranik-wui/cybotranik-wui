@@ -1,4 +1,4 @@
-# ![Logo](media/favicon.png)
+# ![Logo](media/logo.png)
 
 ## cybotranik-wui
 

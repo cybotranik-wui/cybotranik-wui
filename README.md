@@ -1,6 +1,6 @@
 # Website html User Interface.
 
-![Cybotranik-wui](docs/media/favicon.png)
+![Cybotranik-wui](docs/media/logo-white.png)
 
 [![Build Status](https://dev.azure.com/azmisahin-github/cybotranik-wui/_apis/build/status/cybotranik-wui.cybotranik-wui?branchName=master)](https://dev.azure.com/azmisahin-github/cybotranik-wui/_build/latest?definitionId=21&branchName=master)
 
